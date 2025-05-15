@@ -1,0 +1,74 @@
+<!--pages/bp-input/bp-input.wxml-->
+<view class="container">
+  <custom-nav title="录入血压" showBack="{{true}}"/>
+  
+  <view class="input-form">
+    <!-- 测量时间 -->
+    <view class="form-item">
+      <view class="label">测量时间</view>
+      <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+        <view class="picker-value">{{date}} {{time}}</view>
+      </picker>
+    </view>
+
+    <!-- 收缩压 -->
+    <view class="form-item">
+      <view class="label">收缩压</view>
+      <view class="input-group">
+        <input type="number" value="{{systolic}}" bindinput="inputSystolic" class="input"/>
+        <text class="unit">mmHg</text>
+      </view>
+    </view>
+
+    <!-- 舒张压 -->
+    <view class="form-item">
+      <view class="label">舒张压</view>
+      <view class="input-group">
+        <input type="number" value="{{diastolic}}" bindinput="inputDiastolic" class="input"/>
+        <text class="unit">mmHg</text>
+      </view>
+    </view>
+
+    <!-- 心率 -->
+    <view class="form-item">
+      <view class="label">心率</view>
+      <view class="input-group">
+        <input type="number" value="{{heartRate}}" bindinput="inputHeartRate" class="input"/>
+        <text class="unit">次/分钟</text>
+      </view>
+    </view>
+
+    <!-- 房颤 -->
+    <view class="form-item">
+      <view class="label">房颤</view>
+      <view class="radio-group">
+        <view class="radio {{arrhythmia === '正常' ? 'active' : ''}}" bindtap="selectArrhythmia" data-value="正常">
+          <image src="/asserts/icons/check.png" class="check-icon" wx:if="{{arrhythmia === '正常'}}"/>
+          正常
+        </view>
+        <view class="radio {{arrhythmia === '异常' ? 'active' : ''}}" bindtap="selectArrhythmia" data-value="异常">
+          <image src="/asserts/icons/check.png" class="check-icon" wx:if="{{arrhythmia === '异常'}}"/>
+          异常
+        </view>
+      </view>
+    </view>
+
+    <!-- 测量方式 -->
+    <view class="form-item">
+      <view class="label">测量方式</view>
+      <view class="radio-group">
+        <view class="radio {{measureType === '家庭血压' ? 'active' : ''}}" bindtap="selectMeasureType" data-value="家庭血压">
+          <image src="/asserts/icons/edit.png" class="check-icon" wx:if="{{measureType === '家庭血压'}}"/>
+          家庭血压
+        </view>
+        <view class="radio {{measureType === '诊室血压' ? 'active' : ''}}" bindtap="selectMeasureType" data-value="诊室血压">
+          <image src="/asserts/icons/check.png" class="check-icon" wx:if="{{measureType === '诊室血压'}}"/>
+          诊室血压
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-btn" bindtap="saveRecord">保存</view>
+</view>

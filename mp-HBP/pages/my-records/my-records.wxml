@@ -1,0 +1,30 @@
+<!--pages/my-records/my-records.wxml-->
+<view class="container">
+  <custom-nav title="预约记录" showBack="{{true}}"/>
+  
+  <!-- 排序按钮 -->
+  <view class="sort-btn" bindtap="toggleSort">
+    <text>{{sortOrder === 'desc' ? '最新在前' : '最早在前'}}</text>
+    <text class="sort-icon">{{sortOrder === 'desc' ? '↓' : '↑'}}</text>
+  </view>
+
+  <view class="records-list">
+    <view class="record-item" wx:for="{{records}}" wx:key="id">
+      <view class="record-content">
+        <view class="record-header">
+          <view class="doctor-name">医生：{{item.dname}}</view>
+          <view class="status-tag {{item.status}}">{{getStatusText(item.status)}}</view>
+        </view>
+        <view class="appointment-time">预约时间：{{item.appointTime}}</view>
+        <view class="appointment-content">预约内容：{{item.reason}}</view>
+      </view>
+      <view class="delete-btn" bindtap="deleteRecord" data-id="{{item.id}}" wx:if="{{item.status === 'upcoming'}}">
+        取消预约
+      </view>
+    </view>
+
+    <view class="empty-tip" wx:if="{{records.length === 0}}">
+      暂无预约记录
+    </view>
+  </view>
+</view>

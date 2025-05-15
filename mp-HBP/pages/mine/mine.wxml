@@ -1,0 +1,72 @@
+<!-- pages/mine/mine.wxml -->
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <custom-nav title="个人中心" showBack="{{false}}"/>
+  
+  <!-- 已登录状态 -->
+  <view class="user-container" wx:if="{{isLogin}}">
+    <!-- 顶部用户信息区域 -->
+    <view class="user-header">
+      <view class="user-info">
+        <image class="avatar" src="{{userInfo.image || '/asserts/icons/default-avatar.png'}}" mode="aspectFill"/>
+        <view class="user-detail">
+          <text class="nickname">{{userInfo.username || '微信用户'}}</text>
+        </view>
+        <image class="edit-icon" src="/asserts/icons/edit.png" bindtap="editInfo"/>
+      </view>
+    </view>
+
+    <!-- 功能列表区域 -->
+    <view class="function-list">
+      <view class="function-item" bindtap="navigateTo" data-url="/pages/my-records/my-records">
+        <view class="item-left">
+          <image class="item-icon" src="/asserts/icons/back.png"/>
+          <text class="item-text">我的预约</text>
+        </view>
+        <image class="arrow-right" src="/asserts/icons/arrow_right.png"/>
+      </view>
+
+      <view class="function-item" bindtap="navigateTo" data-url="/pages/online-service/online-service">
+        <view class="item-left">
+          <image class="item-icon" src="/asserts/icons/back.png"/>
+          <text class="item-text">在线客服</text>
+        </view>
+        <image class="arrow-right" src="/asserts/icons/arrow_right.png"/>
+      </view>
+
+      <view class="function-item" bindtap="navigateTo" data-url="/pages/feedback/feedback">
+        <view class="item-left">
+          <image class="item-icon" src="/asserts/icons/back.png"/>
+          <text class="item-text">意见反馈</text>
+        </view>
+        <image class="arrow-right" src="/asserts/icons/arrow_right.png"/>
+      </view>
+
+      <view class="function-item" bindtap="navigateTo" data-url="/pages/about/about">
+        <view class="item-left">
+          <image class="item-icon" src="/asserts/icons/back.png"/>
+          <text class="item-text">关于</text>
+        </view>
+        <image class="arrow-right" src="/asserts/icons/arrow_right.png"/>
+      </view>
+    </view>
+
+    <!-- 退出登录按钮 -->
+    <view class="login-btn" bindtap="loginOut">退出登录</view>
+  </view>
+
+  <view class="unlogin-container" wx:if="{{!isLogin}}">
+    <!-- 顶部蓝色区域 -->
+    <view class="unlogin-header" bindtap="navigateTo" data-url="/pages/login/login">
+      <image class="default-avatar" src="/asserts/icons/default-avatar.png"/>
+      <text class="login-text" bindtap="login" >请登录</text>
+    </view>
+    
+    <!-- 提示图片 -->
+    <image class="tip-image" src="/asserts/images/login-tip.png" mode="aspectFit"/>
+    
+    <!-- 提示文字 -->
+    <text class="tip-text">如果想使用系统功能，请登录！</text>
+
+  </view>
+</view>

@@ -1,0 +1,66 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+  <custom-nav title="登录" showBack="{{true}}"/>
+  
+  <view class="login-container">
+    <!-- 顶部图标 -->
+    <view class="logo-box">
+      <image class="logo" src="/asserts/icons/default-avatar.png" mode="aspectFit"/>
+      <text class="title">血压管理助手</text>
+    </view>
+
+    <!-- 登录表单 -->
+    <view class="login-form">
+      <view class="input-group">
+        <image class="input-icon" src="/asserts/icons/user.png"/>
+        <input class="input" 
+               type="text" 
+               placeholder="请输入用户名" 
+               model:value="{{username}}"/>
+      </view>
+
+      <view class="input-group">
+        <image class="input-icon" src="/asserts/icons/password.png"/>
+        <input class="input" 
+               type="password" 
+               placeholder="请输入密码" 
+               model:value="{{password}}"/>
+      </view>
+
+      <!-- 登录按钮 -->
+      <view class="login-btn account-login" bindtap="handleAccountLogin">
+        账号密码登录
+      </view>
+
+      <!-- 分割线 -->
+      <view class="divider">
+        <view class="line"></view>
+        <text>或</text>
+        <view class="line"></view>
+      </view>
+
+      <!-- 微信登录按钮 -->
+      <view class="login-btn wechat-login" bindtap="handleWechatLogin">
+        <image class="wechat-icon" src="/asserts/icons/wechat.png"/>
+        微信一键登录
+      </view>
+
+      <!-- 授权按钮（仅在 showAuthButton 为 true 时显示） -->
+      <view 
+        wx:if="{{showAuthButton}}" 
+        class="auth-button" 
+        bindtap="onGetUserProfile"
+      >
+        点击授权
+      </view>
+    </view>
+
+    <!-- 底部提示 -->
+    <view class="bottom-tips">
+      <text>登录即代表同意</text>
+      <text class="link">《用户协议》</text>
+      <text>和</text>
+      <text class="link">《隐私政策》</text>
+    </view>
+  </view>
+</view> 

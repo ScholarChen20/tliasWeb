@@ -1,0 +1,81 @@
+<!-- pages/home/home.wxml -->
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <custom-nav title="首页" showBack="{{false}}"/>
+  <view class="content">
+  <!-- 轮播图部分 -->
+    <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500">
+      <swiper-item wx:for="{{bannerList}}" wx:key="index">
+        <image src="{{item.imageUrl}}" mode="aspectFill" class="banner-image"/>
+      </swiper-item>
+    </swiper>
+
+    <!-- 血压数据展示 -->
+    <view class="bp-data-container">
+      <!-- 上次记录 -->
+      <!-- 上次记录 -->
+      <view class="bp-card">
+        <view class="card-title">上次记录</view>
+        <view class="bp-value">
+          <text>收缩压：{{lastRecord.systolic}}mmHg</text>
+          <text>舒张压：{{lastRecord.diastolic}}mmHg</text>
+        </view>
+        <view class="measure-time" wx:if="{{lastRecord.measureTime}}">
+          测量时间：{{lastRecord.measureTime}}
+        </view>
+      </view>
+      
+      <!-- 目标值 -->
+      <view class="bp-card-target">
+        <view class="card-title">目标值</view>
+        <view class="bp-value">
+          <text>收缩压：{{target.systolic}}mmHg</text>
+          <text>舒张压：{{target.diastolic}}mmHg</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 功能按钮区 -->
+    <view class="function-grid">
+      <view class="grid-item" bindtap="navigateTo" data-url="/pages/bp-input/bp-input">
+        <image src="/asserts/icons/record.png"/>
+        <text>录入血压</text>
+      </view>
+      <view class="grid-item" bindtap="navigateTo" data-url="/pages/bp-record/bp-record">
+        <image src="/asserts/icons/history.png"/>
+        <text>血压记录</text>
+      </view>
+      <view class="grid-item" bindtap="navigateTo" data-url="/pages/doctor/doctor">
+        <image src="/asserts/icons/doctor.png"/>
+        <text>预约医生</text>
+      </view>
+      <view class="grid-item" bindtap="navigateTo" data-url="/pages/advice/advice">
+        <image src="/asserts/icons/advice.png"/>
+        <text>医生建议</text>
+      </view>
+    </view>
+
+    <!-- 系统介绍 -->
+    <view class="system-intro">
+      <view class="intro-title">系统介绍</view>
+      <view class="intro-content">
+        <view class="intro-item">
+          <view class="item-title">智能血压管理</view>
+          <view class="item-desc">本系统提供专业的血压监测和管理服务，帮助您更好地了解和控制血压状况。</view>
+        </view>
+        <view class="intro-item">
+          <view class="item-title">医生在线咨询</view>
+          <view class="item-desc">提供专业的医生在线咨询服务，随时解答您的健康问题。</view>
+        </view>
+        <view class="intro-item">
+          <view class="item-title">数据追踪分析</view>
+          <view class="item-desc">自动记录和分析您的血压数据，生成趋势图表，帮助您了解血压变化。</view>
+        </view>
+        <view class="intro-item">
+          <view class="item-title">健康提醒</view>
+          <view class="item-desc">定期提醒测量血压，及时关注健康状况。</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

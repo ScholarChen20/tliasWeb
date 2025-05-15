@@ -1,0 +1,108 @@
+/* pages/knowledge/detail/detail.wxss */
+.container {
+  min-height: 100vh;
+  background-color: #fff;
+  position: relative;
+}
+
+.content {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.article-content {
+  height: calc(100vh - var(--nav-height));
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.article-header {
+  margin-bottom: 30rpx;
+}
+
+.cover-image {
+  width: 100%;
+  height: 400rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.article-info {
+  padding: 0 10rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16rpx;
+  line-height: 1.4;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 30rpx;
+}
+
+.author {
+  margin-right: 20rpx;
+}
+
+.time {
+  color: #999;
+}
+
+.article-body {
+  padding: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.text {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.8;
+  text-align: justify;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 0 10rpx;
+}
+
+/* 自定义导航栏样式 */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 88rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  z-index: 100;
+  border-bottom: 1rpx solid #eee;
+}
+
+.nav-back {
+  width: 80rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+}
+
+.back-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.nav-title {
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 500;
+  padding-right: 80rpx; /* 为了保持标题居中 */
+}

@@ -1,0 +1,156 @@
+/* pages/mine/mine.wxss */
+.container {
+  min-height: 100vh;
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* 已登录状态样式 */
+.user-container {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部用户信息区域 */
+.user-header {
+  background: #2d8cf0;
+  padding: 40rpx 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.user-detail {
+  flex: 1;
+  margin-left: 24rpx;
+}
+
+.nickname {
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: 500;
+}
+
+.edit-icon {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 功能列表区域 */
+.function-list {
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+.function-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f6f6f6;
+}
+
+.item-left {
+  display: flex;
+  align-items: center;
+}
+
+.item-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+.item-text {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.arrow-right {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 未登录状态样式 */
+.unlogin-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+}
+
+/* 顶部蓝色区域 */
+.unlogin-header {
+  width: 100%;
+  height: 300rpx;
+  background: #1f54e6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60rpx;
+}
+
+/* 默认头像样式 */
+.default-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  margin-bottom: 20rpx;
+}
+
+/* 微信用户文字样式 */
+.login-text {
+  font-size: 32rpx;
+  color: #fff;
+}
+
+/* 提示图片区域 */
+.tip-image {
+  width: 100%;
+  height: 400rpx;
+  margin-top: 40rpx;
+}
+
+/* 提示文字样式 */
+.tip-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 20rpx;
+  text-align: center;
+}
+
+/* 登录按钮样式 */
+.login-btn {
+  width: 90%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: #1f54e6;
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  margin-top: 60rpx;
+  margin-left: 20px;
+}

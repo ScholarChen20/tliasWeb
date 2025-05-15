@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.LogMapper">
+
+
+    <select id="list" resultType="com.itheima.pojo.OperateLog">
+        select
+        o.*,
+        e.name operateEmpName
+        from operate_log o left join emp e on o.operate_emp_id = e.id
+        order by o.operate_time desc
+    </select>
+
+
+</mapper>

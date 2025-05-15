@@ -1,0 +1,98 @@
+/* pages/my-records/my-records.wxss */
+.container {
+  padding: 20rpx;
+  padding-top: 180rpx;
+}
+
+.sort-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.sort-icon {
+  margin-left: 10rpx;
+  font-weight: bold;
+}
+
+.records-list {
+  width: 100%;
+}
+
+.record-item {
+  background: rgb(245, 237, 194);
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.record-content {
+  flex: 1;
+  margin-right: 20rpx;
+  color: #333;
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.doctor-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.status-tag {
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.status-tag.completed {
+  background-color: #52c41a;
+}
+
+.status-tag.upcoming {
+  background-color: #1890ff;
+}
+
+.status-tag.cancelled {
+  background-color: #ff4d4f;
+}
+
+.appointment-time {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.appointment-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.4;
+}
+
+.delete-btn {
+  padding: 10rpx 30rpx;
+  background: #007AFF;
+  color: #fff;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  margin-top: 100rpx;
+}

@@ -1,0 +1,40 @@
+<!--pages/bp-record/bp-record.wxml-->
+<view class="container">
+  <custom-nav title="血压记录" showBack="{{true}}"/>
+  
+  <!-- 切换视图按钮 -->
+  <view class="view-switch">
+    <view class="switch-btn {{viewType === 'chart' ? 'active' : ''}}" bindtap="switchView" data-type="chart">曲线</view>
+    <view class="switch-btn {{viewType === 'text' ? 'active' : ''}}" bindtap="switchView" data-type="text">文字</view>
+  </view>
+
+  <!-- 曲线视图 -->
+  <view class="chart-view" wx:if="{{viewType === 'chart'}}">
+    <ec-canvas id="bpChart" canvas-id="bpChart" ec="{{ ec }}"></ec-canvas>
+  </view>
+
+  <!-- 文字视图 -->
+  <view class="text-view" wx:if="{{viewType === 'text'}}">
+    <view class="record-item" wx:for="{{records}}" wx:key="createTime">
+      <view class="record-time">{{item.measureTime}}</view>
+      <view class="record-data">
+        <view class="data-row">
+          <text class="label">血压 (mmHg)</text>
+          <text class="value">{{item.systolic}}/{{item.diastolic}}</text>
+        </view>
+        <view class="data-row">
+          <text class="label">心率 (次/分)</text>
+          <text class="value">{{item.heartRate}}</text>
+        </view>
+      </view>
+      <view class="record-info">
+        <text>测量方式：{{item.measureType}}</text>
+        <text>房颤情况：{{item.arrhythmia}}</text>
+        <text class="bp-level">血压等级：{{item.bpLevel}}</text>
+      </view>
+      <view class="detail-btn" bindtap="showDetail" data-record="{{item}}">
+        详情
+      </view>
+    </view>
+  </view>
+</view>

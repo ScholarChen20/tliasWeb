@@ -1,0 +1,11 @@
+<!-- components/custom-nav/custom-nav.wxml -->
+<view class="custom-nav" style="padding-top: {{statusBarHeight}}px;">
+  <view class="nav-content">
+    <!-- 返回按钮，仅在非首页显示 -->
+    <view class="nav-left" wx:if="{{showBack}}" bindtap="handleBack">
+      <image class="back-icon" src="/asserts/icons/back.png" mode="aspectFit"/>
+    </view>
+    <!-- 标题 -->
+    <view class="nav-title {{showBack ? '' : 'nav-title-center'}}">{{title}}</view>
+  </view>
+</view>

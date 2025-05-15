@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/knowledge/knowledge",
+    "pages/knowledge-detail/knowledge-detail",
+    "pages/mine/mine",
+    "pages/mine-profile/mine-profile",
+    "pages/bp-input/bp-input",
+    "pages/bp-record/bp-record",
+    "pages/doctor/doctor",
+    "pages/advice/advice",
+    "pages/custom-nav/custom-nav",
+    "pages/my-records/my-records"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "血压管理",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "custom-nav": "/components/custom-nav/custom-nav",
+    "ec-canvas": "/ec-canvas/ec-canvas"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2d8cf0",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "asserts/_home.png",
+        "selectedIconPath": "asserts/home.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/knowledge/knowledge",
+        "iconPath": "asserts/_know.png",
+        "selectedIconPath": "asserts/know.png",
+        "text": "知识"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "asserts/_my.png",
+        "selectedIconPath": "asserts/my.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

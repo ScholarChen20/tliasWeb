@@ -1,0 +1,74 @@
+<!--pages/advice/advice.wxml-->
+<view class="container">
+  <custom-nav title="医生建议" showBack="{{true}}"/>
+  
+  <view class="advice-list">
+    <view class="advice-card" 
+          wx:for="{{adviceList}}" 
+          wx:key="id"
+          bindtap="toggleAdvice"
+          data-id="{{item.id}}">
+      
+      <view class="card-header">
+        <view class="header-left">
+          <view class="doctor-info">
+            <text class="doctor-name">{{item.doctorName}} 医生</text>
+            <text class="department">{{item.department}}</text>
+          </view>
+          <text class="date">就诊日期：{{item.date}}</text>
+        </view>
+        <view class="expand-icon {{activeAdviceId === item.id ? 'expanded' : ''}}">
+          <text>{{activeAdviceId === item.id ? '收起' : '展开'}}</text>
+        </view>
+      </view>
+
+      <view class="card-content {{activeAdviceId === item.id ? 'show' : ''}}">
+        <!-- 饮食建议 -->
+        <view class="advice-item">
+          <view class="advice-title">
+            <text class="dot"></text>
+            <text>饮食建议</text>
+          </view>
+          <view class="advice-content">{{item.dietAdvice}}</view>
+          <view class="copy-btn" 
+                catchtap="copyAdvice" 
+                data-content="{{item.dietAdvice}}">
+            复制
+          </view>
+        </view>
+
+        <!-- 运动建议 -->
+        <view class="advice-item">
+          <view class="advice-title">
+            <text class="dot"></text>
+            <text>运动建议</text>
+          </view>
+          <view class="advice-content">{{item.exerciseAdvice}}</view>
+          <view class="copy-btn" 
+                catchtap="copyAdvice" 
+                data-content="{{item.exerciseAdvice}}">
+            复制
+          </view>
+        </view>
+
+        <!-- 用药建议 -->
+        <view class="advice-item">
+          <view class="advice-title">
+            <text class="dot"></text>
+            <text>用药建议</text>
+          </view>
+          <view class="advice-content">{{item.medicationAdvice}}</view>
+          <view class="copy-btn" 
+                catchtap="copyAdvice" 
+                data-content="{{item.medicationAdvice}}">
+            复制
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-tip" wx:if="{{adviceList.length === 0}}">
+    暂无医生建议
+  </view>
+</view>

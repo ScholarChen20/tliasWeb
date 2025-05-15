@@ -1,0 +1,63 @@
+<!--pages/doctor/doctor.wxml-->
+<view class="container">
+  <custom-nav title="医生预约" showBack="{{true}}"/>
+  
+  <!-- 医生列表 -->
+  <view class="doctor-list">
+    <view class="doctor-item" wx:for="{{doctors}}" wx:key="id">
+      <view class="doctor-avatar">
+        <image src="{{item.avatar}}" mode="aspectFill"></image>
+      </view>
+      <view class="doctor-info">
+        <view class="doctor-name">{{item.name}}</view>
+        <view class="doctor-title">{{item.title}}</view>
+        <view class="doctor-dept">{{item.dept}}</view>
+        <view class="doctor-desc">{{item.introduce}}</view>
+      </view>
+      <view class="book-btn" bindtap="showBooking" data-doctor="{{item}}">
+        预约
+      </view>
+    </view>
+  </view>
+
+  <!-- 预约弹窗 -->
+  <view class="booking-modal" wx:if="{{showBookingModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">请填写预约信息</text>
+        <view class="close-btn" bindtap="hideBooking">×</view>
+      </view>
+
+      <view class="booking-form">
+        <view class="form-item">
+          <text class="label">预约医生：</text>
+          <text class="value">{{selectedDoctor.name}}</text>
+        </view>
+
+        <!-- pages/doctor/doctor.wxml -->
+        <view class="form-item">
+          <text class="label">预约时间：</text>
+          <picker mode="date" value="{{bookingDate}}" start="{{minDate}}" end="{{maxDate}}" bindchange="onDateChange">
+            <view class="picker-value">{{bookingDate || '请选择日期'}}</view>
+          </picker>
+          <picker mode="time" value="{{bookingTime}}" start="09:00" end="17:00" bindchange="onTimeChange">
+            <view class="picker-value">{{bookingTime || '请选择时间'}}</view>
+          </picker>
+        </view>
+
+        <view class="form-item">
+          <text class="label">预约内容：</text>
+          <textarea class="content-input" 
+            placeholder="请简要描述您的病情和需求" 
+            value="{{reason}}"
+            bindinput="onContentInput"
+          ></textarea>
+        </view>
+
+        <view class="submit-btn" bindtap="submitBooking">
+          提交
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

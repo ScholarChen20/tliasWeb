@@ -1,0 +1,96 @@
+/* pages/bp-input/bp-input.wxss */
+.container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.input-form {
+  margin-bottom: 200px;
+  width: 85%;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-top: 120rpx;
+}
+
+.form-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.form-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  height: 80rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.unit {
+  font-size: 28rpx;
+  color: #666;
+  margin-left: 20rpx;
+  color: #2d8cf0;
+}
+
+.picker-value {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.radio-group {
+  display: flex;
+  gap: 30rpx;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 30rpx;
+  border-radius: 8rpx;
+  background-color: #f5f5f5;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.radio.active {
+  background-color: #e6f3ff;
+  color: #2d8cf0;
+}
+
+.check-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+
+.save-btn {
+  position: fixed;
+  bottom: 40rpx;
+  left: 20rpx;
+  right: 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background-color: #2d8cf0;
+  color: #ffffff;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+}

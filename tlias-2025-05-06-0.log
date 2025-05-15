@@ -1,0 +1,108 @@
+2025-05-06 09:32:54.649 [main] INFO  com.itheima.TliasWebManagementApplication-Starting TliasWebManagementApplication using Java 17.0.12 with PID 8536 (D:\Graduate\JavaPro\Web-Ai\tlias-web-management\target\classes started by Smart陈文钦 in D:\Graduate\JavaPro\Web-Ai)
+2025-05-06 09:32:54.654 [main] INFO  com.itheima.TliasWebManagementApplication-No active profile set, falling back to 1 default profile: "default"
+2025-05-06 09:32:57.416 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8081 (http)
+2025-05-06 09:32:57.435 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8081"]
+2025-05-06 09:32:57.437 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2025-05-06 09:32:57.437 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-06 09:32:57.502 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring embedded WebApplicationContext
+2025-05-06 09:32:57.502 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 2707 ms
+2025-05-06 09:32:59.079 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver-Exposing 1 endpoint beneath base path '/actuator'
+2025-05-06 09:32:59.146 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8081"]
+2025-05-06 09:32:59.168 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8081 (http) with context path '/'
+2025-05-06 09:32:59.195 [main] INFO  com.itheima.TliasWebManagementApplication-Started TliasWebManagementApplication in 6.971 seconds (process running for 9.994)
+2025-05-06 09:32:59.866 [RMI TCP Connection(3)-172.28.160.181] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-06 09:32:59.867 [RMI TCP Connection(3)-172.28.160.181] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2025-05-06 09:32:59.870 [RMI TCP Connection(3)-172.28.160.181] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 3 ms
+2025-05-06 09:32:59.893 [RMI TCP Connection(4)-172.28.160.181] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2025-05-06 09:33:00.152 [RMI TCP Connection(4)-172.28.160.181] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.jdbc.JDBC4Connection@3c5953a0
+2025-05-06 09:33:00.158 [RMI TCP Connection(4)-172.28.160.181] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2025-05-06 09:33:06.186 [http-nio-8081-exec-1] INFO  com.itheima.filter.TokenFilter-登录请求 , 直接放行
+2025-05-06 09:33:06.266 [http-nio-8081-exec-1] INFO  com.itheima.controller.LoginController-login emp: Emp(id=null, username=songjiang, password=123456, name=null, gender=null, phone=null, job=null, salary=null, image=null, entryDate=null, deptId=null, createTime=null, updateTime=null, deptName=null, exprList=null)
+2025-05-06 09:33:06.276 [http-nio-8081-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Creating new transaction with name [com.itheima.service.impl.EmpServiceImpl.login]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-06 09:33:06.279 [http-nio-8081-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Acquired Connection [HikariProxyConnection@2059515881 wrapping com.mysql.jdbc.JDBC4Connection@3c5953a0] for JDBC transaction
+2025-05-06 09:33:06.281 [http-nio-8081-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Switching JDBC Connection [HikariProxyConnection@2059515881 wrapping com.mysql.jdbc.JDBC4Connection@3c5953a0] to manual commit
+2025-05-06 09:33:06.352 [http-nio-8081-exec-1] INFO  com.itheima.service.impl.EmpServiceImpl-登录成功,员工信息：Emp(id=2, username=songjiang, password=null, name=宋江, gender=null, phone=null, job=null, salary=null, image=null, entryDate=null, deptId=null, createTime=null, updateTime=null, deptName=null, exprList=null)
+2025-05-06 09:33:06.396 [http-nio-8081-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Initiating transaction commit
+2025-05-06 09:33:06.398 [http-nio-8081-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Committing JDBC transaction on Connection [HikariProxyConnection@2059515881 wrapping com.mysql.jdbc.JDBC4Connection@3c5953a0]
+2025-05-06 09:33:06.399 [http-nio-8081-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Releasing JDBC Connection [HikariProxyConnection@2059515881 wrapping com.mysql.jdbc.JDBC4Connection@3c5953a0] after transaction
+2025-05-06 09:33:35.689 [http-nio-8081-exec-2] INFO  com.itheima.filter.TokenFilter-获取到jwt令牌为空, 返回错误结果
+2025-05-06 09:36:59.743 [http-nio-8081-exec-10] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-06 09:36:59.745 [http-nio-8081-exec-10] INFO  com.itheima.controller.ReportController-统计班级人数
+2025-05-06 11:05:06.515 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2025-05-06 11:05:06.525 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2025-05-06 11:05:22.084 [main] INFO  com.itheima.TliasWebManagementApplication-Starting TliasWebManagementApplication using Java 17.0.12 with PID 5628 (D:\Graduate\JavaPro\Web-Ai\tlias-web-management\target\classes started by Smart陈文钦 in D:\Graduate\JavaPro\Web-Ai)
+2025-05-06 11:05:22.097 [main] INFO  com.itheima.TliasWebManagementApplication-No active profile set, falling back to 1 default profile: "default"
+2025-05-06 11:05:24.276 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8081 (http)
+2025-05-06 11:05:24.293 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8081"]
+2025-05-06 11:05:24.296 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2025-05-06 11:05:24.296 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-06 11:05:24.374 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring embedded WebApplicationContext
+2025-05-06 11:05:24.375 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 2219 ms
+2025-05-06 11:05:26.185 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver-Exposing 1 endpoint beneath base path '/actuator'
+2025-05-06 11:05:26.257 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8081"]
+2025-05-06 11:05:26.276 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8081 (http) with context path '/'
+2025-05-06 11:05:26.295 [main] INFO  com.itheima.TliasWebManagementApplication-Started TliasWebManagementApplication in 4.729 seconds (process running for 6.115)
+2025-05-06 11:05:26.665 [RMI TCP Connection(2)-172.28.160.181] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-06 11:05:26.666 [RMI TCP Connection(2)-172.28.160.181] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2025-05-06 11:05:26.672 [RMI TCP Connection(2)-172.28.160.181] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 6 ms
+2025-05-06 11:05:26.684 [RMI TCP Connection(4)-172.28.160.181] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2025-05-06 11:05:26.921 [RMI TCP Connection(4)-172.28.160.181] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.jdbc.JDBC4Connection@318d24fb
+2025-05-06 11:05:26.939 [RMI TCP Connection(4)-172.28.160.181] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2025-05-06 11:08:15.755 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2025-05-06 11:08:15.762 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2025-05-06 11:08:20.403 [main] INFO  com.itheima.TliasWebManagementApplication-Starting TliasWebManagementApplication using Java 17.0.12 with PID 9912 (D:\Graduate\JavaPro\Web-Ai\tlias-web-management\target\classes started by Smart陈文钦 in D:\Graduate\JavaPro\Web-Ai)
+2025-05-06 11:08:20.405 [main] INFO  com.itheima.TliasWebManagementApplication-No active profile set, falling back to 1 default profile: "default"
+2025-05-06 11:08:22.011 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8081 (http)
+2025-05-06 11:08:22.022 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8081"]
+2025-05-06 11:08:22.024 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2025-05-06 11:08:22.024 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-06 11:08:22.078 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring embedded WebApplicationContext
+2025-05-06 11:08:22.078 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 1612 ms
+2025-05-06 11:08:23.760 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver-Exposing 1 endpoint beneath base path '/actuator'
+2025-05-06 11:08:23.812 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8081"]
+2025-05-06 11:08:23.834 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8081 (http) with context path '/'
+2025-05-06 11:08:23.856 [main] INFO  com.itheima.TliasWebManagementApplication-Started TliasWebManagementApplication in 3.933 seconds (process running for 5.11)
+2025-05-06 11:08:24.400 [RMI TCP Connection(3)-172.28.160.181] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2025-05-06 11:08:24.412 [RMI TCP Connection(2)-172.28.160.181] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-06 11:08:24.413 [RMI TCP Connection(2)-172.28.160.181] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2025-05-06 11:08:24.415 [RMI TCP Connection(2)-172.28.160.181] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 2 ms
+2025-05-06 11:08:24.612 [RMI TCP Connection(3)-172.28.160.181] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.jdbc.JDBC4Connection@41d5c759
+2025-05-06 11:08:24.615 [RMI TCP Connection(3)-172.28.160.181] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2025-05-06 11:08:49.950 [http-nio-8081-exec-1] INFO  com.itheima.filter.TokenFilter-获取到jwt令牌为空, 返回错误结果
+2025-05-06 11:09:26.569 [http-nio-8081-exec-5] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-06 11:09:26.624 [http-nio-8081-exec-5] INFO  com.itheima.controller.DeptController-修改部门：Dept(id=9, name=信息中心, createTime=null, updateTime=null)
+2025-05-06 12:03:01.579 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2025-05-06 12:03:01.586 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2025-05-06 12:03:10.110 [main] INFO  com.itheima.TliasWebManagementApplication-Starting TliasWebManagementApplication using Java 17.0.12 with PID 7268 (D:\Graduate\JavaPro\Web-Ai\tlias-web-management\target\classes started by Smart陈文钦 in D:\Graduate\JavaPro\Web-Ai)
+2025-05-06 12:03:10.112 [main] INFO  com.itheima.TliasWebManagementApplication-No active profile set, falling back to 1 default profile: "default"
+2025-05-06 12:03:12.194 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8081 (http)
+2025-05-06 12:03:12.202 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8081"]
+2025-05-06 12:03:12.204 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2025-05-06 12:03:12.204 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-06 12:03:12.246 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring embedded WebApplicationContext
+2025-05-06 12:03:12.247 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 2089 ms
+2025-05-06 12:03:13.467 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver-Exposing 1 endpoint beneath base path '/actuator'
+2025-05-06 12:03:13.517 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8081"]
+2025-05-06 12:03:13.531 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8081 (http) with context path '/'
+2025-05-06 12:03:13.546 [main] INFO  com.itheima.TliasWebManagementApplication-Started TliasWebManagementApplication in 3.834 seconds (process running for 5.15)
+2025-05-06 12:03:14.119 [RMI TCP Connection(1)-172.28.160.181] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-06 12:03:14.120 [RMI TCP Connection(1)-172.28.160.181] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2025-05-06 12:03:14.124 [RMI TCP Connection(1)-172.28.160.181] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 3 ms
+2025-05-06 12:03:14.127 [RMI TCP Connection(3)-172.28.160.181] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2025-05-06 12:03:14.334 [RMI TCP Connection(3)-172.28.160.181] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.jdbc.JDBC4Connection@3420f62
+2025-05-06 12:03:14.337 [RMI TCP Connection(3)-172.28.160.181] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2025-05-06 12:03:27.960 [http-nio-8081-exec-3] INFO  com.itheima.filter.TokenFilter-解析令牌失败, 返回错误结果
+2025-05-06 12:04:22.512 [http-nio-8081-exec-5] INFO  com.itheima.filter.TokenFilter-登录请求 , 直接放行
+2025-05-06 12:04:22.580 [http-nio-8081-exec-5] INFO  com.itheima.controller.LoginController-login emp: Emp(id=null, username=songjiang, password=123456, name=null, gender=null, phone=null, job=null, salary=null, image=null, entryDate=null, deptId=null, createTime=null, updateTime=null, deptName=null, exprList=null)
+2025-05-06 12:04:22.593 [http-nio-8081-exec-5] DEBUG o.s.jdbc.support.JdbcTransactionManager-Creating new transaction with name [com.itheima.service.impl.EmpServiceImpl.login]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-06 12:04:22.595 [http-nio-8081-exec-5] DEBUG o.s.jdbc.support.JdbcTransactionManager-Acquired Connection [HikariProxyConnection@2019635093 wrapping com.mysql.jdbc.JDBC4Connection@3420f62] for JDBC transaction
+2025-05-06 12:04:22.597 [http-nio-8081-exec-5] DEBUG o.s.jdbc.support.JdbcTransactionManager-Switching JDBC Connection [HikariProxyConnection@2019635093 wrapping com.mysql.jdbc.JDBC4Connection@3420f62] to manual commit
+2025-05-06 12:04:22.658 [http-nio-8081-exec-5] INFO  com.itheima.service.impl.EmpServiceImpl-登录成功,员工信息：Emp(id=2, username=songjiang, password=null, name=宋江, gender=null, phone=null, job=null, salary=null, image=null, entryDate=null, deptId=null, createTime=null, updateTime=null, deptName=null, exprList=null)
+2025-05-06 12:04:22.673 [http-nio-8081-exec-5] DEBUG o.s.jdbc.support.JdbcTransactionManager-Initiating transaction commit
+2025-05-06 12:04:22.674 [http-nio-8081-exec-5] DEBUG o.s.jdbc.support.JdbcTransactionManager-Committing JDBC transaction on Connection [HikariProxyConnection@2019635093 wrapping com.mysql.jdbc.JDBC4Connection@3420f62]
+2025-05-06 12:04:22.675 [http-nio-8081-exec-5] DEBUG o.s.jdbc.support.JdbcTransactionManager-Releasing JDBC Connection [HikariProxyConnection@2019635093 wrapping com.mysql.jdbc.JDBC4Connection@3420f62] after transaction
+2025-05-06 12:04:47.852 [http-nio-8081-exec-4] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-06 12:04:47.852 [http-nio-8081-exec-4] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-06 12:04:47.855 [http-nio-8081-exec-4] INFO  com.itheima.controller.LogController-日志记录
+2025-05-06 12:05:04.950 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2025-05-06 12:05:04.955 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.

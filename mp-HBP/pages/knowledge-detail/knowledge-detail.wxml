@@ -1,0 +1,25 @@
+<!-- pages/knowledge-detail/knowledge-detail.wxml -->
+<view class="container">
+  <!-- 自定义导航栏 -->
+  <custom-nav title="健康知识" showBack="{{true}}"/>
+  
+  <!-- 文章内容区 -->
+  <scroll-view scroll-y class="article-content" style="margin-top: {{navHeight}}px;">
+    <!-- 文章头部 -->
+    <view class="article-header">
+      <image class="cover-image" src="{{article.image}}" mode="aspectFill"/>
+      <view class="article-info">
+        <view class="title">{{article.title}}</view>
+        <view class="meta">
+          <text class="author">{{article.author}}</text>
+          <text class="time">{{article.publishTime}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 文章正文 -->
+    <view class="article-body">
+      <text class="text">{{article.text}}</text>
+    </view>
+  </scroll-view>
+</view>

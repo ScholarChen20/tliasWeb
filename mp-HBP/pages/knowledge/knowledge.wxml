@@ -1,0 +1,22 @@
+<!-- pages/knowledge/knowledge.wxml -->
+
+<view class="container">
+  <custom-nav title="健康知识" showBack="{{false}}"/>
+  <!-- 文章列表 -->
+  <scroll-view scroll-y="true" class="article-list" bindscrolltolower="onReachBottom" refresher-enabled="{{true}}" bindrefresherrefresh="onPullDownRefresh">
+    <view class="article-item" wx:for="{{articles}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <image class="article-image" src="{{item.image}}" mode="aspectFill"/>
+      <view class="article-info">
+        <view class="article-title">{{item.title}}</view>
+        <view class="article-meta">
+          <text class="article-author">{{item.author}}</text>
+          <text class="article-time">{{item.publishTime}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 加载状态 -->
+    <view class="loading-status" wx:if="{{loading}}">加载中...</view>
+    <view class="loading-status" wx:if="{{!hasMore && articles.length > 0}}">没有更多了</view>
+    <view class="empty-status" wx:if="{{!loading && articles.length === 0}}">暂无数据</view>
+  </scroll-view>
+</view>

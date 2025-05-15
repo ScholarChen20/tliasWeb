@@ -1,0 +1,4701 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Web开发-AI",
+    "description": "新版本的Web开发的接口文档",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "部门管理"
+    },
+    {
+      "name": "员工管理"
+    },
+    {
+      "name": "班级管理"
+    },
+    {
+      "name": "学生管理"
+    },
+    {
+      "name": "报表统计"
+    },
+    {
+      "name": "通用服务"
+    }
+  ],
+  "paths": {
+    "/clazzs": {
+      "get": {
+        "summary": "分页查询",
+        "x-apifox-folder": "班级管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "班级信息的分页条件查询",
+        "operationId": "pageUsingGET",
+        "tags": [
+          "班级管理"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "班级名称",
+            "required": false,
+            "example": "java就业100期",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "begin",
+            "in": "query",
+            "description": "结课时间的开始时间",
+            "required": false,
+            "example": "2020-01-01",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "结课时间的结束时间",
+            "required": false,
+            "example": "2023-01-01",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页展示记录数",
+            "required": false,
+            "example": "10",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [
+                    "code",
+                    "msg",
+                    "data"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32",
+                      "additionalProperties": false
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "additionalProperties": false,
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "响应数据",
+                      "type": "object",
+                      "x-apifox-refs": {},
+                      "x-apifox-orders": [
+                        "total",
+                        "rows"
+                      ],
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "title": "总记录数",
+                          "description": "总记录数",
+                          "additionalProperties": false
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "ID",
+                                "description": "ID",
+                                "additionalProperties": false
+                              },
+                              "name": {
+                                "type": "string",
+                                "title": "班级名称",
+                                "description": "班级",
+                                "additionalProperties": false
+                              },
+                              "room": {
+                                "type": "string",
+                                "title": "班级教室",
+                                "description": "班级教室",
+                                "additionalProperties": false
+                              },
+                              "beginDate": {
+                                "type": "string",
+                                "format": "date",
+                                "title": "开课时间",
+                                "description": "开课时间",
+                                "additionalProperties": false
+                              },
+                              "endDate": {
+                                "type": "string",
+                                "format": "date",
+                                "title": "结课时间",
+                                "description": "结课时间",
+                                "additionalProperties": false
+                              },
+                              "masterId": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "班主任id",
+                                "description": "班主任id, 关联员工表id",
+                                "additionalProperties": false
+                              },
+                              "masterName": {
+                                "type": "string",
+                                "title": "班主任姓名",
+                                "description": "班主任姓名"
+                              },
+                              "subject": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "学科",
+                                "description": "1:java, 2:前端, 3:大数据, 4:Python, 5:Go, 6:嵌入式",
+                                "additionalProperties": false
+                              },
+                              "createTime": {
+                                "type": "string",
+                                "format": "date-time",
+                                "title": "创建时间",
+                                "description": "创建时间",
+                                "additionalProperties": false
+                              },
+                              "updateTime": {
+                                "type": "string",
+                                "format": "date-time",
+                                "title": "修改时间",
+                                "description": "修改时间",
+                                "additionalProperties": false
+                              }
+                            },
+                            "x-apifox-refs": {},
+                            "x-apifox-orders": [
+                              "id",
+                              "name",
+                              "room",
+                              "beginDate",
+                              "endDate",
+                              "masterId",
+                              "masterName",
+                              "subject",
+                              "createTime",
+                              "updateTime"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          },
+                          "title": "结果列表",
+                          "description": "结果列表"
+                        }
+                      },
+                      "required": [
+                        "rows",
+                        "total"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410783-run"
+      },
+      "post": {
+        "summary": "添加班级",
+        "x-apifox-folder": "班级管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "添加班级数据",
+        "operationId": "saveUsingPOST",
+        "tags": [
+          "班级管理"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "title": "班级名称",
+                    "description": "班级"
+                  },
+                  "room": {
+                    "type": "string",
+                    "title": "班级教室",
+                    "description": "班级教室"
+                  },
+                  "beginDate": {
+                    "type": "string",
+                    "format": "date",
+                    "title": "开课时间",
+                    "description": "开课时间"
+                  },
+                  "endDate": {
+                    "type": "string",
+                    "format": "date",
+                    "title": "结课时间",
+                    "description": "结课时间"
+                  },
+                  "masterId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "title": "班主任id",
+                    "description": "班主任id, 关联员工表id"
+                  },
+                  "subject": {
+                    "type": "integer",
+                    "format": "int32",
+                    "title": "学科",
+                    "description": "1:java, 2:前端, 3:大数据, 4:Python, 5:Go, 6:嵌入式"
+                  }
+                },
+                "x-apifox-refs": {},
+                "x-apifox-orders": [
+                  "name",
+                  "room",
+                  "beginDate",
+                  "endDate",
+                  "masterId",
+                  "subject"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410784-run"
+      },
+      "put": {
+        "summary": "修改班级",
+        "x-apifox-folder": "班级管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "修改班级数据信息",
+        "operationId": "updateUsingPUT",
+        "tags": [
+          "班级管理"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Clazz"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410785-run"
+      }
+    },
+    "/clazzs/list": {
+      "get": {
+        "summary": "查询所有班级",
+        "x-apifox-folder": "班级管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "查询所有班级数据",
+        "operationId": "findAllUsingGET",
+        "tags": [
+          "班级管理"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H7YTTNNEA55W2VFCQC1HHXDR": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H7YTTNNEA55W2VFCQC1HHXDR"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Clazz"
+                      },
+                      "title": "响应数据",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410786-run"
+      }
+    },
+    "/clazzs/{id}": {
+      "get": {
+        "summary": "根据ID查询",
+        "x-apifox-folder": "班级管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "根据ID查询班级信息",
+        "operationId": "getInfoUsingGET",
+        "tags": [
+          "班级管理"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H7YTX04J7GX93MGMS37EFYGC": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H7YTX04J7GX93MGMS37EFYGC"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "响应数据",
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/Clazz"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410787-run"
+      },
+      "delete": {
+        "summary": "删除班级",
+        "x-apifox-folder": "班级管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "根据ID删除班级信息",
+        "operationId": "deleteUsingDELETE",
+        "tags": [
+          "班级管理"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410788-run"
+      }
+    },
+    "/depts": {
+      "get": {
+        "summary": "查询所有部门",
+        "x-apifox-folder": "部门管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "查询所有部门",
+        "operationId": "listUsingGET",
+        "tags": [
+          "部门管理"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoi5a6L5rGfIiwiaWQiOjIsInVzZXJuYW1lIjoic29uZ2ppYW5nIiwiZXhwIjoxNzA0NzU5MjE3fQ.isGb5c2pqqhH7PVC1Cm0AUaxskObBExE0SsJtmZs-7c",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H7YPXV7VMRGR32FMEW9ED0JH": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H7YPXV7VMRGR32FMEW9ED0JH"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "x-apifox-refs": {
+                          "01H80F03TV2N4W2ZZ29J2K33D7": {
+                            "$ref": "#/components/schemas/Dept",
+                            "x-apifox-overrides": {
+                              "id": {
+                                "type": "integer",
+                                "title": "部门ID",
+                                "format": "int32",
+                                "nullable": true
+                              },
+                              "name": {
+                                "type": "string",
+                                "title": "部门名称",
+                                "nullable": true
+                              },
+                              "createTime": {
+                                "type": "string",
+                                "title": "创建时间",
+                                "format": "date-time",
+                                "nullable": true
+                              },
+                              "updateTime": {
+                                "type": "string",
+                                "title": "修改时间",
+                                "format": "date-time",
+                                "nullable": true
+                              }
+                            }
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "01H80F03TV2N4W2ZZ29J2K33D7"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "title": "部门ID",
+                            "format": "int32",
+                            "nullable": true
+                          },
+                          "name": {
+                            "type": "string",
+                            "title": "部门名称",
+                            "nullable": true
+                          },
+                          "createTime": {
+                            "type": "string",
+                            "title": "创建时间",
+                            "format": "date-time",
+                            "nullable": true
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "title": "修改时间",
+                            "format": "date-time",
+                            "nullable": true
+                          }
+                        },
+                        "x-apifox-ignore-properties": [
+                          "id",
+                          "name",
+                          "createTime",
+                          "updateTime"
+                        ]
+                      },
+                      "title": "响应数据"
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410789-run"
+      },
+      "post": {
+        "summary": "添加部门",
+        "x-apifox-folder": "部门管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "添加部门数据",
+        "operationId": "saveUsingPOST_1",
+        "tags": [
+          "部门管理"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "title": "部门名称"
+                  }
+                },
+                "x-apifox-refs": {},
+                "x-apifox-orders": [
+                  "name"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "name": "近派使算他"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410790-run"
+      },
+      "put": {
+        "summary": "修改部门",
+        "x-apifox-folder": "部门管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "修改部门",
+        "operationId": "updateUsingPUT_1",
+        "tags": [
+          "部门管理"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "title": "部门ID",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "name": {
+                    "type": "string",
+                    "title": "部门名称",
+                    "nullable": true
+                  }
+                },
+                "x-apifox-refs": {},
+                "x-apifox-orders": [
+                  "id",
+                  "name"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "name": "后勤部",
+                "id": 10
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410791-run"
+      },
+      "delete": {
+        "summary": "删除部门",
+        "x-apifox-folder": "部门管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "根据ID删除部门数据",
+        "operationId": "deleteUsingDELETE_1",
+        "tags": [
+          "部门管理"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "部门ID",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410793-run"
+      }
+    },
+    "/depts/{id}": {
+      "get": {
+        "summary": "根据ID查询",
+        "x-apifox-folder": "部门管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "根据ID查询部门",
+        "operationId": "getByIdUsingGET",
+        "tags": [
+          "部门管理"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H7YQ828NM86WJCYT9AQGVXRH": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H7YQ828NM86WJCYT9AQGVXRH"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "响应数据",
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/Dept",
+                          "x-apifox-overrides": {
+                            "id": {
+                              "type": "integer",
+                              "title": "部门ID",
+                              "format": "int32",
+                              "nullable": true
+                            },
+                            "name": {
+                              "type": "string",
+                              "title": "部门名称",
+                              "nullable": true
+                            },
+                            "createTime": {
+                              "type": "string",
+                              "title": "创建时间",
+                              "format": "date-time",
+                              "nullable": true
+                            },
+                            "updateTime": {
+                              "type": "string",
+                              "title": "修改时间",
+                              "format": "date-time",
+                              "nullable": true
+                            }
+                          }
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410792-run"
+      }
+    },
+    "/emps": {
+      "get": {
+        "summary": "分页查询",
+        "x-apifox-folder": "员工管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "员工信息的分页条件查询",
+        "operationId": "pageUsingGET_1",
+        "tags": [
+          "员工管理"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页展示记录数",
+            "required": true,
+            "example": "5",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "姓名",
+            "required": false,
+            "example": "阮",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "description": "性别",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "begin",
+            "in": "query",
+            "description": "范围匹配的开始时间(入职日期)",
+            "required": false,
+            "example": "2010-01-01",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "范围匹配的结束时间(入职日期)",
+            "required": false,
+            "example": "2020-01-01",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [
+                    "code",
+                    "msg",
+                    "data"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32",
+                      "additionalProperties": false
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "additionalProperties": false,
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "响应数据",
+                      "type": "object",
+                      "x-apifox-refs": {},
+                      "x-apifox-orders": [
+                        "total",
+                        "rows"
+                      ],
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "title": "总记录数",
+                          "description": "总记录数",
+                          "additionalProperties": false
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "title": "ID",
+                                "format": "int32",
+                                "description": "ID",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "username": {
+                                "type": "string",
+                                "title": "用户名",
+                                "description": "用户名",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "password": {
+                                "type": "string",
+                                "title": "密码",
+                                "description": "密码",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "name": {
+                                "type": "string",
+                                "title": "姓名",
+                                "description": "姓名",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "gender": {
+                                "type": "integer",
+                                "title": "性别",
+                                "description": "性别, 1: 男 , 2: 女",
+                                "format": "int32",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "job": {
+                                "type": "integer",
+                                "title": "职位",
+                                "description": "职位, 1 班主任,2 讲师, 3 学工主管, 4 教研主管, 5 咨询师",
+                                "format": "int32",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "salary": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "薪资",
+                                "description": "薪资",
+                                "additionalProperties": false
+                              },
+                              "image": {
+                                "type": "string",
+                                "title": "头像",
+                                "description": "头像",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "entryDate": {
+                                "type": "string",
+                                "title": "入职日期",
+                                "format": "date",
+                                "description": "入职日期",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "deptId": {
+                                "type": "integer",
+                                "title": "部门ID",
+                                "format": "int32",
+                                "description": "部门ID",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "deptName": {
+                                "type": "string",
+                                "title": "部门名称",
+                                "description": "部门名称"
+                              },
+                              "createTime": {
+                                "type": "string",
+                                "title": "创建时间",
+                                "format": "date-time",
+                                "description": "创建时间",
+                                "additionalProperties": false,
+                                "nullable": true
+                              },
+                              "updateTime": {
+                                "type": "string",
+                                "title": "修改时间",
+                                "format": "date-time",
+                                "description": "修改时间",
+                                "additionalProperties": false,
+                                "nullable": true
+                              }
+                            },
+                            "x-apifox-refs": {},
+                            "x-apifox-orders": [
+                              "id",
+                              "username",
+                              "password",
+                              "name",
+                              "gender",
+                              "job",
+                              "salary",
+                              "image",
+                              "entryDate",
+                              "deptId",
+                              "deptName",
+                              "createTime",
+                              "updateTime"
+                            ],
+                            "required": [
+                              "salary"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          },
+                          "title": "结果列表"
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "rows"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410794-run"
+      },
+      "post": {
+        "summary": "添加员工",
+        "x-apifox-folder": "员工管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "添加员工信息",
+        "operationId": "saveUsingPOST_2",
+        "tags": [
+          "员工管理"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "title": "用户名",
+                    "description": "用户名",
+                    "nullable": true
+                  },
+                  "name": {
+                    "type": "string",
+                    "title": "姓名",
+                    "description": "姓名",
+                    "nullable": true
+                  },
+                  "gender": {
+                    "type": "integer",
+                    "title": "性别",
+                    "description": "性别, 1: 男 , 2: 女",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "job": {
+                    "type": "integer",
+                    "title": "职位",
+                    "description": "职位, 1 班主任,2 讲师, 3 学工主管, 4 教研主管, 5 咨询师",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "image": {
+                    "type": "string",
+                    "title": "头像",
+                    "description": "头像",
+                    "nullable": true
+                  },
+                  "entryDate": {
+                    "type": "string",
+                    "title": "入职日期",
+                    "format": "date",
+                    "description": "入职日期",
+                    "nullable": true
+                  },
+                  "deptId": {
+                    "type": "integer",
+                    "title": "部门ID",
+                    "format": "int32",
+                    "description": "部门ID",
+                    "nullable": true
+                  },
+                  "salary": {
+                    "type": "integer",
+                    "format": "int32",
+                    "title": "薪资",
+                    "description": "薪资"
+                  },
+                  "exprList": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "x-apifox-refs": {},
+                      "x-apifox-orders": [
+                        "begin",
+                        "end",
+                        "company",
+                        "job"
+                      ],
+                      "properties": {
+                        "begin": {
+                          "description": "开始时间",
+                          "type": "string",
+                          "format": "date",
+                          "title": "开始时间"
+                        },
+                        "end": {
+                          "description": "结束时间",
+                          "type": "string",
+                          "format": "date",
+                          "title": "结束时间"
+                        },
+                        "company": {
+                          "description": "公司名字",
+                          "type": "string",
+                          "maxLength": 50,
+                          "title": "公司名字"
+                        },
+                        "job": {
+                          "description": "职位",
+                          "type": "string",
+                          "maxLength": 50,
+                          "title": "职位"
+                        }
+                      },
+                      "x-apifox-ignore-properties": []
+                    }
+                  }
+                },
+                "x-apifox-refs": {},
+                "x-apifox-orders": [
+                  "username",
+                  "name",
+                  "gender",
+                  "job",
+                  "image",
+                  "entryDate",
+                  "deptId",
+                  "salary",
+                  "exprList"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410795-run"
+      },
+      "put": {
+        "summary": "修改员工",
+        "x-apifox-folder": "员工管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "修改员工信息",
+        "operationId": "updateUsingPUT_2",
+        "tags": [
+          "员工管理"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "title": "ID",
+                    "format": "int32",
+                    "description": "ID",
+                    "nullable": true
+                  },
+                  "username": {
+                    "type": "string",
+                    "title": "用户名",
+                    "description": "用户名",
+                    "nullable": true
+                  },
+                  "password": {
+                    "type": "string",
+                    "title": "密码",
+                    "description": "密码",
+                    "nullable": true
+                  },
+                  "name": {
+                    "type": "string",
+                    "title": "姓名",
+                    "description": "姓名",
+                    "nullable": true
+                  },
+                  "gender": {
+                    "type": "integer",
+                    "title": "性别",
+                    "description": "性别, 1: 男 , 2: 女",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "job": {
+                    "type": "integer",
+                    "title": "职位",
+                    "description": "职位, 1 班主任,2 讲师, 3 学工主管, 4 教研主管, 5 咨询师",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "image": {
+                    "type": "string",
+                    "title": "头像",
+                    "description": "头像",
+                    "nullable": true
+                  },
+                  "entryDate": {
+                    "type": "string",
+                    "title": "入职日期",
+                    "format": "date",
+                    "description": "入职日期",
+                    "nullable": true
+                  },
+                  "salary": {
+                    "type": "integer",
+                    "format": "int32",
+                    "title": "薪资",
+                    "description": "薪资"
+                  },
+                  "deptId": {
+                    "type": "integer",
+                    "title": "部门ID",
+                    "format": "int32",
+                    "description": "部门ID",
+                    "nullable": true
+                  },
+                  "createTime": {
+                    "type": "string",
+                    "title": "创建时间",
+                    "format": "date-time",
+                    "description": "创建时间",
+                    "nullable": true
+                  },
+                  "updateTime": {
+                    "type": "string",
+                    "title": "修改时间",
+                    "format": "date-time",
+                    "description": "修改时间",
+                    "nullable": true
+                  },
+                  "exprList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EmpExpr"
+                    },
+                    "title": "工作经历列表",
+                    "description": "工作经历列表"
+                  }
+                },
+                "x-apifox-refs": {},
+                "x-apifox-orders": [
+                  "id",
+                  "username",
+                  "password",
+                  "name",
+                  "gender",
+                  "job",
+                  "image",
+                  "entryDate",
+                  "salary",
+                  "deptId",
+                  "createTime",
+                  "updateTime",
+                  "exprList"
+                ],
+                "required": [
+                  "exprList"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410796-run"
+      },
+      "delete": {
+        "summary": "批量删除",
+        "x-apifox-folder": "员工管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "根据ID批量删除员工数据",
+        "operationId": "deleteUsingDELETE_2",
+        "tags": [
+          "员工管理"
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "ID值",
+            "required": false,
+            "example": "1,2,3",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410798-run"
+      }
+    },
+    "/emps/list": {
+      "get": {
+        "summary": "查询所有",
+        "x-apifox-folder": "员工管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "查询所有员工信息",
+        "operationId": "listUsingGET_1",
+        "tags": [
+          "员工管理"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H7YS2B73RX51RABAB2A0SJ6E": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H7YS2B73RX51RABAB2A0SJ6E"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Emp"
+                      },
+                      "title": "响应数据",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410797-run"
+      }
+    },
+    "/emps/{id}": {
+      "get": {
+        "summary": "根据ID查询",
+        "x-apifox-folder": "员工管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "根据ID查询员工",
+        "operationId": "getInfoUsingGET_1",
+        "tags": [
+          "员工管理"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [
+                    "code",
+                    "msg",
+                    "data"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32",
+                      "additionalProperties": false
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "additionalProperties": false,
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "响应数据",
+                      "type": "object",
+                      "x-apifox-refs": {},
+                      "x-apifox-orders": [
+                        "id",
+                        "username",
+                        "password",
+                        "name",
+                        "gender",
+                        "job",
+                        "salary",
+                        "image",
+                        "entryDate",
+                        "deptId",
+                        "createTime",
+                        "updateTime",
+                        "exprList"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "title": "ID",
+                          "format": "int32",
+                          "description": "ID",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "username": {
+                          "type": "string",
+                          "title": "用户名",
+                          "description": "用户名",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "password": {
+                          "type": "string",
+                          "title": "密码",
+                          "description": "密码",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "name": {
+                          "type": "string",
+                          "title": "姓名",
+                          "description": "姓名",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "gender": {
+                          "type": "integer",
+                          "title": "性别",
+                          "description": "性别, 1: 男 , 2: 女",
+                          "format": "int32",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "job": {
+                          "type": "integer",
+                          "title": "职位",
+                          "description": "职位, 1 班主任,2 讲师, 3 学工主管, 4 教研主管, 5 咨询师",
+                          "format": "int32",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "salary": {
+                          "type": "integer",
+                          "format": "int32",
+                          "title": "薪资",
+                          "description": "薪资",
+                          "additionalProperties": false
+                        },
+                        "image": {
+                          "type": "string",
+                          "title": "头像",
+                          "description": "头像",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "entryDate": {
+                          "type": "string",
+                          "title": "入职日期",
+                          "format": "date",
+                          "description": "入职日期",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "deptId": {
+                          "type": "integer",
+                          "title": "部门ID",
+                          "format": "int32",
+                          "description": "部门ID",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "createTime": {
+                          "type": "string",
+                          "title": "创建时间",
+                          "format": "date-time",
+                          "description": "创建时间",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "updateTime": {
+                          "type": "string",
+                          "title": "修改时间",
+                          "format": "date-time",
+                          "description": "修改时间",
+                          "additionalProperties": false,
+                          "nullable": true
+                        },
+                        "exprList": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/EmpExpr"
+                          },
+                          "title": "工作经历",
+                          "description": "工作经历"
+                        }
+                      },
+                      "required": [
+                        "salary"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410799-run"
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "登录接口",
+        "x-apifox-folder": "通用服务",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "该接口用于员工登录Tlias智能学习辅助系统，登录完毕后，系统下发JWT令牌。 \n用户登录成功后，系统会自动下发JWT令牌，然后在后续的每次请求中，都需要在请求头header中携带到服务端，请求头的名称为 token ，值为 登录时下发的JWT令牌。 如果检测到用户未登录，则会返回 401 状态码 。",
+        "operationId": "loginUsingPOST",
+        "tags": [
+          "通用服务"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "title": "用户名",
+                    "description": "用户名"
+                  },
+                  "password": {
+                    "type": "string",
+                    "title": "密码",
+                    "description": "密码"
+                  }
+                },
+                "x-apifox-refs": {},
+                "x-apifox-orders": [
+                  "username",
+                  "password"
+                ],
+                "required": [
+                  "username",
+                  "password"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "username": "songjiang",
+                "password": "123456"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H80D0KSKNMQS5YDERPSC2CY6": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H80D0KSKNMQS5YDERPSC2CY6"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "响应数据",
+                      "description": "JWT令牌",
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/LoginInfo"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410800-run"
+      }
+    },
+    "/report/empGenderData": {
+      "get": {
+        "summary": "员工性别统计",
+        "x-apifox-folder": "报表统计",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "统计员工的性别 ",
+        "operationId": "empGenderDataUsingGET",
+        "tags": [
+          "报表统计"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H80DAK7KP4PXKJ8RSF84D9TM": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H80DAK7KP4PXKJ8RSF84D9TM"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "title": "性别",
+                            "description": "男性员工/女性员工"
+                          },
+                          "value": {
+                            "type": "string",
+                            "title": "人数",
+                            "description": "人数"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "name",
+                          "value"
+                        ],
+                        "required": [
+                          "name",
+                          "value"
+                        ],
+                        "x-apifox-ignore-properties": []
+                      },
+                      "title": "响应数据",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410801-run"
+      }
+    },
+    "/report/empJobData": {
+      "get": {
+        "summary": "员工职位统计",
+        "x-apifox-folder": "报表统计",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "统计出每一年入职的员工人数 ",
+        "operationId": "empJobDataUsingGET",
+        "tags": [
+          "报表统计"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H80DF5YYSNGR68AH9VATC56Y": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H80DF5YYSNGR68AH9VATC56Y"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "jobList": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "title": "职位列表"
+                        },
+                        "dataList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "title": "人数列表"
+                        }
+                      },
+                      "title": "响应数据",
+                      "x-apifox-orders": [
+                        "jobList",
+                        "dataList"
+                      ],
+                      "required": [
+                        "jobList",
+                        "dataList"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410802-run"
+      }
+    },
+    "/report/studentDegreeData": {
+      "get": {
+        "summary": "学生学历统计",
+        "x-apifox-folder": "报表统计",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "该接口用于统计学生的学历信息",
+        "operationId": "getStudentDataUsingGET",
+        "tags": [
+          "报表统计"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H80DKTXD91VT7WX8XY3R5Y8W": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H80DKTXD91VT7WX8XY3R5Y8W"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "title": "学历名称"
+                          },
+                          "value": {
+                            "type": "integer",
+                            "title": "人数"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "name",
+                          "value"
+                        ],
+                        "x-apifox-ignore-properties": []
+                      },
+                      "title": "响应数据",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410803-run"
+      }
+    },
+    "/students": {
+      "get": {
+        "summary": "分页查询",
+        "x-apifox-folder": "学生管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "学生信息的分页条件查询",
+        "operationId": "pageUsingGET_2",
+        "tags": [
+          "学生管理"
+        ],
+        "parameters": [
+          {
+            "name": "clazzId",
+            "in": "query",
+            "description": "班级ID",
+            "required": false,
+            "example": "3",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "degree",
+            "in": "query",
+            "description": "学历",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "姓名",
+            "required": false,
+            "example": "张三",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页记录数",
+            "required": false,
+            "example": "10",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [
+                    "code",
+                    "msg",
+                    "data"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "响应数据",
+                      "type": "object",
+                      "x-apifox-refs": {},
+                      "x-apifox-orders": [
+                        "total",
+                        "rows"
+                      ],
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "title": "总记录数",
+                          "description": "总记录数"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "ID",
+                                "additionalProperties": false
+                              },
+                              "name": {
+                                "type": "string",
+                                "title": "姓名",
+                                "additionalProperties": false
+                              },
+                              "no": {
+                                "type": "string",
+                                "title": "学号",
+                                "additionalProperties": false
+                              },
+                              "gender": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "性别",
+                                "description": "1: 男 , 2: 女",
+                                "additionalProperties": false
+                              },
+                              "phone": {
+                                "type": "string",
+                                "title": "手机号",
+                                "additionalProperties": false
+                              },
+                              "idCard": {
+                                "type": "string",
+                                "title": "身份证号",
+                                "additionalProperties": false
+                              },
+                              "isCollege": {
+                                "type": "integer",
+                                "title": "是否是院校学生",
+                                "description": "1: 是 , 0: 否",
+                                "format": "int32"
+                              },
+                              "address": {
+                                "type": "string",
+                                "title": "联系地址",
+                                "additionalProperties": false
+                              },
+                              "degree": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "最高学历",
+                                "description": "1:初中, 2:高中, 3:大专, 4:本科, 5:硕士, 6:博士",
+                                "additionalProperties": false
+                              },
+                              "graduateDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "title": "毕业时间",
+                                "additionalProperties": false
+                              },
+                              "clazzId": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "班级ID",
+                                "additionalProperties": false
+                              },
+                              "violationCount": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "违纪次数",
+                                "additionalProperties": false
+                              },
+                              "violationScore": {
+                                "type": "integer",
+                                "format": "int32",
+                                "title": "违纪扣分",
+                                "additionalProperties": false
+                              },
+                              "createTime": {
+                                "type": "string",
+                                "format": "date-time",
+                                "title": "创建时间",
+                                "additionalProperties": false
+                              },
+                              "updateTime": {
+                                "type": "string",
+                                "format": "date-time",
+                                "title": "修改时间",
+                                "additionalProperties": false
+                              },
+                              "clazzName": {
+                                "type": "string",
+                                "title": "班级名称"
+                              }
+                            },
+                            "x-apifox-refs": {},
+                            "x-apifox-orders": [
+                              "id",
+                              "name",
+                              "no",
+                              "gender",
+                              "phone",
+                              "idCard",
+                              "isCollege",
+                              "address",
+                              "degree",
+                              "graduateDate",
+                              "clazzId",
+                              "violationCount",
+                              "violationScore",
+                              "createTime",
+                              "updateTime",
+                              "clazzName"
+                            ],
+                            "required": [
+                              "idCard",
+                              "isCollege",
+                              "clazzName"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          },
+                          "title": "结果列表",
+                          "description": "结果列表"
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "rows"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410804-run"
+      },
+      "post": {
+        "summary": "添加学生",
+        "x-apifox-folder": "学生管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "添加学员信息",
+        "operationId": "saveUsingPOST_3",
+        "tags": [
+          "学生管理"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "title": "姓名"
+                  },
+                  "no": {
+                    "type": "string",
+                    "title": "学号"
+                  },
+                  "gender": {
+                    "type": "integer",
+                    "format": "int32",
+                    "title": "性别",
+                    "description": "1: 男 , 2: 女"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "title": "手机号"
+                  },
+                  "idCard": {
+                    "type": "string",
+                    "title": "身份证号"
+                  },
+                  "isCollege": {
+                    "type": "string",
+                    "title": "是否是院校学生",
+                    "description": "1: 是 , 0: 否"
+                  },
+                  "address": {
+                    "type": "string",
+                    "title": "联系地址"
+                  },
+                  "degree": {
+                    "type": "integer",
+                    "format": "int32",
+                    "title": "最高学历",
+                    "description": "1:初中, 2:高中, 3:大专, 4:本科, 5:硕士, 6:博士"
+                  },
+                  "graduationDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "title": "毕业时间"
+                  },
+                  "clazzId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "title": "班级ID"
+                  }
+                },
+                "x-apifox-refs": {},
+                "x-apifox-orders": [
+                  "name",
+                  "no",
+                  "gender",
+                  "phone",
+                  "idCard",
+                  "isCollege",
+                  "address",
+                  "degree",
+                  "graduationDate",
+                  "clazzId"
+                ],
+                "required": [
+                  "idCard",
+                  "isCollege"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410805-run"
+      },
+      "put": {
+        "summary": "修改学生",
+        "x-apifox-folder": "学生管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "修改学生信息",
+        "operationId": "updateUsingPUT_3",
+        "tags": [
+          "学生管理"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Student"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410806-run"
+      }
+    },
+    "/students/violation/{id}/{score}": {
+      "put": {
+        "summary": "违纪处理",
+        "x-apifox-folder": "学生管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "学生违纪信息处理",
+        "operationId": "violationHandleUsingPUT",
+        "tags": [
+          "学生管理"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "example": "3",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "score",
+            "in": "path",
+            "description": "score",
+            "required": true,
+            "example": "5",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410807-run"
+      }
+    },
+    "/students/{ids}": {
+      "delete": {
+        "summary": "批量删除学生",
+        "x-apifox-folder": "学生管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "批量删除学生信息",
+        "operationId": "deleteUsingDELETE_3",
+        "tags": [
+          "学生管理"
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "description": "ids",
+            "required": true,
+            "example": "3,4,6",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410808-run"
+      }
+    },
+    "/students/{id}": {
+      "get": {
+        "summary": "根据ID查询",
+        "x-apifox-folder": "学生管理",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "根据ID查询",
+        "operationId": "getInfoUsingGET_2",
+        "tags": [
+          "学生管理"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H7Z1NS5AJB5W2JG6FFQ3NGYE": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H7Z1NS5AJB5W2JG6FFQ3NGYE"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "响应数据",
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/Student"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410809-run"
+      }
+    },
+    "/upload": {
+      "post": {
+        "summary": "文件上传",
+        "x-apifox-folder": "通用服务",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "上传图片接口",
+        "operationId": "uploadUsingPOST",
+        "tags": [
+          "通用服务"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "description": "上传的文件",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01H80D3W2QGY9V94SGVHX9SP28": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01H80D3W2QGY9V94SGVHX9SP28"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败",
+                      "format": "int32"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "string",
+                      "title": "响应数据",
+                      "description": "文件访问路径",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103410810-run"
+      }
+    },
+    "/report/studentCountData": {
+      "get": {
+        "summary": "班级人数统计",
+        "x-apifox-folder": "报表统计",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "该接口用于统计每个班级的人数信息",
+        "tags": [
+          "报表统计"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码",
+                      "description": "1: 成功 , 0: 失败"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "title": "错误提示信息"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "clazzList": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "title": "班级列表"
+                        },
+                        "dataList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "title": "班级人数列表"
+                        }
+                      },
+                      "required": [
+                        "clazzList",
+                        "dataList"
+                      ],
+                      "x-apifox-orders": [
+                        "clazzList",
+                        "dataList"
+                      ],
+                      "title": "响应的数据",
+                      "x-apifox-ignore-properties": []
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-103536677-run"
+      }
+    },
+    "/log/page": {
+      "get": {
+        "summary": "日志列表查询",
+        "x-apifox-folder": "报表统计",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "报表统计"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页展示记录数",
+            "required": false,
+            "example": "10",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoibGluY2hvbmciLCJleHAiOjE2OTk0OTA2OTB9.85rmeu6aI3eU1Cidw7O7Ep4lpEfSOmAy20VSafXYsQU",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "状态码, 1:成功, 0: 失败"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "提示信息"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "description": "总记录数"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "description": "ID"
+                              },
+                              "operateEmpId": {
+                                "type": "integer",
+                                "description": "操作人ID"
+                              },
+                              "operateTime": {
+                                "type": "string",
+                                "description": "操作时间"
+                              },
+                              "className": {
+                                "type": "string",
+                                "description": "类名"
+                              },
+                              "methodName": {
+                                "type": "string",
+                                "description": "方法名"
+                              },
+                              "methodParams": {
+                                "type": "string",
+                                "description": "方法请求参数"
+                              },
+                              "returnValue": {
+                                "type": "string",
+                                "description": "返回值"
+                              },
+                              "costTime": {
+                                "type": "integer",
+                                "description": "执行耗时"
+                              },
+                              "operateEmpName": {
+                                "type": "string",
+                                "description": "操作人姓名"
+                              }
+                            },
+                            "x-apifox-orders": [
+                              "id",
+                              "operateEmpId",
+                              "operateTime",
+                              "className",
+                              "methodName",
+                              "methodParams",
+                              "returnValue",
+                              "costTime",
+                              "operateEmpName"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          },
+                          "description": "数据列表"
+                        }
+                      },
+                      "required": [
+                        "rows",
+                        "total"
+                      ],
+                      "x-apifox-orders": [
+                        "total",
+                        "rows"
+                      ],
+                      "description": "返回数据",
+                      "x-apifox-ignore-properties": []
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例",
+                    "value": {
+                      "code": 1,
+                      "msg": "success",
+                      "data": {
+                        "total": 4,
+                        "rows": [
+                          {
+                            "id": 1,
+                            "operateEmpId": 10,
+                            "operateTime": "2023-11-08T20:52:07",
+                            "className": "com.itheima.controller.DeptController",
+                            "methodName": "update",
+                            "methodParams": "[Dept(id=7, name=综合服务部2, createTime=2023-10-09T14:34:57, updateTime=2023-10-12T15:44:03)]",
+                            "returnValue": "{\"code\":1,\"msg\":\"success\"}",
+                            "costTime": 8,
+                            "operateEmpName": "林冲"
+                          },
+                          {
+                            "id": 2,
+                            "operateEmpId": 10,
+                            "operateTime": "2023-11-08T20:52:13",
+                            "className": "com.itheima.controller.DeptController",
+                            "methodName": "update",
+                            "methodParams": "[Dept(id=7, name=综合服务部, createTime=2023-10-09T14:34:57, updateTime=2023-11-08T20:52:07)]",
+                            "returnValue": "{\"code\":1,\"msg\":\"success\"}",
+                            "costTime": 9,
+                            "operateEmpName": "林冲"
+                          },
+                          {
+                            "id": 3,
+                            "operateEmpId": 10,
+                            "operateTime": "2023-11-08T20:52:50",
+                            "className": "com.itheima.controller.DeptController",
+                            "methodName": "delete",
+                            "methodParams": "[7]",
+                            "returnValue": "{\"code\":1,\"msg\":\"success\"}",
+                            "costTime": 7,
+                            "operateEmpName": "林冲"
+                          },
+                          {
+                            "id": 4,
+                            "operateEmpId": 10,
+                            "operateTime": "2023-11-08T20:52:56",
+                            "className": "com.itheima.controller.DeptController",
+                            "methodName": "add",
+                            "methodParams": "[Dept(id=null, name=后勤部, createTime=null, updateTime=null)]",
+                            "returnValue": "{\"code\":1,\"msg\":\"success\"}",
+                            "costTime": 9,
+                            "operateEmpName": "林冲"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3161925/apis/api-123383083-run"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "title": "员工ID"
+          },
+          "username": {
+            "type": "string",
+            "title": "用户名"
+          },
+          "name": {
+            "type": "string",
+            "title": "姓名"
+          },
+          "token": {
+            "type": "string",
+            "title": "令牌"
+          }
+        },
+        "x-apifox-orders": [
+          "id",
+          "username",
+          "name",
+          "token"
+        ],
+        "required": [
+          "id",
+          "username",
+          "name",
+          "token"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "EmpExpr": {
+        "$comment": "JSON Schema for emp_expr table",
+        "$id": "emp_expr",
+        "title": "",
+        "description": "员工工作经历表",
+        "type": "object",
+        "properties": {
+          "id": {
+            "$comment": "primary key",
+            "description": "ID, 主键",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4294967296,
+            "title": "ID, 主键"
+          },
+          "begin": {
+            "description": "开始时间",
+            "type": "string",
+            "format": "date",
+            "title": "开始时间"
+          },
+          "end": {
+            "description": "结束时间",
+            "type": "string",
+            "format": "date",
+            "title": "结束时间"
+          },
+          "company": {
+            "description": "公司名字",
+            "type": "string",
+            "maxLength": 50,
+            "title": "公司名字"
+          },
+          "job": {
+            "description": "职位",
+            "type": "string",
+            "maxLength": 50,
+            "title": "职位"
+          },
+          "empId": {
+            "description": "员工ID",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967296,
+            "title": "员工ID"
+          }
+        },
+        "x-apifox-orders": [
+          "id",
+          "begin",
+          "end",
+          "company",
+          "job",
+          "empId"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "PageBean": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "总记录数",
+            "description": "总记录数"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "结果列表",
+            "description": "结果列表"
+          }
+        },
+        "required": [
+          "total",
+          "rows"
+        ],
+        "x-apifox-orders": [
+          "total",
+          "rows"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "Student": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "title": "ID",
+            "additionalProperties": false
+          },
+          "name": {
+            "type": "string",
+            "title": "姓名",
+            "additionalProperties": false
+          },
+          "no": {
+            "type": "string",
+            "title": "学号",
+            "additionalProperties": false
+          },
+          "gender": {
+            "type": "integer",
+            "format": "int32",
+            "title": "性别",
+            "description": "1: 男 , 2: 女",
+            "additionalProperties": false
+          },
+          "phone": {
+            "type": "string",
+            "title": "手机号",
+            "additionalProperties": false
+          },
+          "idCard": {
+            "type": "string",
+            "title": "身份证号",
+            "additionalProperties": false
+          },
+          "isCollege": {
+            "type": "integer",
+            "title": "是否是院校学生",
+            "description": "1: 是 , 0: 否",
+            "format": "int32"
+          },
+          "address": {
+            "type": "string",
+            "title": "联系地址",
+            "additionalProperties": false
+          },
+          "degree": {
+            "type": "integer",
+            "format": "int32",
+            "title": "最高学历",
+            "description": "1:初中, 2:高中, 3:大专, 4:本科, 5:硕士, 6:博士",
+            "additionalProperties": false
+          },
+          "graduationDate": {
+            "type": "string",
+            "format": "date-time",
+            "title": "毕业时间",
+            "additionalProperties": false
+          },
+          "clazzId": {
+            "type": "integer",
+            "format": "int32",
+            "title": "班级ID",
+            "additionalProperties": false
+          },
+          "violationCount": {
+            "type": "integer",
+            "format": "int32",
+            "title": "违纪次数",
+            "additionalProperties": false
+          },
+          "violationScore": {
+            "type": "integer",
+            "format": "int32",
+            "title": "违纪扣分",
+            "additionalProperties": false
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "创建时间",
+            "additionalProperties": false
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "修改时间",
+            "additionalProperties": false
+          }
+        },
+        "title": "Student",
+        "x-apifox-orders": [
+          "id",
+          "name",
+          "no",
+          "gender",
+          "phone",
+          "idCard",
+          "isCollege",
+          "address",
+          "degree",
+          "graduationDate",
+          "clazzId",
+          "violationCount",
+          "violationScore",
+          "createTime",
+          "updateTime"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "Clazz": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "title": "ID",
+            "description": "ID"
+          },
+          "name": {
+            "type": "string",
+            "title": "班级名称",
+            "description": "班级"
+          },
+          "room": {
+            "type": "string",
+            "title": "班级教室",
+            "description": "班级教室"
+          },
+          "beginDate": {
+            "type": "string",
+            "format": "date",
+            "title": "开课时间",
+            "description": "开课时间"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "title": "结课时间",
+            "description": "结课时间"
+          },
+          "masterId": {
+            "type": "integer",
+            "format": "int32",
+            "title": "班主任id",
+            "description": "班主任id, 关联员工表id"
+          },
+          "subject": {
+            "type": "integer",
+            "format": "int32",
+            "title": "学科",
+            "description": "1:java, 2:前端, 3:大数据, 4:Python, 5:Go, 6:嵌入式"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "创建时间",
+            "description": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "修改时间",
+            "description": "修改时间"
+          }
+        },
+        "title": "Clazz",
+        "x-apifox-orders": [
+          "id",
+          "name",
+          "room",
+          "beginDate",
+          "endDate",
+          "masterId",
+          "subject",
+          "createTime",
+          "updateTime"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "Emp": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "ID",
+            "format": "int32",
+            "description": "ID",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "title": "用户名",
+            "description": "用户名",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "title": "密码",
+            "description": "密码",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "title": "姓名",
+            "description": "姓名",
+            "nullable": true
+          },
+          "gender": {
+            "type": "integer",
+            "title": "性别",
+            "description": "性别, 1: 男 , 2: 女",
+            "format": "int32",
+            "nullable": true
+          },
+          "job": {
+            "type": "integer",
+            "title": "职位",
+            "description": "职位, 1 班主任,2 讲师, 3 学工主管, 4 教研主管, 5 咨询师",
+            "format": "int32",
+            "nullable": true
+          },
+          "salary": {
+            "type": "integer",
+            "format": "int32",
+            "title": "薪资",
+            "description": "薪资"
+          },
+          "image": {
+            "type": "string",
+            "title": "头像",
+            "description": "头像",
+            "nullable": true
+          },
+          "entryDate": {
+            "type": "string",
+            "title": "入职日期",
+            "format": "date",
+            "description": "入职日期",
+            "nullable": true
+          },
+          "deptId": {
+            "type": "integer",
+            "title": "部门ID",
+            "format": "int32",
+            "description": "部门ID",
+            "nullable": true
+          },
+          "createTime": {
+            "type": "string",
+            "title": "创建时间",
+            "format": "date-time",
+            "description": "创建时间",
+            "nullable": true
+          },
+          "updateTime": {
+            "type": "string",
+            "title": "修改时间",
+            "format": "date-time",
+            "description": "修改时间",
+            "nullable": true
+          }
+        },
+        "title": "Emp",
+        "x-apifox-orders": [
+          "id",
+          "username",
+          "password",
+          "name",
+          "gender",
+          "job",
+          "salary",
+          "image",
+          "entryDate",
+          "deptId",
+          "createTime",
+          "updateTime"
+        ],
+        "required": [
+          "salary"
+        ],
+        "x-apifox-ignore-properties": [],
+        "nullable": true,
+        "x-apifox-folder": "Schemas"
+      },
+      "Dept": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "部门ID",
+            "format": "int32",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "title": "部门名称",
+            "nullable": true
+          },
+          "createTime": {
+            "type": "string",
+            "title": "创建时间",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updateTime": {
+            "type": "string",
+            "title": "修改时间",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "title": "Dept",
+        "x-apifox-orders": [
+          "id",
+          "name",
+          "createTime",
+          "updateTime"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "状态码",
+            "description": "1: 成功 , 0: 失败",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string",
+            "title": "错误提示信息",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {},
+            "title": "响应数据",
+            "x-apifox-orders": [],
+            "x-apifox-ignore-properties": [],
+            "nullable": true
+          }
+        },
+        "title": "Result",
+        "x-apifox-orders": [
+          "code",
+          "msg",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "开发环境"
+    }
+  ]
+}

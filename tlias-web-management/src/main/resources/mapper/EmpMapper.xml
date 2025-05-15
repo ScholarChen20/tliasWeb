@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.EmpMapper">
+    <update id="updateById">   <!-- 根据id更新员工信息 ，set标签用于设置更新的字段和值，where标签用于指定更新条件 -->
+        update emp
+        <set>
+            <if test="username!= null and username!= ''">username = #{username},</if>
+            <if test="password!= null and password!= ''">password = #{password},</if>
+            <if test="name!= null and name!= ''">name = #{name},</if>
+            <if test="phone!= null and phone!= ''">phone = #{phone},</if>
+            <if test="gender!= null">gender = #{gender},</if>
+            <if test="job!= null">job = #{job},</if>
+            <if test="salary!= null">salary = #{salary},</if>
+            <if test="image!= null and image!= ''">image = #{image},</if>
+            <if test="entryDate!= null">entry_date = #{entryDate},</if>
+            <if test="deptId!= null">dept_id = #{deptId},</if>
+            <if test="updateTime!= null">update_time = #{updateTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByIds">
+        DELETE FROM emp WHERE id IN
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--    引号中不能使用#{}，只能使用${} ，但效率不高不推荐使用.动态sql<if> <where>根据查询条件，生成where关键字 -->
+    <select id="listAll" resultType="com.itheima.pojo.Emp">
+        select e.*,d.name deptName from emp e left join dept d on e.dept_id = d.id
+        <where>
+            <if test="name!= null and name!= ''">
+                e.name like concat('%',#{name},'%')
+            </if>
+            <if test="gender!= null">
+                and e.gender = #{gender}
+            </if>
+            <if test="begin!= null and end!= null">
+                and e.entry_date between #{begin} and #{end}
+            </if>
+        </where>
+        order by e.update_time desc
+    </select>
+    <select id="getById" resultMap="empResultMap">
+        select
+            e.*,
+            ee.id ee_id,
+            ee.begin ee_begin,
+            ee.end ee_end,
+            ee.company ee_company,
+            ee.job ee_job
+        from emp e left join emp_expr ee on e.id = ee.emp_id
+        where e.id = #{id}
+    </select>
+    <select id="countEmpJobData" resultType="java.util.Map">
+        select
+            (case when job = 1 then "班主任"
+                 when job = 2 then "讲师"
+                 when job = 3 then "学工主管"
+                 when job = 4 then "教研主管"
+                 when job = 5 then "咨询师"
+                 else "其他" end) pos,
+            count(*) num
+        from emp group by job order by num asc
+    </select>
+<!--     统计员工性别数据-->
+    <select id="countEmpGenderData" resultType="java.util.Map">
+        select
+            if(gender = 1, "男性员工", "女性员工") as name,
+            count(*) as value
+        from emp group by gender order by value asc
+    </select>
+    <!--    定义resultMap,将查询结果映射到pojo对象-->
+    <resultMap id="empResultMap" type="com.itheima.pojo.Emp">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="phone" column="phone"/>
+        <result property="job" column="job"/>
+        <result property="salary" column="salary"/>
+        <result property="image" column="image"/>
+        <result property="entryDate" column="entry_date"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+<!--        工作经历信息-->
+        <collection property="exprList" ofType="com.itheima.pojo.EmpExpr">
+            <id property="id" column="ee_id"/>
+            <result property="begin" column="ee_begin"/>
+            <result property="end" column="ee_end"/>
+            <result property="company" column="ee_company"/>
+            <result property="job" column="ee_job"/>
+        </collection>
+    </resultMap>
+</mapper>

@@ -1,0 +1,165 @@
+/* pages/bp-record/bp-record.wxss */
+.container {
+  padding: 20rpx;
+  background-color: #f5f7fa;
+  height: 100vh;
+  overflow: hidden; /* 禁止外层滚动 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 切换视图按钮样式 */
+.view-switch {
+  position: fixed;
+  top: 100px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: center;
+  background: #fff;
+  padding: 8rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.switch-btn {
+  padding: 12rpx 50rpx;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.switch-btn.active {
+  color: #2d8cf0;
+}
+
+.switch-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background: #2d8cf0;
+  border-radius: 2rpx;
+}
+
+/* 曲线视图样式 */
+.chart-view {
+  flex: 1;
+  overflow: hidden; /* 图表不需要滚动 */
+  width: 100%;
+  height: 600rpx;
+  background: #fff;
+  margin-top: 250rpx;
+  margin-bottom: 300px;
+  border-radius: 12rpx;
+  padding-bottom: 200px;
+  padding: 20rpx;
+}
+
+.chart-view ec-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* 文字视图样式 */
+.text-view {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 150px;
+  padding-bottom: 40rpx;
+}
+
+.record-item {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.record-item:active {
+  transform: scale(0.98);
+}
+
+.record-time {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+}
+
+.record-data {
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.data-row .label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.data-row .value {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.systolic {
+  color: #2d8cf0;
+}
+
+.diastolic {
+  color: #19be6b;
+}
+
+.heart-rate {
+  color: #ff9900;
+}
+
+.record-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 20rpx;
+}
+
+.bp-level {
+  color: #2d8cf0;
+  font-weight: 500;
+}
+
+.detail-btn {
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+  padding: 8rpx 20rpx;
+  background: #e6f3ff;
+  color: #2d8cf0;
+  font-size: 24rpx;
+  border-radius: 8rpx;
+  border: 1rpx solid rgba(45, 140, 240, 0.2);
+}
+
+/* 主内容区（包含切换按钮和滚动内容） */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: 100rpx; /* 给顶部导航留空间 */
+}

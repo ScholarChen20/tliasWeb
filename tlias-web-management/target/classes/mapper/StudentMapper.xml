@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.StudentMapper">
+
+    <!--批量插入学员信息-->
+    <insert id="insertBatch">
+        insert into student(name, no, gender, phone,id_card, is_college, address, degree, graduation_date,clazz_id, create_time, update_time)
+        VALUES
+        <foreach collection="studentList" item="s" separator=",">
+            (#{s.name},#{s.no},#{s.gender},#{s.phone},#{s.idCard},#{s.isCollege},#{s.address},#{s.degree},#{s.graduationDate},
+            #{s.clazzId},#{s.createTime},#{s.updateTime})
+        </foreach>
+    </insert>
+
+
+    <!-- 修改学生信息 -->
+    <update id="update">
+        update student
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="no != null and no != ''">
+                no = #{no},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="idCard != null and idCard != ''">
+                id_card = #{idCard},
+            </if>
+            <if test="isCollege != null">
+                is_college = #{isCollege},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="graduationDate != null">
+                graduation_date = #{graduationDate},
+            </if>
+            <if test="degree != null">
+                degree = #{degree},
+            </if>
+            <if test="violationCount != null">
+                violation_count = #{violationCount},
+            </if>
+            <if test="violationScore != null">
+                violation_score = #{violationScore},
+            </if>
+            <if test="clazzId != null">
+                clazz_id = #{clazzId},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--批量删除学生信息-->
+    <delete id="delete">
+        delete from student where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 动态条件查询 -->
+    <select id="list" resultType="com.itheima.pojo.Student">
+        select s.*, c.name clazzName from student s left join clazz c on s.clazz_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                s.name like concat('%',#{name},'%')
+            </if>
+            <if test="degree != null">
+                and s.degree = #{degree}
+            </if>
+            <if test="clazzId != null">
+                and s.clazz_id = #{clazzId}
+            </if>
+        </where>
+        order by s.update_time desc
+    </select>
+
+
+    <!--学员学历统计-->
+    <select id="countStudentDegreeData" resultType="java.util.Map">
+        select
+        (case degree
+        when 1 then '初中'
+        when 2 then '高中'
+        when 3 then '大专'
+        when 4 then '本科'
+        when 5 then '硕士'
+        when 6 then '博士'
+        else '其他' end)  name,
+        count(*) value
+        from student group by degree
+        order by degree
+    </select>
+
+</mapper>

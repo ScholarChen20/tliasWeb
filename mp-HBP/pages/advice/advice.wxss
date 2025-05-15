@@ -1,0 +1,139 @@
+/* pages/advice/advice.wxss */
+.container {
+  padding: 20rpx;
+  padding-top: 180rpx;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.advice-list {
+  padding-bottom: 1000px;
+  width: 100%;
+}
+
+.advice-card {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  border-bottom: 2rpx solid #eee;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.doctor-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.doctor-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-right: 20rpx;
+}
+
+.department {
+  font-size: 26rpx;
+  color: #666;
+  background: #e6f7ff;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.date {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.expand-icon {
+  padding: 10rpx 20rpx;
+  font-size: 26rpx;
+  color: #666;
+  background: #f0f0f0;
+  border-radius: 30rpx;
+  transition: all 0.3s;
+}
+
+.expand-icon.expanded {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.card-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.card-content.show {
+  max-height: 2000rpx;
+}
+
+.advice-item {
+  padding: 30rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+  position: relative;
+}
+
+.advice-item:last-child {
+  border-bottom: none;
+}
+
+.advice-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  background: #1890ff;
+  border-radius: 50%;
+  margin-right: 16rpx;
+}
+
+.advice-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  margin-left: 28rpx;
+}
+
+.copy-btn {
+  position: absolute;
+  right: 30rpx;
+  bottom: 30rpx;
+  padding: 8rpx 24rpx;
+  background: #f0f0f0;
+  color: #666;
+  font-size: 24rpx;
+  border-radius: 24rpx;
+}
+
+.copy-btn:active {
+  background: #e6e6e6;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  margin-top: 200rpx;
+}

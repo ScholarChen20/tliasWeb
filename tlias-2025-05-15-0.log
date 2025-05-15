@@ -1,0 +1,59 @@
+2025-05-15 16:43:49.885 [main] INFO  com.itheima.TliasWebManagementApplication-Starting TliasWebManagementApplication using Java 17.0.12 with PID 11108 (D:\JavaEnv\JavaPro\Web-Ai\tlias-web-management\target\classes started by Administrator in D:\JavaEnv\JavaPro\Web-Ai)
+2025-05-15 16:43:49.887 [main] INFO  com.itheima.TliasWebManagementApplication-No active profile set, falling back to 1 default profile: "default"
+2025-05-15 16:43:50.739 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2025-05-15 16:43:50.746 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2025-05-15 16:43:50.747 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2025-05-15 16:43:50.748 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-15 16:43:50.780 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring embedded WebApplicationContext
+2025-05-15 16:43:50.781 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 868 ms
+2025-05-15 16:43:51.696 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver-Exposing 1 endpoint beneath base path '/actuator'
+2025-05-15 16:43:51.729 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2025-05-15 16:43:51.738 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/'
+2025-05-15 16:43:51.747 [main] INFO  com.itheima.TliasWebManagementApplication-Started TliasWebManagementApplication in 2.084 seconds (process running for 2.513)
+2025-05-15 16:43:51.897 [RMI TCP Connection(1)-192.168.100.1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-15 16:43:51.897 [RMI TCP Connection(1)-192.168.100.1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2025-05-15 16:43:51.898 [RMI TCP Connection(3)-192.168.100.1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2025-05-15 16:43:51.899 [RMI TCP Connection(1)-192.168.100.1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2025-05-15 16:43:52.048 [RMI TCP Connection(3)-192.168.100.1] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e26c9d8
+2025-05-15 16:43:52.050 [RMI TCP Connection(3)-192.168.100.1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2025-05-15 16:44:17.639 [http-nio-8080-exec-1] INFO  com.itheima.filter.TokenFilter-登录请求 , 直接放行
+2025-05-15 16:44:17.701 [http-nio-8080-exec-1] INFO  com.itheima.controller.LoginController-login emp: Emp(id=null, username=songjiang, password=123456, name=null, gender=null, phone=null, job=null, salary=null, image=null, entryDate=null, deptId=null, createTime=null, updateTime=null, deptName=null, exprList=null)
+2025-05-15 16:44:17.709 [http-nio-8080-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Creating new transaction with name [com.itheima.service.impl.EmpServiceImpl.login]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15 16:44:17.712 [http-nio-8080-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Acquired Connection [HikariProxyConnection@1391909076 wrapping com.mysql.cj.jdbc.ConnectionImpl@5e26c9d8] for JDBC transaction
+2025-05-15 16:44:17.719 [http-nio-8080-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Switching JDBC Connection [HikariProxyConnection@1391909076 wrapping com.mysql.cj.jdbc.ConnectionImpl@5e26c9d8] to manual commit
+2025-05-15 16:44:17.760 [http-nio-8080-exec-1] INFO  com.itheima.service.impl.EmpServiceImpl-登录成功,员工信息：Emp(id=2, username=songjiang, password=null, name=宋江, gender=null, phone=null, job=null, salary=null, image=null, entryDate=null, deptId=null, createTime=null, updateTime=null, deptName=null, exprList=null)
+2025-05-15 16:44:17.879 [http-nio-8080-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Initiating transaction commit
+2025-05-15 16:44:17.879 [http-nio-8080-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Committing JDBC transaction on Connection [HikariProxyConnection@1391909076 wrapping com.mysql.cj.jdbc.ConnectionImpl@5e26c9d8]
+2025-05-15 16:44:17.880 [http-nio-8080-exec-1] DEBUG o.s.jdbc.support.JdbcTransactionManager-Releasing JDBC Connection [HikariProxyConnection@1391909076 wrapping com.mysql.cj.jdbc.ConnectionImpl@5e26c9d8] after transaction
+2025-05-15 16:46:02.128 [http-nio-8080-exec-3] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:02.128 [http-nio-8080-exec-3] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:02.129 [http-nio-8080-exec-3] INFO  com.itheima.controller.ReportController-统计学员学历统计
+2025-05-15 16:46:02.130 [http-nio-8080-exec-2] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:02.130 [http-nio-8080-exec-2] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:02.130 [http-nio-8080-exec-2] INFO  com.itheima.controller.ReportController-统计班级人数
+2025-05-15 16:46:02.146 [http-nio-8080-exec-4] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:02.147 [http-nio-8080-exec-4] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:02.147 [http-nio-8080-exec-4] INFO  com.itheima.controller.ReportController-统计班级人数
+2025-05-15 16:46:02.997 [http-nio-8080-exec-6] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:02.997 [http-nio-8080-exec-5] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:02.998 [http-nio-8080-exec-6] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:02.998 [http-nio-8080-exec-5] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:02.998 [http-nio-8080-exec-6] INFO  com.itheima.controller.ReportController-统计员工性别人数
+2025-05-15 16:46:02.998 [http-nio-8080-exec-5] INFO  com.itheima.controller.ReportController-统计员工职位人数
+2025-05-15 16:46:03.005 [http-nio-8080-exec-7] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:03.005 [http-nio-8080-exec-7] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:03.005 [http-nio-8080-exec-7] INFO  com.itheima.controller.ReportController-统计员工职位人数
+2025-05-15 16:46:04.063 [http-nio-8080-exec-8] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:04.063 [http-nio-8080-exec-8] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:04.066 [http-nio-8080-exec-8] INFO  com.itheima.controller.LogController-日志记录
+2025-05-15 16:46:05.062 [http-nio-8080-exec-10] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:05.062 [http-nio-8080-exec-10] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:05.062 [http-nio-8080-exec-9] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:05.062 [http-nio-8080-exec-9] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:05.062 [http-nio-8080-exec-10] INFO  com.itheima.controller.ReportController-统计员工性别人数
+2025-05-15 16:46:05.062 [http-nio-8080-exec-9] INFO  com.itheima.controller.ReportController-统计员工职位人数
+2025-05-15 16:46:05.070 [http-nio-8080-exec-1] INFO  com.itheima.filter.TokenFilter-解析令牌成功放行, 当前用户id为: 2
+2025-05-15 16:46:05.071 [http-nio-8080-exec-1] INFO  com.itheima.filter.TokenFilter-令牌合法, 放行
+2025-05-15 16:46:05.071 [http-nio-8080-exec-1] INFO  com.itheima.controller.ReportController-统计员工职位人数
+2025-05-15 16:46:43.871 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2025-05-15 16:46:43.875 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
