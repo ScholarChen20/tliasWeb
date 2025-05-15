@@ -26,10 +26,10 @@ logging:   #日志级别
 
 aliyun:   #阿里云配置,用于文件上传
   oss:
-    endpoint: https://oss-cn-beijing.aliyuncs.com
-    bucketName: java-webai-1
-    region: cn-beijing
+    endpoint: https://oss-xxxx-.aliyuncs.com
+    bucketName: xxxxx
+    region: xxxxxx
 
 wx:   #微信配置
-  app-id: wxf2f3ec1435991131  #微信公众号appid
-  app-secret: 80cc45346775bb1286bd3b5fa620d81c  #微信公众号appsecret
+  app-id: xxxxxxxx  #微信公众号appid
+  app-secret: xxxxxxxxxx  #微信公众号appsecret
