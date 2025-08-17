@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.UserHbpMapper">
+<!--    根据id查询用户预约信息，使用resultMap进行结果集的封装 -->
+    <select id="list" resultMap="userHbpMap">
+        SELECT
+            u.*,
+            uu.name userName
+        FROM user_healthyinfo u left join user_info uu on u.userid = uu.id
+        order by update_time desc
+    </select>
+    <!--    property:属性名，column:数据库字段名-->
+    <resultMap id="userHbpMap" type="com.itheima.pojo.UserHbp">
+        <id property="id" column="id"/>
+        <result property="userid" column="userId"/>
+        <result property="userName" column="userName"/>
+        <result property="sbp" column="sbp"/>
+        <result property="dbp" column="dbp"/>
+        <result property="heart" column="heart"/>
+        <result property="writeType" column="writetype"/>
+        <result property="situation" column="situation"/>
+        <result property="writeTime" column="write_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+</mapper>

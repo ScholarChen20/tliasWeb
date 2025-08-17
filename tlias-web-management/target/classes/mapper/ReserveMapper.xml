@@ -76,7 +76,7 @@
         FROM reserve r left join doctor d on r.d_id = d.id right join user_info u on r.user_id = u.id
         where r.user_id=#{id} and r.status='已完成'
     </select>
-<!--    property:属性名，column:数据库字段名-->
+    <!--    property:属性名，column:数据库字段名-->
     <resultMap id="adviceReserveMap" type="com.itheima.pojo.Reserve">
             <id property="id" column="id"/>
             <result property="did" column="dId"/>
@@ -87,5 +87,34 @@
             <result property="dietAdvise" column="dietAdvise"/>
             <result property="exerciseAdvise" column="exerciseAdvise"/>
             <result property="medicationAdvise" column="medicationAdvise"/>
+    </resultMap>
+
+    <!--    查看所有的预约记录-->
+    <select id="list" resultMap="reserveMap">
+        SELECT
+            r.id id,
+            r.d_id dId,
+            r.user_id userId,
+            u.name userName,
+            d.name dname,
+            d.dept dept,
+            r.appoint_time appointTime,
+            r.diet_advice dietAdvise,
+            r.exercise_advice exerciseAdvise,
+            r.medication_advice medicationAdvise
+        FROM reserve r left join doctor d on r.d_id = d.id left join user_info u on r.user_id = u.id
+    </select>
+    <!--    property:属性名，column:数据库字段名-->
+    <resultMap id="reserveMap" type="com.itheima.pojo.Reserve">
+        <id property="id" column="id"/>
+        <result property="did" column="dId"/>
+        <result property="userId" column="userId"/>
+        <result property="userName" column="userName"/>
+        <result property="dName" column="dname"/>
+        <result property="dept" column="dept"/>
+        <result property="appointTime" column="appointTime"/>
+        <result property="dietAdvise" column="dietAdvise"/>
+        <result property="exerciseAdvise" column="exerciseAdvise"/>
+        <result property="medicationAdvise" column="medicationAdvise"/>
     </resultMap>
 </mapper>

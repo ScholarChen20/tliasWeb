@@ -1,8 +1,10 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.Doctor;
+import com.itheima.pojo.DoctorQueryParam;
 import com.itheima.pojo.User;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,17 +13,19 @@ public interface DoctorMapper {
     @Select("select * from doctor where id=#{id}")
     Doctor list(Integer id);
 
-    @Update("update doctor set name=#{name}, dept=#{dept}, title=#{title}, avatar=#{avatar}, " +
-            "introduce=#{introduce}, status=#{status}, phone=#{phone} where id=#{id}")
     void update(Doctor doctor);
 
     @Delete("delete from doctor where id=#{id}")
     void delete(Integer id);
 
-    @Insert("insert into doctor(name, dept, title, introduce, status, phone,avatar) " +
-            "values(#{name}, #{dept}, #{title},, #{introduce}, #{status}, #{phone}),#{avatar}")
+    @Insert("insert into doctor(name, gender, dept, title, introduce, status, phone,avatar) " +
+            "values(#{name}, #{gender}, #{dept}, #{title},, #{introduce}, #{status}, #{phone}),#{avatar}")
     void insert(Doctor doctor);
 
     @Select("select * from doctor where status=1")
     List<Doctor> listAll();
+
+//    List<Doctor> listPage(DoctorQueryParam doctorQueryParam);
+
+    List<Doctor> listPage(@Param("name") String name, @Param("dept") String dept, @Param("gender") String gender, @Param("title") String title);
 }

@@ -19,6 +19,6 @@
     "ignoreDevUnusedFiles": true,
     "bigPackageSizeSupport": false
   },
-  "libVersion": "3.8.3",
+  "libVersion": "3.9.1",
   "condition": {}
 }

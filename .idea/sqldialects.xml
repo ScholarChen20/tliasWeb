@@ -8,7 +8,10 @@
     <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/java/com/itheima/mapper/ReserveMapper.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/java/com/itheima/mapper/UserHbpMapper.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/java/com/itheima/mapper/UserMapper.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/resources/mapper/DoctorMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/resources/mapper/EmpExprMapper.xml" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/resources/mapper/EmpMapper.xml" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/resources/mapper/ReserveMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/resources/mapper/UserHbpMapper.xml" dialect="GenericSQL" />
   </component>
 </project>

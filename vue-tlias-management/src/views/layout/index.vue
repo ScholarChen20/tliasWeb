@@ -2,6 +2,16 @@
 import {ref, onMounted} from 'vue';
 import {ElMessageBox, ElMessage} from 'element-plus';
 import { useRouter } from 'vue-router';
+import {
+  Comment,
+  DataAnalysis,
+  Document,
+  FolderOpened,
+  Grid,
+  Opportunity, Place,
+  Scissor,
+  UserFilled
+} from "@element-plus/icons-vue";
 
 //当前登录员工
 const loginName = ref('');
@@ -36,7 +46,7 @@ const logout = () => {
     <el-container>
       <!-- Header 区域 -->
       <el-header class="header">
-        <span class="title">Tlias后台管理辅助系统</span>
+        <span class="title">智能后台管理系统</span>
         <span class="right_tool">
           <a href="">
             <el-icon><EditPen /></el-icon> 修改密码 &nbsp;&nbsp;&nbsp; |  &nbsp;&nbsp;&nbsp;
@@ -82,6 +92,29 @@ const logout = () => {
               <el-menu-item index="/emp">
                 <el-icon><Avatar /></el-icon>员工管理
               </el-menu-item>
+            </el-sub-menu>
+
+            <!-- 血压助手管理 -->
+            <el-sub-menu index="/assistant">
+              <template #title>
+                <el-icon><opportunity /></el-icon>血压助手管理
+              </template>
+              <el-menu-item index="/record">
+                <el-icon><data-analysis /></el-icon>血压管理
+              </el-menu-item>
+              <el-menu-item index="/reserve">
+                <el-icon><comment /></el-icon>预约管理
+              </el-menu-item>
+              <el-menu-item index="/knowledge">
+                <el-icon><folder-opened /></el-icon>文章管理
+              </el-menu-item>
+              <el-menu-item index="/doctor">
+                <el-icon><place /></el-icon>医生管理
+              </el-menu-item>
+              <el-menu-item index="/user">
+                <el-icon><user-filled /></el-icon>员工管理
+              </el-menu-item>
+
             </el-sub-menu>
 
             <!-- 数据统计管理 -->

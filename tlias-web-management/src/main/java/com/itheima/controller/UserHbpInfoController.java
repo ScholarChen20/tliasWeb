@@ -1,6 +1,7 @@
 package com.itheima.controller;
 
 import com.itheima.mapper.UserHbpMapper;
+import com.itheima.pojo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.pojo.UserHbp;
 import com.itheima.service.UserBhpService;
@@ -18,6 +19,16 @@ public class UserHbpInfoController {
     private UserBhpService userHbpService;
 
     /**
+     * 条件分页查询列表
+     */
+    @GetMapping
+    public Result page(@RequestParam(defaultValue = "1") Integer page,
+                       @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageResult record = userHbpService.page(page, pageSize);
+        log.info("recorfList: {}", record);
+        return Result.success(record);
+    }
+    /**
      * 查询血压记录信息
      */
     @GetMapping("/list")
@@ -30,7 +41,7 @@ public class UserHbpInfoController {
     @GetMapping("/{id}")
     public Result getInfo(@PathVariable Integer id){
         log.info("查询用户信息");
-        List<UserHbp> userHbp = userHbpService.getInfo(id);
+        UserHbp userHbp = userHbpService.getInfo(id);
         return Result.success(userHbp);
     }
     @GetMapping("/latest/{id}")

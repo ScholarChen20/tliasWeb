@@ -20,4 +20,6 @@ public interface UserService {
     UserLoginInfo login(User user);
 
     WxLoginInfo getWxLoginInfo(User user);
+
+    List<User> list();
 }

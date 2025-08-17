@@ -32,7 +32,7 @@ const clear = () => {
   <div id="container">
     <div class="login-form">
       <el-form label-width="80px">
-        <p class="title">Tlias后台管理辅助系统</p>
+        <p class="title">智能后台管理系统</p>
         <el-form-item label="用户名" prop="username">
           <el-input v-model="loginForm.username" placeholder="请输入用户名"></el-input>
         </el-form-item>
@@ -51,22 +51,33 @@ const clear = () => {
 </template>
 
 <style scoped>
+/* 让背景填充整个页面 */
 #container {
-  padding: 10%;
-  height: 410px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url('../../assets/bg1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* 移除原来的padding */
 }
 
 .login-form {
   max-width: 400px;
   padding: 30px;
   margin: 0 auto;
-  border: 1px solid #e0e0e0;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  /* 设置半透明背景 */
+  background-color: rgba(255, 255, 255, 0.8); /* 0.8是透明度，可调整 */
+  backdrop-filter: blur(5px); /* 添加毛玻璃效果，可选 */
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .title {
@@ -75,10 +86,19 @@ const clear = () => {
   text-align: center;
   margin-bottom: 30px;
   font-weight: bold;
+  color: #333; /* 确保文字在透明背景下可见 */
 }
 
 .button {
   margin-top: 30px;
   width: 120px;
+}
+
+/* 调整表单元素的透明度 */
+.el-form-item__label {
+  color: #333 !important; /* 确保标签文字可见 */
+}
+.el-input__inner {
+  background-color: rgba(255, 255, 255, 0.7) !important;
 }
 </style>

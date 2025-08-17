@@ -35,6 +35,8 @@ const getEmpList = async () => {
   }
 }
 
+const subjects = ref([{ name: 'Java', value: 1 },{ name: '前端', value: 2 },{ name: '大数据', value: 3 }
+  ,{ name: 'python', value: 4 },{ name: 'Go', value: 5 },{ name: '嵌入式', value: 6 }])
 
 //Dialog对话框
 const dialogFormVisible = ref(false);
@@ -194,12 +196,7 @@ const delById = async (id) => {
       </el-form-item>
       <el-form-item label="学科" label-width="80px" prop="subject">
         <el-select v-model="dept.subject" placeholder="请选择学科">
-          <el-option label="java" value="1"></el-option>
-          <el-option label="前端" value="2"></el-option>
-          <el-option label="大数据" value="3"></el-option>
-          <el-option label="python" value="4"></el-option>
-          <el-option label="Go" value="5"></el-option>
-          <el-option label="嵌入式" value="6"></el-option>
+          <el-option v-for="s in subjects" :key="s.value" :label="s.name" :value="s.value"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="更新时间" label-width="80px" prop="updateTime">
