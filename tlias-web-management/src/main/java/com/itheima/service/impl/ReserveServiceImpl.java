@@ -1,7 +1,11 @@
 package com.itheima.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.itheima.mapper.ReserveMapper;
+import com.itheima.pojo.PageResult;
 import com.itheima.pojo.Reserve;
+import com.itheima.pojo.ReserveQueryParam;
 import com.itheima.service.ReserveService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +53,20 @@ public class ReserveServiceImpl implements ReserveService {
     @Override
     public List<Reserve> list() {
         return reserveMapper.list();
+    }
+
+    @Override
+    public PageResult<Reserve> page(ReserveQueryParam reserveQueryParam) {
+        PageHelper.startPage(reserveQueryParam.getPage(), reserveQueryParam.getPageSize());
+        List<Reserve> reserves  = reserveMapper.listPage(reserveQueryParam);
+        PageInfo<Reserve> pageInfo = new PageInfo<Reserve>(reserves);
+        return new PageResult<>(pageInfo.getTotal(), pageInfo.getList());
+    }
+
+    @Override
+    public Reserve getById(Integer id) {
+        Reserve res = reserveMapper.getById(id);
+        return res;
     }
 
 

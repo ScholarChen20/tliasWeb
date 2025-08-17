@@ -1,6 +1,7 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.Reserve;
+import com.itheima.pojo.ReserveQueryParam;
 import com.itheima.pojo.User;
 import org.apache.ibatis.annotations.*;
 
@@ -19,9 +20,6 @@ public interface ReserveMapper {
     List<Reserve> doctorList(Integer id);
 
 
-    @Update("update reserve set user_id=#{userId}, d_id=#{did}, appoint_time=#{appointTime}, status=#{status}, " +
-            "reason=#{reason}, diet_advise=#{dietAdvise}, exercise_advise=#{exerciseAdvise}, medication_advise=#{medicationAdvise}, " +
-            "where id=#{id}")
     void update(Reserve reserve);
 
     @Delete("delete from reserve where id=#{id}")
@@ -45,4 +43,7 @@ public interface ReserveMapper {
      * @return
      */
     List<Reserve> list();
+    Reserve getById(Integer id);
+
+    List<Reserve> listPage(ReserveQueryParam reserveQueryParam);
 }
