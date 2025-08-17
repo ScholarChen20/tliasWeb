@@ -104,6 +104,65 @@
             r.medication_advice medicationAdvise
         FROM reserve r left join doctor d on r.d_id = d.id left join user_info u on r.user_id = u.id
     </select>
+    <select id="listPage" resultMap="reserveMap">
+        select
+            r.id id,
+            r.d_id dId,
+            r.user_id userId,
+            r.appoint_time appointTime,
+            r.status status,
+            r.reason reason,
+            r.diet_advice dietAdvise,
+            r.exercise_advice exerciseAdvise,
+            r.medication_advice medicationAdvise,
+            d.name dname,u.name userName,d.dept dept from reserve r left join doctor d on r.d_id = d.id left join user_info u on r.user_id = u.id
+        <where>
+            <if test="userId!= null and userId!= ''">
+                r.user_id = #{userId}
+            </if>
+            <if test="dId!= null and dId!= ''">
+                and r.d_id = #{dId}
+            </if>
+            <if test="status!= null and status!= ''">
+                and r.status = #{status}
+            </if>
+            <if test="begin!= null and end!= null">
+                and r.appoint_time between #{begin} and #{end}
+            </if>
+        </where>
+        order by r.appoint_time desc
+    </select>
+    <select id="getById" resultMap="reserveMap">
+        SELECT
+        r.id id,
+        r.d_id dId,
+        r.user_id userId,
+        u.name userName,
+        d.name dname,
+        d.dept dept,
+        r.status status,
+        r.reason reason,
+        r.appoint_time appointTime,
+        r.diet_advice dietAdvise,
+        r.exercise_advice exerciseAdvise,
+        r.medication_advice medicationAdvise
+        FROM reserve r left join doctor d on r.d_id = d.id left join user_info u on r.user_id = u.id
+        where r.id = #{id}
+    </select>
+    <update id="update">
+        update reserve
+        <set>
+            <if test="userId!= null and userId!= ''">user_id = #{userId},</if>
+            <if test="did!= null and did!= ''">d_id = #{did},</if>
+            <if test="status!= null and status!= ''">status = #{status},</if>
+            <if test="reason!= null and reason!= ''">reason = #{reason},</if>
+            <if test="dietAdvise!= null dietAdvise!= ''">diet_advice = #{dietAdvise},</if>
+            <if test="exerciseAdvise!= null exerciseAdvise!= ''">exercise_advice = #{exerciseAdvise},</if>
+            <if test="medicationAdvise!= null medicationAdvise!= ''">medication_advice = #{medicationAdvise},</if>
+            <if test="appointTime!= null">appoint_time = #{appointTime}</if>
+        </set>
+        where r.id = #{id}
+    </update>
     <!--    property:属性名，column:数据库字段名-->
     <resultMap id="reserveMap" type="com.itheima.pojo.Reserve">
         <id property="id" column="id"/>
@@ -112,6 +171,8 @@
         <result property="userName" column="userName"/>
         <result property="dName" column="dname"/>
         <result property="dept" column="dept"/>
+        <result property="reason" column="reason"/>
+        <result property="status" column="status"/>
         <result property="appointTime" column="appointTime"/>
         <result property="dietAdvise" column="dietAdvise"/>
         <result property="exerciseAdvise" column="exerciseAdvise"/>

@@ -181,8 +181,8 @@ const delById = async (id) => {
       <el-table-column prop="heart" label="心率" width="100" align="center"/>
       <el-table-column prop="writeType" label="测量方式" width="100" align="center"/>
       <el-table-column prop="situation" label="房颤" width="100" align="center"/>
-      <el-table-column prop="writeTime" label="记录时间" width="150" align="center"/>
-      <el-table-column prop="updateTime" label="最后操作时间" width="150" align="center"/>
+      <el-table-column prop="writeTime" label="记录时间" width="200" align="center"/>
+      <el-table-column prop="updateTime" label="最后操作时间" width="200" align="center"/>
       <el-table-column label="操作" align="center">
         <template #default="scope">
           <el-button type="primary" size="small" @click="edit(scope.row.id)"><el-icon><EditPen /></el-icon> 编辑</el-button>

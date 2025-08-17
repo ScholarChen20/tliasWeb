@@ -1,9 +1,7 @@
 package com.itheima.controller;
 
 
-import com.itheima.pojo.Reserve;
-import com.itheima.pojo.Result;
-import com.itheima.pojo.UserHbp;
+import com.itheima.pojo.*;
 import com.itheima.service.ReserveService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,20 @@ public class ReserveController {
     @Autowired
     private ReserveService reserveService;
 
+    @GetMapping
+    public Result page(ReserveQueryParam reserveQueryParam) {
+        log.info("分页模糊查询page:{},pageSize:{},userid:{},did:{},status:{},begin:{},end:{}",
+                reserveQueryParam.getPage(), reserveQueryParam.getPageSize(), reserveQueryParam.getUserId(), reserveQueryParam.getDId(),reserveQueryParam.getStatus(),
+                reserveQueryParam.getBegin(), reserveQueryParam.getEnd());
+        PageResult<Reserve> pageResult = reserveService.page(reserveQueryParam);
+        return Result.success(pageResult);
+    }
+    @GetMapping("/{id}")
+    public Result getInfo(@PathVariable Integer id){
+        Reserve reserve = reserveService.getById(id);
+        log.info("查询用户的预约记录：{}",reserve);
+        return Result.success(reserve);
+    }
     /**
      * 查询所有用户的预约记录
      */

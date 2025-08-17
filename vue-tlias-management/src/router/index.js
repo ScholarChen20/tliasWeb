@@ -12,6 +12,8 @@ import LayoutView from '@/views/layout/index.vue'
 import LoginView from '@/views/login/index.vue'
 import RecordView from '@/views/record/index.vue'
 import DoctorView from '@/views/doctor/index.vue'
+import ReserveView from '@/views/reserve/index.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -30,6 +32,7 @@ const router = createRouter({
 
       {path: 'record', name: 'record', component: RecordView},
       {path: 'doctor', name: 'doctor', component: DoctorView},
+      {path: 'reserve', name: 'reserve', component: ReserveView},
 
 
       {path: 'empReport', name: 'empReport', component: EmpReportView},

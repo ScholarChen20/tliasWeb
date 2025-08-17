@@ -1,7 +1,10 @@
 package com.itheima.service;
 
 
+import com.itheima.pojo.Emp;
+import com.itheima.pojo.PageResult;
 import com.itheima.pojo.Reserve;
+import com.itheima.pojo.ReserveQueryParam;
 
 import java.util.List;
 
@@ -19,4 +22,8 @@ public interface ReserveService {
     List<Reserve> getAdvice(Integer id);
 
     List<Reserve> list();
+
+    PageResult<Reserve> page(ReserveQueryParam reserveQueryParam);
+
+    Reserve getById(Integer id);
 }

@@ -5,6 +5,8 @@ export const queryPageApi = (name,gender,dept,title,page,pageSize) =>
 
 export const queryInfoApi = (id) => request.get(`/doctors/${id}`);
 
+export const queryAllApi = () =>  request.get(`/doctors/list`);
+
 export const addApi = (doctor) => request.post('/doctors', doctor);
 
 export const updateApi = (doctor) => request.put('/doctors', doctor);
