@@ -18,7 +18,15 @@ public class UserController {
 
     @Autowired
     private UserService  userService;
-
+    /**
+     * 查询所有用户信息
+     */
+    @GetMapping("/list")
+    public Result getUser(){
+        List<User> user = userService.list();
+        log.info("查询所有的用户");
+        return  Result.success(user);
+    }
     /**
      * 查询用户信息
      */

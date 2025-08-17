@@ -24,16 +24,18 @@ public interface UserHbpMapper {
             "writetype = #{writeType}, situation = #{situation}, update_time = #{updateTime} where id = #{id}")
     void update(UserHbp userHbp);
 
-    @Select("select * from user_healthyinfo where userid = #{id} order by write_time desc")
-    List<UserHbp>  getInfo(Integer id);
+    @Select("select * from user_healthyinfo where id = #{id} order by write_time desc")
+    UserHbp  getInfo(Integer id);
 
-    /*
-    返回最近一条记录
+    /**
+     * 返回最近一条记录
      */
     @Select("select id, userid, sbp, dbp,heart,write_time from user_healthyinfo where userid = #{userid} order by id desc limit 1")
     UserHbp getInfoById(@Param("userid") Integer id);
 
-    @Select("select * from user_healthyinfo order by id desc")
+    /**
+     * 分页查看所有血压记录
+     */
     List<UserHbp> list();
 
 }

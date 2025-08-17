@@ -46,5 +46,10 @@ public class ReserveServiceImpl implements ReserveService {
         return reserveMapper.adviceListById(id);
     }
 
+    @Override
+    public List<Reserve> list() {
+        return reserveMapper.list();
+    }
+
 
 }

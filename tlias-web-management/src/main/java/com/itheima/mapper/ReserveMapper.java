@@ -39,4 +39,10 @@ public interface ReserveMapper {
      */
 
     List<Reserve> adviceListById(Integer id);//Param 注解用于给参数取别名，只有一个参数时，别名可以忽略
+
+    /**
+     * 查询所有预约记录
+     * @return
+     */
+    List<Reserve> list();
 }

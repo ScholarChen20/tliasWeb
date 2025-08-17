@@ -1,6 +1,10 @@
 package com.itheima.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.UserHbpMapper;
+import com.itheima.pojo.Knowledge;
+import com.itheima.pojo.PageResult;
 import com.itheima.pojo.UserHbp;
 import com.itheima.service.UserBhpService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +26,7 @@ public class UserBhpServiceImpl implements UserBhpService {
     }
 
     @Override
-    public List<UserHbp>  getInfo(Integer id) {
+    public UserHbp  getInfo(Integer id) {
         return userHbpMapper.getInfo(id);
     }
 
@@ -48,6 +52,14 @@ public class UserBhpServiceImpl implements UserBhpService {
     @Override
     public UserHbp getInfoById(Integer id) {
         return userHbpMapper.getInfoById(id);
+    }
+
+    @Override
+    public PageResult page(Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);// 开启分页
+        List<UserHbp> list = userHbpMapper.list(); // 查询分页数据
+        Page<UserHbp> p = (Page<UserHbp>) list; // 强转为Page类型
+        return new PageResult(p.getTotal(), p.getResult()); // 返回分页结果
     }
 
 

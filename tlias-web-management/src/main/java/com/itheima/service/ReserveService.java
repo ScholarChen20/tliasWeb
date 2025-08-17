@@ -17,4 +17,6 @@ public interface ReserveService {
     void delete(Integer id);
 
     List<Reserve> getAdvice(Integer id);
+
+    List<Reserve> list();
 }

@@ -34,4 +34,10 @@ public interface UserMapper {
      */
     @Select("select * from user_info where openid=#{openid} and nickname=#{nickname}")
     User selectByOpenidAndNickname(User user);
+
+    /**
+     * 查询所有用户
+     */
+    @Select("select * from user_info")
+    List<User> getList();
 }

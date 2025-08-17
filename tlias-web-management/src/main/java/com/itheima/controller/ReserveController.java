@@ -20,6 +20,17 @@ public class ReserveController {
     private ReserveService reserveService;
 
     /**
+     * 查询所有用户的预约记录
+     */
+
+    @GetMapping("/list")
+    public Result reserveList(){
+        List<Reserve> reserve = reserveService.list();
+        log.info("查询所有预约的信息");
+        return Result.success(reserve);
+    }
+
+    /**
      * 查询用户预约信息
      */
     @GetMapping("/user/{id}")
@@ -29,7 +40,7 @@ public class ReserveController {
         return Result.success(reserve);
     }
     /**
-     * 查询用户信息
+     * 医生查看预约的用户预约信息
      */
     @GetMapping("/doctor/{d_id}")
     public Result getDoctorInfo(@PathVariable Integer d_id){
@@ -65,7 +76,7 @@ public class ReserveController {
         log.info("删除预约信息，id：{}",id);
         return  Result.success();
     }
-    /*
+    /**
      * 根据用户id查询医生建议信息
      */
     @GetMapping("/advice/{id}")

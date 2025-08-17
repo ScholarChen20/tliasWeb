@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.DoctorMapper">
+    <update id="update">
+        update doctor
+        <set>
+            <if test="name!= null and name!= ''">name = #{name},</if>
+            <if test="dept!= null and dept!= ''">dept = #{dept},</if>
+            <if test="title!= null and title!= ''">title = #{title},</if>
+            <if test="phone!= null and phone!= ''">phone = #{phone},</if>
+            <if test="gender!= null">gender = #{gender},</if>
+            <if test="hospital!= null">hospital = #{hospital},</if>
+            <if test="status!= null">status = #{status},</if>
+            <if test="avatar!= null and avatar!= ''">avatar = #{avatar},</if>
+            <if test="introduce!= null and introduce!= ''">introduce = #{introduce},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <select id="listPages" resultType="com.itheima.pojo.Doctor">
+        select * from doctor
+        <where>
+            <if test="name!= null and name!= ''">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="gender!= null">
+                and gender = #{gender}
+            </if>
+            <if test="dept!= null">
+                and dept = #{dept}
+            </if>
+            <if test="title!= null">
+                and title = #{title}
+            </if>
+        </where>
+    </select>
+
+    <select id="listPage" resultType="com.itheima.pojo.Doctor">
+        select * from doctor
+        <where>
+            <if test="name!= null and name!= ''">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="gender!= null and gender!= ''">
+                and gender = #{gender}
+            </if>
+            <if test="dept!= null and dept!= ''" >
+                and dept = #{dept}
+            </if>
+            <if test="title!= null and title!= ''">
+                and title = #{title}
+            </if>
+        </where>
+    </select>
+</mapper>

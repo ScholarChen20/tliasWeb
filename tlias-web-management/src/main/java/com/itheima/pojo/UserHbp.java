@@ -13,8 +13,9 @@ import java.time.LocalDateTime;
 public class UserHbp {
     private Integer id;
     private Integer userid;
-    private String sbp;
-    private String dbp;
+    private String userName;
+    private String sbp;  // 收缩压
+    private String dbp;  // 舒张压
     private String heart;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime writeTime;
