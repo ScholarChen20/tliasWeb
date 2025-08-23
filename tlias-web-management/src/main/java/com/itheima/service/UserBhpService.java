@@ -1,7 +1,9 @@
 package com.itheima.service;
 
 import com.itheima.pojo.PageResult;
+import com.itheima.pojo.Reserve;
 import com.itheima.pojo.UserHbp;
+import com.itheima.pojo.dto.RecordQueryParam;
 
 import java.util.List;
 
@@ -18,5 +20,5 @@ public interface UserBhpService {
 
     UserHbp getInfoById(Integer id);
 
-    PageResult page(Integer page, Integer pageSize);
+    PageResult<UserHbp> page(RecordQueryParam recordQueryParam);
 }

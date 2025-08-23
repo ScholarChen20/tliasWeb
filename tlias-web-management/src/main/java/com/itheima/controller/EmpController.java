@@ -1,18 +1,14 @@
 package com.itheima.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.itheima.pojo.Emp;
-import com.itheima.pojo.EmpQueryParam;
+import com.itheima.pojo.dto.EmpQueryParam;
 import com.itheima.pojo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j

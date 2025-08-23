@@ -2,6 +2,7 @@ package com.itheima.controller;
 
 
 import com.itheima.pojo.*;
+import com.itheima.pojo.dto.ReserveQueryParam;
 import com.itheima.service.ReserveService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

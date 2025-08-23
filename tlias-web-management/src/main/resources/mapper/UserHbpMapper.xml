@@ -11,6 +11,21 @@
         FROM user_healthyinfo u left join user_info uu on u.userid = uu.id
         order by update_time desc
     </select>
+    <select id="listPage" resultMap="userHbpMap">
+        select
+        u.*,
+        uu.name userName
+        from user_healthyinfo u left join user_info uu on u.userid = uu.id
+        <where>
+            <if test="userId!= null and userId!= ''">
+                u.userid = #{userId}
+            </if>
+            <if test="begin!= null and end!= null">
+                and u.write_time between #{begin} and #{end}
+            </if>
+        </where>
+        order by u.update_time desc
+    </select>
     <!--    property:属性名，column:数据库字段名-->
     <resultMap id="userHbpMap" type="com.itheima.pojo.UserHbp">
         <id property="id" column="id"/>

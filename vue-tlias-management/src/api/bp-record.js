@@ -4,8 +4,8 @@ export const queryAllApi = () =>  request.get('/userHbpInfos/list');
 
 export const queryInfoApi = (id) =>  request.get(`/userHbpInfos/${id}`);
 
-export const queryPageApi = (page,pageSize) =>
-    request.get(`/userHbpInfos?page=${page}&pageSize=${pageSize}`);
+export const queryPageApi = (userId,begin,end,page,pageSize) =>
+    request.get(`/userHbpInfos?userId=${userId}&begin=${begin}&end=${end}&page=${page}&pageSize=${pageSize}`);
 
 export const addApi = (usrBhp) => request.post('/userHbpInfos', usrBhp);
 

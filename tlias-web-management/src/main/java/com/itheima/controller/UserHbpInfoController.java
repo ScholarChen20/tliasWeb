@@ -4,6 +4,7 @@ import com.itheima.mapper.UserHbpMapper;
 import com.itheima.pojo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.pojo.UserHbp;
+import com.itheima.pojo.dto.RecordQueryParam;
 import com.itheima.service.UserBhpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,11 @@ public class UserHbpInfoController {
      * 条件分页查询列表
      */
     @GetMapping
-    public Result page(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageResult record = userHbpService.page(page, pageSize);
+    public Result page(RecordQueryParam recordQueryParam) {
+        log.info("分页模糊查询血压记录page:{},pageSize:{},userid:{},,begin:{},end:{}",
+                recordQueryParam.getPage(), recordQueryParam.getPageSize(), recordQueryParam.getUserId(),
+                recordQueryParam.getBegin(), recordQueryParam.getEnd());
+        PageResult<UserHbp> record = userHbpService.page(recordQueryParam);
         log.info("recorfList: {}", record);
         return Result.success(record);
     }

@@ -1,7 +1,7 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.Emp;
-import com.itheima.pojo.EmpQueryParam;
+import com.itheima.pojo.dto.EmpQueryParam;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

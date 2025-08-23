@@ -2,8 +2,7 @@ package com.itheima.service;
 
 
 import com.itheima.pojo.Doctor;
-import com.itheima.pojo.DoctorQueryParam;
-import com.itheima.pojo.Emp;
+import com.itheima.pojo.dto.DoctorQueryParam;
 import com.itheima.pojo.PageResult;
 
 import java.util.List;

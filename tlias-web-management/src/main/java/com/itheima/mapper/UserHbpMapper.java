@@ -1,6 +1,7 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.UserHbp;
+import com.itheima.pojo.dto.RecordQueryParam;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -37,5 +38,12 @@ public interface UserHbpMapper {
      * 分页查看所有血压记录
      */
     List<UserHbp> list();
+
+    /**
+     * 分页条件查询所有记录
+     * @param recordQueryParam
+     * @return
+     */
+    List<UserHbp> listPage(RecordQueryParam recordQueryParam);
 
 }

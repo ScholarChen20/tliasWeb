@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export const queryPageApi = (userId,dId,begin,status,end,page,pageSize) => request.get
+export const queryPageApi = (userId,dId,status,begin,end,page,pageSize) => request.get
 (`/reserves?userId=${userId}&dId=${dId}&status=${status}&begin=${begin}&end=${end}&page=${page}&pageSize=${pageSize}`)
 
 export const queryInfoApi = (id) =>  request.get(`/reserves/${id}`);

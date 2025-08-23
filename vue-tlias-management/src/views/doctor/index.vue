@@ -274,10 +274,10 @@ const deleteByIds = () => {
       <el-table-column type="index" label="序号" width="100" align="center"/>
       <el-table-column prop="name" label="姓名" width="100" align="center"/>
       <el-table-column prop="gender" label="性别" width="100" align="center"/>
-      <el-table-column prop="dept" label="科室" width="100" align="center"/>
-      <el-table-column prop="title" label="职称" width="100" align="center"/>
-      <el-table-column prop="hospital" label="所属医院" width="100" align="center"/>
-      <el-table-column prop="introduce" label="简介" width="100" align="center"/>
+      <el-table-column prop="dept" label="科室" width="120" align="center"/>
+      <el-table-column prop="title" label="职称" width="130" align="center"/>
+      <el-table-column prop="hospital" label="所属医院" width="140" align="center"/>
+      <el-table-column prop="introduce" label="简介" width="350" align="center"/>
       <el-table-column prop="status" label="是否可预约" width="100" align="center"/>
       <el-table-column prop="phone" label="电话号" width="150" align="center"/>
       <el-table-column label="头像" width="120"  align="center">
@@ -396,12 +396,14 @@ const deleteByIds = () => {
       <!-- 第六行 -->
       <el-row :gutter="20">
         <el-col :span="24">
-          <el-input
-              type="textarea"
-              :rows="2"
-              placeholder="请输入简介"
-              v-model="doc.introduce">
-          </el-input>
+          <el-form-item label="简介">
+            <el-input
+                type="textarea"
+                :rows="2"
+                placeholder="请输入简介"
+                v-model="doc.introduce">
+            </el-input>
+          </el-form-item>
         </el-col>
       </el-row>
     </el-form>

@@ -6,6 +6,7 @@ import com.itheima.mapper.UserHbpMapper;
 import com.itheima.pojo.Knowledge;
 import com.itheima.pojo.PageResult;
 import com.itheima.pojo.UserHbp;
+import com.itheima.pojo.dto.RecordQueryParam;
 import com.itheima.service.UserBhpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,12 +56,13 @@ public class UserBhpServiceImpl implements UserBhpService {
     }
 
     @Override
-    public PageResult page(Integer page, Integer pageSize) {
-        PageHelper.startPage(page, pageSize);// 开启分页
-        List<UserHbp> list = userHbpMapper.list(); // 查询分页数据
+    public PageResult<UserHbp> page(RecordQueryParam recordQueryParam) {
+        PageHelper.startPage(recordQueryParam.getPage(), recordQueryParam.getPageSize());// 开启分页
+        List<UserHbp> list = userHbpMapper.listPage(recordQueryParam); // 查询分页数据
         Page<UserHbp> p = (Page<UserHbp>) list; // 强转为Page类型
-        return new PageResult(p.getTotal(), p.getResult()); // 返回分页结果
+        return new PageResult<>(p.getTotal(), p.getResult()); // 返回分页结果
     }
+
 
 
 }
