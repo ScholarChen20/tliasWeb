@@ -64,7 +64,7 @@ public class KnowledgeController {
     /**
      * 添加或修改知识
      */
-    @PostMapping("/save")
+    @PostMapping
     public Result save(@RequestBody Knowledge knowledge) {
         log.info("添加或修改知识: {}", knowledge);
         knowledgeService.save(knowledge);
@@ -73,7 +73,7 @@ public class KnowledgeController {
     /**
      * 修改知识
      */
-    @PutMapping("/{id}")
+    @PutMapping
     public Result update(@RequestBody Knowledge knowledge) {
         log.info("修改知识: {}", knowledge);
         knowledgeService.update(knowledge);

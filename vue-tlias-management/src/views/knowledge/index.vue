@@ -8,17 +8,49 @@ import {
   queryInfoApi,
 } from '@/api/knowledge';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import {SuccessFilled} from "@element-plus/icons-vue";
 
 //钩子函数
 onMounted(() => {
   search();
+  getToken();
 })
 
 //查询
 const bpList = ref([])
+//token
+const token = ref('');
 
+//获取token
+const getToken = () => {
+  try {
+    const loginUserStr = localStorage.getItem('loginUser');
+    if (!loginUserStr) return; // 没有数据时直接返回
 
+    const loginUser = JSON.parse(loginUserStr); // 先判断非空再解析
+    if (loginUser && loginUser.token) {
+      token.value = loginUser.token; // Vue3 示例
+    }
+  } catch (error) {
+    console.error('解析 loginUser 失败：', error); // 捕获 JSON 解析错误
+  }
+}
+
+// 文件上传
+// 图片上传成功后触发
+const handleAvatarSuccess = (response) => {
+  bp.value.image = response.data;
+}
+// 文件上传之前触发
+const beforeAvatarUpload = (rawFile) => {
+  if (rawFile.type !== 'image/jpeg' && rawFile.type !== 'image/png') {
+    ElMessage.error('只支持上传图片')
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 10) {
+    ElMessage.error('只能上传10M以内图片')
+    return false
+  }
+  return true
+}
 
 //搜索表单对象
 const searchEmp = ref({author: '', text: '', date: [], begin: '', end: ''})
@@ -140,8 +172,6 @@ const edit = async (id) => {
   if(result.code){
     dialogFormVisible.value = true;
     bp.value = result.data;
-    bp.value.userid = result.data.userid
-    console.log(result.data.userid);
   }
 }
 
@@ -165,18 +195,19 @@ const delById = async (id) => {
 </script>
 
 <template>
-  <h1>血压记录管理</h1>
+  <h1>文章管理</h1>
   <!-- 搜索栏 -->
   <div class="container">
     <el-form :inline="true" :model="searchEmp" class="demo-form-inline">
-      <el-form-item label="用户">
-        <el-select v-model="searchEmp.userId" placeholder="请选择">
-          <el-option v-for="u in users" :key="u.id" :label="u.name" :value="u.id">
-          </el-option>
-        </el-select>
+      <el-form-item label="作者">
+        <el-input v-model="searchEmp.author" placeholder="请输入文章作者" />
       </el-form-item>
 
-      <el-form-item label="记录时间">
+      <el-form-item label="内容">
+        <el-input v-model="searchEmp.text" placeholder="请输入文章内容" />
+      </el-form-item>
+
+      <el-form-item label="发布时间">
         <el-date-picker
             v-model="searchEmp.date"
             type="daterange"
@@ -193,24 +224,25 @@ const delById = async (id) => {
     </el-form>
   </div>
   <div class="container">
-    <el-button type="primary" @click="addRecord"> + 新增血压记录</el-button>
+    <el-button type="primary" @click="addRecord"> + 新增文章</el-button>
   </div>
 
   <!-- 表格 -->
   <div class="container">
     <el-table :data="bpList" border style="width: 100%">
       <el-table-column type="index" label="序号" width="100" align="center"/>
-      <el-table-column prop="userName" label="用户" width="120" align="center"/>
-      <el-table-column prop="sbp" label="收缩压" width="120" align="center"/>
-      <el-table-column prop="dbp" label="舒张压" width="120" align="center"/>
-      <el-table-column prop="heart" label="心率" width="120" align="center"/>
-      <el-table-column prop="writeType" label="测量方式" width="130" align="center"/>
-      <el-table-column prop="situation" label="房颤" width="130" align="center"/>
-      <el-table-column prop="writeTime" label="记录时间" width="200" align="center"/>
-      <el-table-column prop="updateTime" label="最后操作时间" width="230" align="center"/>
+      <el-table-column prop="author" label="作者" width="150" align="center"/>
+      <el-table-column prop="title" label="主题" width="150" align="center"/>
+      <el-table-column prop="text" label="内容" width="350" align="center"/>
+      <el-table-column prop="image" label="文章图片" width="200" align="center">
+        <template #default="scope">
+          <img :src="scope.row.image" height="100px">
+        </template>
+      </el-table-column>
+      <el-table-column prop="publishTime" label="发布时间" width="230" align="center"/>
+      <el-table-column prop="updateTime" label="更新时间" width="230" align="center"/>
       <el-table-column label="操作" align="center">
         <template #default="scope">
-          <el-button type="success" size="small" @click="showRecord(scope.row.id)"><el-icon><success-filled /></el-icon> 可视化显示</el-button>
           <el-button type="primary" size="small" @click="edit(scope.row.id)"><el-icon><EditPen /></el-icon> 编辑</el-button>
           <el-button type="danger" size="small" @click="delById(scope.row.id)"><el-icon><Delete /></el-icon> 删除</el-button>
         </template>
@@ -233,35 +265,43 @@ const delById = async (id) => {
   </div>
 
   <!-- Dialog对话框 -->
-  <el-dialog v-model="dialogFormVisible" :title="formTitle" width="500">
+  <el-dialog v-model="dialogFormVisible" :title="formTitle" width="600" height="800">
     <el-form :model="bp" :rules="rules" ref="deptFormRef">
-      <el-form-item label="用户" label-width="80px">
-        <el-select v-model="bp.userid" placeholder="请选择用户" style="width: 100%;">
-          <el-option v-for="u in users" :key="u.id" :label="u.name" :value="u.id"></el-option>
-        </el-select>
+      <el-form-item label="作者" label-width="80px" prop="author">
+        <el-input v-model="bp.author" />
       </el-form-item>
-      <el-form-item label="收缩压" label-width="80px" prop="sbp">
-        <el-input v-model="bp.sbp" />
+      <el-form-item label="主题" label-width="80px" prop="title">
+        <el-input v-model="bp.title" />
       </el-form-item>
-      <el-form-item label="舒张压" label-width="80px" prop="dbp">
-        <el-input v-model="bp.dbp" />
+      <el-form-item label="文章图片" label-width="80px">
+        <el-upload
+            class="avatar-uploader"
+            action="/api/upload"
+            :headers="{'token': token}"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
+          <img v-if="bp.image" :src="bp.image" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+        </el-upload>
       </el-form-item>
-      <el-form-item label="心率" label-width="80px" prop="heart">
-        <el-input v-model="bp.heart" />
+      <el-form-item label="内容" label-width="80px" prop="text">
+        <el-input
+            type="textarea"
+            placeholder="请输入内容"
+            :autosize="{ minRows: 2, maxRows: 7}"
+            v-model="bp.text"
+            maxlength="2000"
+            show-word-limit
+        />
       </el-form-item>
-      <el-form-item label="测量方式" label-width="80px">
-        <el-select v-model="bp.writeType" placeholder="请选择用户" style="width: 100%;">
-          <el-option v-for="w in wType" :key="w.value" :label="w.name" :value="w.value"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="房颤" label-width="80px">
-        <el-select v-model="bp.situation" placeholder="请选择用户" style="width: 100%;">
-          <el-option v-for="s in situation" :key="s.value" :label="s.name" :value="s.value"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="更新时间" label-width="80px" prop="updateTime">
-        <el-time-picker v-model="bp.updateTime" placeholder="选择时间">
-        </el-time-picker>
+      <el-form-item label="发布时间" label-width="100px" prop="publishTime">
+        <el-date-picker
+            v-model="bp.publishTime"
+            type="datetime"
+            placeholder="选择发布时间"
+            default-time="12:00:00">
+        </el-date-picker>
       </el-form-item>
 
 
@@ -279,5 +319,28 @@ const delById = async (id) => {
 <style scoped>
 .container {
   margin: 15px 0px;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 }
 </style>
