@@ -20,7 +20,7 @@ const depts = ref([])
 const searchEmp = ref({name: '', gender: '', date: [], begin: '', end: ''})
 
 watch(() => searchEmp.value.date, (newVal, oldVal) => {
-  if(newVal.length == 2){
+  if(newVal.length === 2){
     searchEmp.value.begin = newVal[0];
     searchEmp.value.end = newVal[1];
   }else {

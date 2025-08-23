@@ -45,7 +45,7 @@ const queryAllDoc = async () => {
 const searchEmp = ref({userId: '', dId: '', status: '', date: [], begin: '', end: ''})
 
 watch(() => searchEmp.value.date, (newVal, oldVal) => {
-  if(newVal.length == 2) {
+  if(newVal.length === 2) {
     searchEmp.value.begin = newVal[0];
     searchEmp.value.end = newVal[1];
   }else {
@@ -268,12 +268,12 @@ const deleteByIds = () => {
       <el-table-column prop="userName" label="用户" width="100" align="center"/>
       <el-table-column prop="dname" label="预约医生" width="100" align="center"/>
       <el-table-column prop="dept" label="科室" width="100" align="center"/>
-      <el-table-column prop="reason" label="预约原因" width="100" align="center"/>
+      <el-table-column prop="reason" label="预约原因" width="180" align="center"/>
       <el-table-column prop="status" label="就诊状态" width="100" align="center"/>
       <el-table-column prop="appointTime" label="预约时间" width="200" align="center"/>
-      <el-table-column prop="dietAdvise" label="饮食建议" width="200" align="center"/>
-      <el-table-column prop="exerciseAdvise" label="运动建议" width="200" align="center"/>
-      <el-table-column prop="medicationAdvise" label="用药建议" width="200" align="center"/>
+      <el-table-column prop="dietAdvise" label="饮食建议" width="220" align="center"/>
+      <el-table-column prop="exerciseAdvise" label="运动建议" width="220" align="center"/>
+      <el-table-column prop="medicationAdvise" label="用药建议" width="220" align="center"/>
       <el-table-column label="操作" align="center">
         <template #default="scope">
           <el-button type="primary" size="small" @click="edit(scope.row.id)"><el-icon><EditPen /></el-icon> 编辑</el-button>

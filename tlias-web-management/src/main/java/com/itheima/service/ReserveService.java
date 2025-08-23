@@ -1,10 +1,9 @@
 package com.itheima.service;
 
 
-import com.itheima.pojo.Emp;
 import com.itheima.pojo.PageResult;
 import com.itheima.pojo.Reserve;
-import com.itheima.pojo.ReserveQueryParam;
+import com.itheima.pojo.dto.ReserveQueryParam;
 
 import java.util.List;
 

@@ -1,12 +1,11 @@
 package com.itheima.service;
 
 import com.itheima.pojo.Emp;
-import com.itheima.pojo.EmpQueryParam;
+import com.itheima.pojo.dto.EmpQueryParam;
 import com.itheima.pojo.LoginInfo;
 import com.itheima.pojo.PageResult;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Transactional

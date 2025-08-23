@@ -1,8 +1,6 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.Doctor;
-import com.itheima.pojo.DoctorQueryParam;
-import com.itheima.pojo.User;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.annotations.Param;
 

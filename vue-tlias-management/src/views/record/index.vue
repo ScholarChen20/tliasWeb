@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted,watch } from 'vue';
 import {
   queryPageApi,
   addApi,
@@ -9,6 +9,7 @@ import {
   queryInfoApi,
 } from '@/api/bp-record';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import {SuccessFilled} from "@element-plus/icons-vue";
 
 //钩子函数
 onMounted(() => {
@@ -41,8 +42,25 @@ const queryAllUsers = async () => {
     users.value = result.data;
   }
 }
+
+
+//搜索表单对象
+const searchEmp = ref({userId: '', date: [], begin: '', end: ''})
+
+watch(() => searchEmp.value.date, (newVal, oldVal) => {
+  if(newVal.length === 2) {
+    searchEmp.value.begin = newVal[0];
+    searchEmp.value.end = newVal[1];
+  }else {
+    searchEmp.value.begin = '';
+    searchEmp.value.end = '';
+  }
+})
+
+
 const search = async () => {
-  const result = await queryPageApi(currentPage.value,pageSize.value);
+  const result = await queryPageApi(searchEmp.value.userId,
+      searchEmp.value.begin, searchEmp.value.end, currentPage.value, pageSize.value);
   // console.log(result);
   if(result.code){
     bpList.value = result.data.rows;
@@ -50,6 +68,11 @@ const search = async () => {
   }
 }
 
+//清空
+const clear = () => {
+  searchEmp.value = {userId: '', date: [], begin: '', end: ''};
+  search();
+}
 //分页
 const currentPage = ref(1); //页码
 const pageSize = ref(10); //每页展示记录数
@@ -68,13 +91,13 @@ const handleCurrentChange = (val) => {
 //Dialog对话框
 const dialogFormVisible = ref(false);
 const formTitle = ref('');
-const bp = ref({name: '', userId: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',updateTime: ''});//新增时默认值
+const bp = ref({name: '', userid: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',updateTime: ''});//新增时默认值
 
 //新增记录
 const addRecord = () => {
   dialogFormVisible.value = true;
   formTitle.value = '新增血压记录';
-  bp.value = {name: '', userId: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',updateTime: ''}; //新增时默认值
+  bp.value = {name: '', userid: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',updateTime: ''}; //新增时默认值
 
   //重置表单的校验规则-提示信息
   if (deptFormRef.value){
@@ -141,7 +164,7 @@ const edit = async (id) => {
   if(result.code){
     dialogFormVisible.value = true;
     bp.value = result.data;
-    bp.value.userId = result.data.userid
+    bp.value.userid = result.data.userid
     console.log(result.data.userid);
   }
 }
@@ -167,6 +190,32 @@ const delById = async (id) => {
 
 <template>
   <h1>血压记录管理</h1>
+  <!-- 搜索栏 -->
+  <div class="container">
+    <el-form :inline="true" :model="searchEmp" class="demo-form-inline">
+      <el-form-item label="用户">
+        <el-select v-model="searchEmp.userId" placeholder="请选择">
+          <el-option v-for="u in users" :key="u.id" :label="u.name" :value="u.id">
+          </el-option>
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="记录时间">
+        <el-date-picker
+            v-model="searchEmp.date"
+            type="daterange"
+            range-separator="到"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            value-format="YYYY-MM-DD"/>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" @click="search">查询</el-button>
+        <el-button type="info" @click="clear">清空</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
   <div class="container">
     <el-button type="primary" @click="addRecord"> + 新增血压记录</el-button>
   </div>
@@ -175,16 +224,17 @@ const delById = async (id) => {
   <div class="container">
     <el-table :data="bpList" border style="width: 100%">
       <el-table-column type="index" label="序号" width="100" align="center"/>
-      <el-table-column prop="userName" label="部门名称" width="100" align="center"/>
-      <el-table-column prop="sbp" label="收缩压" width="100" align="center"/>
-      <el-table-column prop="dbp" label="舒张压" width="100" align="center"/>
-      <el-table-column prop="heart" label="心率" width="100" align="center"/>
-      <el-table-column prop="writeType" label="测量方式" width="100" align="center"/>
-      <el-table-column prop="situation" label="房颤" width="100" align="center"/>
+      <el-table-column prop="userName" label="用户" width="120" align="center"/>
+      <el-table-column prop="sbp" label="收缩压" width="120" align="center"/>
+      <el-table-column prop="dbp" label="舒张压" width="120" align="center"/>
+      <el-table-column prop="heart" label="心率" width="120" align="center"/>
+      <el-table-column prop="writeType" label="测量方式" width="130" align="center"/>
+      <el-table-column prop="situation" label="房颤" width="130" align="center"/>
       <el-table-column prop="writeTime" label="记录时间" width="200" align="center"/>
-      <el-table-column prop="updateTime" label="最后操作时间" width="200" align="center"/>
+      <el-table-column prop="updateTime" label="最后操作时间" width="230" align="center"/>
       <el-table-column label="操作" align="center">
         <template #default="scope">
+          <el-button type="success" size="small" @click="showRecord(scope.row.id)"><el-icon><success-filled /></el-icon> 可视化显示</el-button>
           <el-button type="primary" size="small" @click="edit(scope.row.id)"><el-icon><EditPen /></el-icon> 编辑</el-button>
           <el-button type="danger" size="small" @click="delById(scope.row.id)"><el-icon><Delete /></el-icon> 删除</el-button>
         </template>
@@ -210,7 +260,7 @@ const delById = async (id) => {
   <el-dialog v-model="dialogFormVisible" :title="formTitle" width="500">
     <el-form :model="bp" :rules="rules" ref="deptFormRef">
       <el-form-item label="用户" label-width="80px">
-        <el-select v-model="bp.userId" placeholder="请选择用户" style="width: 100%;">
+        <el-select v-model="bp.userid" placeholder="请选择用户" style="width: 100%;">
           <el-option v-for="u in users" :key="u.id" :label="u.name" :value="u.id"></el-option>
         </el-select>
       </el-form-item>
