@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.KnowledgeMapper">
+    <update id="update">
+        update knowledge
+        <set>
+            <if test="author != null">
+                author = #{author},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="text != null">
+                text = #{text},
+            </if>
+            <if test="image!= null and image!= ''">
+                and image = #{image},
+            </if>
+            <if test="updateTime!= null and updateTime!= ''">
+                and update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="listPage" resultMap="knowledgeMap">
+        select
+            * from knowledge
+        <where>
+            <if test="author!= null and author!= ''">
+                author = #{author}
+            </if>
+            <if test="text!= null and text!= ''">
+                and text like concat('%',#{text},'%')
+            </if>
+            <if test="begin!= null and end!= null">
+                and publish_time between #{begin} and #{end}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+    <!--    property:属性名，column:数据库字段名-->
+    <resultMap id="knowledgeMap" type="com.itheima.pojo.Knowledge">
+        <id property="id" column="id"/>
+        <result property="author" column="author"/>
+        <result property="title" column="title"/>
+        <result property="text" column="text"/>
+        <result property="image" column="image"/>
+        <result property="publishTime" column="publish_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+</mapper>

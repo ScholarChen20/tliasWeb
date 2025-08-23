@@ -7,9 +7,9 @@ import {
   DataAnalysis,
   Document,
   FolderOpened,
-  Grid,
-  Opportunity, Place,
-  Scissor,
+  Grid, LocationInformation,
+  Opportunity, Place, QuestionFilled,
+  Scissor, Setting,
   UserFilled
 } from "@element-plus/icons-vue";
 
@@ -46,6 +46,7 @@ const logout = () => {
     <el-container>
       <!-- Header 区域 -->
       <el-header class="header">
+        <img src="@/assets/icon.png" style="width: 40px;position: relative;top: 10px;left: 10px">
         <span class="title">智能后台管理系统</span>
         <span class="right_tool">
           <a href="">
@@ -112,7 +113,7 @@ const logout = () => {
                 <el-icon><place /></el-icon>医生管理
               </el-menu-item>
               <el-menu-item index="/user">
-                <el-icon><user-filled /></el-icon>员工管理
+                <el-icon><user-filled /></el-icon>用户管理
               </el-menu-item>
 
             </el-sub-menu>
@@ -130,6 +131,19 @@ const logout = () => {
               </el-menu-item>
               <el-menu-item index="/log">
                 <el-icon><Document /></el-icon>日志信息统计
+              </el-menu-item>
+            </el-sub-menu>
+
+            <!-- 系统公告 -->
+            <el-sub-menu index="/Inform">
+              <template #title>
+                <el-icon><Setting /></el-icon>系统公告
+              </template>
+              <el-menu-item index="/inform">
+                <el-icon><LocationInformation /></el-icon>公告通知
+              </el-menu-item>
+              <el-menu-item index="/inform">
+                <el-icon><QuestionFilled /></el-icon>意见反馈
               </el-menu-item>
             </el-sub-menu>
           </el-menu>
@@ -153,6 +167,7 @@ const logout = () => {
   color: white;
   font-size: 40px;
   font-family: 楷体;
+  margin-left: 20px;
   line-height: 60px;
   font-weight: bolder;
 }

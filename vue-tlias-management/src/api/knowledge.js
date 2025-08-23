@@ -2,8 +2,8 @@ import request from '@/utils/request'
 
 export const queryAllApi = () =>  request.get('/knowledge/list');
 
-export const queryPageApi = (page,pageSize) =>
-    request.get(`/knowledge?page=${page}&pageSize=${pageSize}`);
+export const queryPageApi = (author,text,begin,end,page,pageSize) =>
+    request.get(`/knowledge?author=${author}&text=${text}&begin=${begin}&end=${end}&page=${page}&pageSize=${pageSize}`);
 
 export const queryInfoApi = (id) => request.get(`/knowledge/${id}`);
 

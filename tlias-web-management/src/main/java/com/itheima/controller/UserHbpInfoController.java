@@ -28,7 +28,7 @@ public class UserHbpInfoController {
                 recordQueryParam.getPage(), recordQueryParam.getPageSize(), recordQueryParam.getUserId(),
                 recordQueryParam.getBegin(), recordQueryParam.getEnd());
         PageResult<UserHbp> record = userHbpService.page(recordQueryParam);
-        log.info("recorfList: {}", record);
+        log.info("血压记录列表: {}", record);
         return Result.success(record);
     }
     /**

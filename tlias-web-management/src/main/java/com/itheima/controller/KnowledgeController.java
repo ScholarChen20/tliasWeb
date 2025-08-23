@@ -4,6 +4,7 @@ package com.itheima.controller;
 import com.itheima.pojo.Knowledge;
 import com.itheima.pojo.PageResult;
 import com.itheima.pojo.Result;
+import com.itheima.pojo.dto.KnowledgeQueryParam;
 import com.itheima.service.KnowledgeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,13 @@ public class KnowledgeController {
      * 条件分页查询列表
      */
     @GetMapping
-    public Result page(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageResult knowledgeList = knowledgeService.page(page, pageSize);
-        log.info("knowledgeList: {}", knowledgeList);
-        return Result.success(knowledgeList);
+    public Result page(KnowledgeQueryParam knowledgeQueryParam) {
+        log.info("分页模糊查询血压记录page:{},pageSize:{},author:{},text:{},begin:{},end:{}",
+                knowledgeQueryParam.getPage(), knowledgeQueryParam.getPageSize(), knowledgeQueryParam.getAuthor(),knowledgeQueryParam.getText(),
+                knowledgeQueryParam.getBegin(), knowledgeQueryParam.getEnd());
+        PageResult<Knowledge> knowledge = knowledgeService.page(knowledgeQueryParam);
+        log.info("knowledge: {}", knowledge);
+        return Result.success(knowledge);
     }
     /**
      * 获取知识列表
