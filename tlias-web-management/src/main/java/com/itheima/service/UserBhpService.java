@@ -21,5 +21,7 @@ public interface UserBhpService {
 
     UserHbp getInfoById(Integer id);
 
+    List<UserHbp> getInfoByUserId(Integer id);
+
     PageResult<UserHbp> page(RecordQueryParam recordQueryParam);
 }

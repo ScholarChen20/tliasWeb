@@ -35,7 +35,7 @@ public interface ReserveMapper {
      * 查询医生建议列表通过患者id查询的
      */
 
-    List<Reserve> adviceListById(Integer id);//Param 注解用于给参数取别名，只有一个参数时，别名可以忽略
+    List<Reserve> adviceListById(Integer id,String status);//Param 注解用于给参数取别名，只有一个参数时，别名可以忽略
 
     /**
      * 查询所有预约记录

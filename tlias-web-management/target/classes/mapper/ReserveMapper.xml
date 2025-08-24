@@ -80,8 +80,8 @@
             r.diet_advice dietAdvise,
             r.exercise_advice exerciseAdvise,
             r.medication_advice medicationAdvise
-        FROM reserve r left join doctor d on r.d_id = d.id right join user_info u on r.user_id = u.id
-        where r.user_id=#{id} and r.status='已完成'
+        FROM reserve r left join doctor d on r.d_id = d.id left join user_info u on r.user_id = u.id
+        where r.user_id=#{id} and r.status=#{status}
     </select>
     <!--    property:属性名，column:数据库字段名-->
     <resultMap id="adviceReserveMap" type="com.itheima.pojo.Reserve">

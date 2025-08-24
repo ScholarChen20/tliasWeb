@@ -40,6 +40,16 @@ public class UserHbpInfoController {
         return Result.success(userHbp);
     }
 
+    /**
+     * 查询某用户的血压记录
+     */
+    @GetMapping("/user/{id}")
+    public Result getUserInfo(@PathVariable Integer id){
+        List<UserHbp> userHbp = userHbpService.getInfoByUserId(id);
+        log.info("查询用户血压信息：{}",userHbp);
+        return Result.success(userHbp);
+    }
+
     @GetMapping("/{id}")
     public Result getInfo(@PathVariable Integer id){
         log.info("查询用户信息");

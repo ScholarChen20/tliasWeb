@@ -31,6 +31,12 @@ public class UserBhpServiceImpl implements UserBhpService {
     }
 
     @Override
+    public List<UserHbp> getInfoByUserId(Integer userId) {
+        return userHbpMapper.getInfoByUserId(userId);
+    }
+
+
+    @Override
     public void insert(UserHbp userHbp) {
         userHbp.setWriteTime(LocalDateTime.now());
         userHbp.setUpdateTime(LocalDateTime.now());
