@@ -1,7 +1,7 @@
 package com.itheima.service;
 
 
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Reserve;
 import com.itheima.pojo.dto.ReserveQueryParam;
 
@@ -25,4 +25,6 @@ public interface ReserveService {
     PageResult<Reserve> page(ReserveQueryParam reserveQueryParam);
 
     Reserve getById(Integer id);
+
+    void deleteByIds(List<Integer> ids);
 }

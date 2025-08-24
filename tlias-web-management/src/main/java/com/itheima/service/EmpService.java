@@ -2,8 +2,8 @@ package com.itheima.service;
 
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.dto.EmpQueryParam;
-import com.itheima.pojo.LoginInfo;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.dto.LoginInfo;
+import com.itheima.pojo.vo.PageResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

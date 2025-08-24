@@ -333,7 +333,7 @@ const deleteByIds = () => {
       <el-table-column prop="name" label="姓名" width="120" align="center"/>
       <el-table-column label="性别" width="120"  align="center">
         <template #default="scope">
-          {{ scope.row.gender == 1 ? '男' : '女' }}
+          {{ scope.row.gender === 1 ? '男' : '女' }}
         </template>
       </el-table-column>
       <el-table-column label="头像" width="120"  align="center">
@@ -344,11 +344,11 @@ const deleteByIds = () => {
       <el-table-column prop="deptName" label="所属部门" width="120"  align="center"/>
       <el-table-column prop="job" label="职位" width="120"  align="center">
         <template #default="scope">
-          <span v-if="scope.row.job == 1">班主任</span>
-          <span v-else-if="scope.row.job == 2">讲师</span>
-          <span v-else-if="scope.row.job == 3">学工主管</span>
-          <span v-else-if="scope.row.job == 4">教研主管</span>
-          <span v-else-if="scope.row.job == 5">咨询师</span>
+          <span v-if="scope.row.job === 1">班主任</span>
+          <span v-else-if="scope.row.job === 2">讲师</span>
+          <span v-else-if="scope.row.job === 3">学工主管</span>
+          <span v-else-if="scope.row.job === 4">教研主管</span>
+          <span v-else-if="scope.row.job === 5">咨询师</span>
           <span v-else>其他</span>
         </template>
       </el-table-column>

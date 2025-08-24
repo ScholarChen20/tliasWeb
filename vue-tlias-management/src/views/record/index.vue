@@ -10,6 +10,7 @@ import {
 } from '@/api/bp-record';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import {SuccessFilled} from "@element-plus/icons-vue";
+import dayjs from "dayjs";
 
 //钩子函数
 onMounted(() => {
@@ -91,14 +92,14 @@ const handleCurrentChange = (val) => {
 //Dialog对话框
 const dialogFormVisible = ref(false);
 const formTitle = ref('');
-const bp = ref({name: '', userid: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',updateTime: ''});//新增时默认值
+const bp = ref({name: '', userid: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',writeTime: ''});//新增时默认值
 
 //新增记录
 const addRecord = () => {
   dialogFormVisible.value = true;
   formTitle.value = '新增血压记录';
-  bp.value = {name: '', userid: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',updateTime: ''}; //新增时默认值
-
+  bp.value = {name: '', userid: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',writeTime: ''}; //新增时默认值
+  bp.value.writeTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
   //重置表单的校验规则-提示信息
   if (deptFormRef.value){
     deptFormRef.value.resetFields();
@@ -283,9 +284,16 @@ const delById = async (id) => {
           <el-option v-for="s in situation" :key="s.value" :label="s.name" :value="s.value"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="更新时间" label-width="80px" prop="updateTime">
-        <el-time-picker v-model="bp.updateTime" placeholder="选择时间">
-        </el-time-picker>
+      <el-form-item label="记录时间" label-width="80px" prop="updateTime">
+        <el-date-picker
+            v-model="bp.writeTime"
+            type="datetime"
+            placeholder="选择记录时间"
+            style="width: 100%;"
+            :disabled="!!bp.writeTime"
+            value-format="YYYY-MM-DD HH:mm:ss"
+            default-time="12:00:00">
+        </el-date-picker>
       </el-form-item>
 
 

@@ -3,6 +3,7 @@ package com.itheima.controller;
 
 import com.itheima.pojo.*;
 import com.itheima.pojo.dto.DoctorQueryParam;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.service.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,16 @@ public class DoctorController {
     public Result save(@RequestBody Doctor doctor){
         doctorService.save(doctor);
         log.info("保存医生信息，医生对象：{}",doctor);
+        return  Result.success();
+    }
+
+    /**
+     * 批量删除医生信息
+     */
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids){
+        doctorService.deleteByIds(ids);
+        log.info("批量删除医生信息，id：{}",ids);
         return  Result.success();
     }
 

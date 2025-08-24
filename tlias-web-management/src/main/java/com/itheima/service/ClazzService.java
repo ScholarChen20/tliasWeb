@@ -1,7 +1,7 @@
 package com.itheima.service;
 
 import com.itheima.pojo.Clazz;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import java.time.LocalDate;
 import java.util.List;
 

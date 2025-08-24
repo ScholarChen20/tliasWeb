@@ -5,12 +5,13 @@ import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.DoctorMapper;
 import com.itheima.pojo.Doctor;
 import com.itheima.pojo.dto.DoctorQueryParam;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.service.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -27,6 +28,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void update(Doctor doctor) {
+        doctor.setUpdateTime(LocalDateTime.now());
         doctorMapper.update(doctor);
     }
 
@@ -38,6 +40,11 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public void delete(Integer id) {
         doctorMapper.delete(id);
+    }
+
+    @Override
+    public void deleteByIds(List<Integer> ids) {
+        doctorMapper.deleteByIds(ids);
     }
 
     @Override

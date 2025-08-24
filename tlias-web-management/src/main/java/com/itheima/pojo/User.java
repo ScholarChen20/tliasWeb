@@ -1,6 +1,7 @@
 package com.itheima.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +26,9 @@ public class User {
     private String sex;
     private LocalDate birthDate;
     private String phone;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 
 }

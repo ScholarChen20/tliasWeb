@@ -1,7 +1,6 @@
 package com.itheima.service;
 
-import com.itheima.pojo.PageResult;
-import com.itheima.pojo.Reserve;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.UserHbp;
 import com.itheima.pojo.dto.RecordQueryParam;
 
@@ -17,6 +16,8 @@ public interface UserBhpService {
     void update(UserHbp userHbp);
 
     void delete(Integer id);
+
+    void deleteByIds(List<Integer> ids);
 
     UserHbp getInfoById(Integer id);
 

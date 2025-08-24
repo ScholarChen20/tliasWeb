@@ -11,6 +11,7 @@ import {queryAllUserApi} from "@/api/bp-record";
 import {queryAllApi as queryAllDocApi} from "@/api/doctor"
 import { ElMessage, ElMessageBox } from 'element-plus';
 import {Delete, EditPen} from "@element-plus/icons-vue";
+import dayjs from "dayjs";
 
 //钩子函数
 onMounted(() => {
@@ -36,6 +37,7 @@ const queryAllDoc = async () => {
   const result = await queryAllDocApi();
   if(result.code){
     docList.value = result.data;
+    console.log(result.data)
   }
 }
 
@@ -99,6 +101,7 @@ const addRecord = () => {
   dialogFormVisible.value = true;
   formTitle.value = '新增医生记录';
   res.value = {userId: '', did: '',appointTime: '',reason: '',dietAdvise: '',exerciseAdvise: '',status: '',medicationAdvise: ''}; //新增时默认值
+  res.value.appointTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
 
   //重置表单的校验规则-提示信息
   if (deptFormRef.value){
@@ -155,14 +158,17 @@ const edit = async (id) => {
   if (deptFormRef.value){
     deptFormRef.value.resetFields();
   }
-
   const result = await queryInfoApi(id);
   if(result.code){
+    if(result.data.status === "待就诊"){
+      ElMessage.info("还未到就诊状态！")
+      return;
+    }
     dialogFormVisible.value = true;
-    dialogTitle.value = '修改预约';
+    formTitle.value = '修改预约';
     res.value = result.data;
     res.value.userId = result.data.userId;
-    res.value.did = result.data.dId;
+    res.value.did = result.data.did;
     console.log(result.data);
   }
 }
@@ -264,16 +270,17 @@ const deleteByIds = () => {
   <!-- 表格 -->
   <div class="container">
     <el-table :data="resList" border style="width: 100%" @selection-change="handleSelectionChange">
-      <el-table-column type="index" label="序号" width="100" align="center"/>
-      <el-table-column prop="userName" label="用户" width="100" align="center"/>
-      <el-table-column prop="dname" label="预约医生" width="100" align="center"/>
+      <el-table-column type="selection" width="50" align="center"/>
+      <el-table-column prop="userName" label="用户" width="80" align="center"/>
+      <el-table-column prop="dname" label="预约医生" width="80" align="center"/>
       <el-table-column prop="dept" label="科室" width="100" align="center"/>
-      <el-table-column prop="reason" label="预约原因" width="180" align="center"/>
+      <el-table-column prop="reason" label="预约原因" width="150" align="center"/>
       <el-table-column prop="status" label="就诊状态" width="100" align="center"/>
-      <el-table-column prop="appointTime" label="预约时间" width="200" align="center"/>
-      <el-table-column prop="dietAdvise" label="饮食建议" width="220" align="center"/>
-      <el-table-column prop="exerciseAdvise" label="运动建议" width="220" align="center"/>
-      <el-table-column prop="medicationAdvise" label="用药建议" width="220" align="center"/>
+      <el-table-column prop="dietAdvise" label="饮食建议" width="180" align="center"/>
+      <el-table-column prop="exerciseAdvise" label="运动建议" width="180" align="center"/>
+      <el-table-column prop="medicationAdvise" label="用药建议" width="180" align="center"/>
+      <el-table-column prop="appointTime" label="预约时间" width="180" align="center"/>
+      <el-table-column prop="updateTime" label="更新时间" width="180" align="center"/>
       <el-table-column label="操作" align="center">
         <template #default="scope">
           <el-button type="primary" size="small" @click="edit(scope.row.id)"><el-icon><EditPen /></el-icon> 编辑</el-button>
@@ -307,14 +314,14 @@ const deleteByIds = () => {
         <el-col :span="12">
           <el-form-item label="用户">
             <el-select v-model="res.userId" placeholder="请选择用户" style="width: 100%;">
-              <el-option v-for="u in userList" :key="u.id" :label="d.name" :value="u.id"></el-option>
+              <el-option v-for="u in userList" :key="u.id" :label="u.name" :value="u.id"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
 
         <el-col :span="12">
           <el-form-item label="就诊状态">
-            <el-select v-model="res.status" disabled placeholder="就诊状态">
+            <el-select v-model="res.status" disabled placeholder="待就诊">
               <el-option v-for="s in stus" :key="s.value" :label="s.name" :value="s.value"></el-option>
             </el-select>
           </el-form-item>
@@ -333,7 +340,7 @@ const deleteByIds = () => {
 
         <el-col :span="12">
           <el-form-item label="所属科室">
-            <el-select v-model="res.did" disabled placeholder="请选择科室" style="width: 100%;">
+            <el-select v-model="res.did"  placeholder="请选择科室" style="width: 100%;">
               <el-option v-for="d in docList" :key="d.id" :label="d.dept" :value="d.id"></el-option>
             </el-select>
           </el-form-item>
@@ -348,6 +355,8 @@ const deleteByIds = () => {
               v-model=res.appointTime
               type="datetime"
               placeholder="选择日期时间"
+              :disabled="!!res.appointTime"
+              value-format="YYYY-MM-DD HH:mm:ss"
               default-time="12:00:00">
           </el-date-picker>
           </el-form-item>
@@ -371,6 +380,7 @@ const deleteByIds = () => {
               type="textarea"
               :rows="2"
               placeholder="请输入饮食建议"
+              :disabled="res.dietAdvise.length === 0"
               v-model="res.dietAdvise">
           </el-input>
         </el-form-item>
@@ -384,6 +394,7 @@ const deleteByIds = () => {
                 type="textarea"
                 :rows="2"
                 placeholder="请输入运动建议"
+                :disabled="res.exerciseAdvise.length === 0"
                 v-model="res.exerciseAdvise">
             </el-input>
           </el-form-item>
@@ -396,6 +407,7 @@ const deleteByIds = () => {
             <el-input
                 type="textarea"
                 :rows="2"
+                :disabled="res.medicationAdvise.length === 0"
                 placeholder="请输入用药建议"
                 v-model="res.medicationAdvise">
             </el-input>

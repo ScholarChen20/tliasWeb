@@ -1,7 +1,8 @@
 package com.itheima.service;
 
 import com.itheima.pojo.Knowledge;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
+import com.itheima.pojo.dto.KnowledgeQueryParam;
 
 import java.util.List;
 
@@ -16,5 +17,6 @@ public interface KnowledgeService {
 
     void update(Knowledge knowledge);
 
-    PageResult page(Integer page, Integer pageSize);
+
+    PageResult<Knowledge> page(KnowledgeQueryParam knowledgeQueryParam);
 }

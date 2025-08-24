@@ -17,7 +17,7 @@ public class UserHbp {
     private String sbp;  // 收缩压
     private String dbp;  // 舒张压
     private String heart;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime writeTime;
     private String writeType;
     private String situation;

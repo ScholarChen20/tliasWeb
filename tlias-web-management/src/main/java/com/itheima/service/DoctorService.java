@@ -3,10 +3,9 @@ package com.itheima.service;
 
 import com.itheima.pojo.Doctor;
 import com.itheima.pojo.dto.DoctorQueryParam;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 
 import java.util.List;
-//import com.itheima.pojo.User;
 
 public interface DoctorService {
     Doctor getInfo(Integer id);
@@ -16,6 +15,8 @@ public interface DoctorService {
     void save(Doctor doctor);
 
     void delete(Integer id);
+
+    void deleteByIds(List<Integer> ids);
 
     List<Doctor> list();
 

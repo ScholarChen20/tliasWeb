@@ -3,13 +3,15 @@ package com.itheima.controller;
 import cn.binarywang.wx.miniapp.api.WxMaUserService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import com.itheima.pojo.*;
+import com.itheima.pojo.dto.LoginInfo;
+import com.itheima.pojo.dto.UserLoginInfo;
+import com.itheima.pojo.dto.WxLoginInfo;
 import com.itheima.service.EmpService;
 import com.itheima.service.UserService;
 import com.itheima.service.impl.WechatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.testng.annotations.Test;
 
 @Slf4j
 @RestController

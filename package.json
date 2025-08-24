@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dayjs": "^1.11.13",
     "echarts": "^5.6.0"
   }
 }
