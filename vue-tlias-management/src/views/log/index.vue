@@ -38,9 +38,6 @@ const handleCurrentChange = (val) => {
 
 <template>
   <h1>日志信息管理</h1>
-<!--  <div class="container">-->
-<!--    <el-button type="primary" @click="addClazz"> + 新增班级</el-button>-->
-<!--  </div>-->
 
   <!-- 表格 -->
   <div class="container">
@@ -53,12 +50,6 @@ const handleCurrentChange = (val) => {
       <el-table-column prop="returnValue" label="操作方法返回值" width="250" align="center"/>
       <el-table-column prop="costTime" label="操作耗时" width="90" align="center"/>
       <el-table-column prop="operateTime" label="操作时间" width="200" align="center"/>
-<!--      <el-table-column label="操作" align="center">-->
-<!--        <template #default="scope">-->
-<!--          <el-button type="primary" size="small" @click="edit(scope.row.id)"><el-icon><EditPen /></el-icon> 编辑</el-button>-->
-<!--          <el-button type="danger" size="small" @click="delById(scope.row.id)"><el-icon><Delete /></el-icon> 删除</el-button>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
     </el-table>
   </div>
   <!-- 分页条 -->
