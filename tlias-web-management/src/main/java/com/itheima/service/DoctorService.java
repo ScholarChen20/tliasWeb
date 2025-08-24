@@ -6,7 +6,6 @@ import com.itheima.pojo.dto.DoctorQueryParam;
 import com.itheima.pojo.vo.PageResult;
 
 import java.util.List;
-//import com.itheima.pojo.User;
 
 public interface DoctorService {
     Doctor getInfo(Integer id);
