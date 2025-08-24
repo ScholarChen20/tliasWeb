@@ -3,7 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itheima.mapper.UserHbpMapper">
-<!--    根据id查询用户预约信息，使用resultMap进行结果集的封装 -->
+    <update id="update">
+        update user_healthyinfo
+        <set>
+            <if test="sbp != null and sbp != ''">
+                sbp = #{sbp},
+            </if>
+            <if test="dbp != null and dbp != ''">
+                dbp = #{dbp},
+            </if>
+            <if test="heart != null and heart != ''">
+                heart = #{heart},
+            </if>
+            <if test="writeType != null and writeType != ''">
+                writetype = #{writeType},
+            </if>
+            <if test="situation != null and situation != ''">
+                situation = #{situation},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--    根据id查询用户预约信息，使用resultMap进行结果集的封装 -->
     <select id="list" resultMap="userHbpMap">
         SELECT
             u.*,

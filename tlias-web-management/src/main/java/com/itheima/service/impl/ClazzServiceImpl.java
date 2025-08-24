@@ -6,7 +6,7 @@ import com.itheima.exception.BusinessException;
 import com.itheima.mapper.ClazzMapper;
 import com.itheima.mapper.StudentMapper;
 import com.itheima.pojo.Clazz;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.service.ClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

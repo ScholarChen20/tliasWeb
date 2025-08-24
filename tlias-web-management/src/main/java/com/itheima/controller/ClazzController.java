@@ -2,10 +2,9 @@ package com.itheima.controller;
 
 import com.itheima.anno.LogOperation;
 import com.itheima.pojo.Clazz;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.service.ClazzService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;

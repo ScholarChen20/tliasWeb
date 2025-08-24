@@ -1,6 +1,6 @@
 package com.itheima.controller;
 
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.service.LogService;
 //import com.mysql.jdbc.log.Log;

@@ -1,4 +1,4 @@
-package com.itheima.pojo;
+package com.itheima.pojo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

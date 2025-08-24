@@ -1,16 +1,24 @@
 package com.itheima.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.UserMapper;
 import com.itheima.pojo.*;
+import com.itheima.pojo.dto.UserLoginInfo;
+import com.itheima.pojo.dto.UserQueryParam;
+import com.itheima.pojo.dto.WxLoginInfo;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.service.UserService;
 import com.itheima.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 
 @Slf4j
@@ -26,17 +34,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(User user) {
+        user.setUpdateTime(LocalDateTime.now());
         userMapper.update(user);
     }
 
     @Override
     public void save(User user) {
+        user.setCreateTime(LocalDateTime.now());
+//        user.setUserId(String.valueOf(UUID.randomUUID())); //生成UUID
         userMapper.insert(user);
     }
 
     @Override
-    public void delete(Integer id) {
-        userMapper.delete(id);
+    public void delete(List<Integer> ids) {
+        userMapper.deleteByIds(ids);
     }
 
     @Override
@@ -79,6 +90,14 @@ public class UserServiceImpl implements UserService {
     public List<User> list() {
         List<User> list = userMapper.getList();
         return list;
+    }
+
+    @Override
+    public PageResult<User> page(UserQueryParam userQueryParam) {
+        PageHelper.startPage(userQueryParam.getPage(), userQueryParam.getPageSize());
+        List<User> list = userMapper.listPage(userQueryParam);
+        Page<User> page = (Page<User>)  list;
+        return new PageResult<>(page.getTotal(), page.getResult());
     }
 
 }

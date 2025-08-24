@@ -1,4 +1,8 @@
 spring:
+  jackson:
+    time-zone: GMT+8 # 时区（根据需求调整）
+    deserialization:
+      adjust-dates-to-context-time-zone: false # 禁用时区调整（避免格式错误）
   datasource:
 #    url: jdbc:mysql://localhost:3306/tlias?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver

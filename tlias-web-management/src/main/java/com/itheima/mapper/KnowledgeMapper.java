@@ -1,7 +1,6 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.Knowledge;
-import com.itheima.pojo.PageResult;
 import com.itheima.pojo.dto.KnowledgeQueryParam;
 import org.apache.ibatis.annotations.*;
 

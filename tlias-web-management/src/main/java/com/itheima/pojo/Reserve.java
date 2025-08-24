@@ -15,8 +15,10 @@ public class Reserve {
     private Integer id; // 预约id
     private Integer userId; // 预约的用户id
     private Integer did;  // 预约的医生id
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime appointTime; // 预约时间
+    private LocalDateTime updateTime; // 预约时间
     private String status; // 预约状态
     private String reason; // 预约原因
     private String dietAdvise; // 饮食建议

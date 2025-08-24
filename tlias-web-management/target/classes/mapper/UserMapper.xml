@@ -28,7 +28,57 @@
             <if test="phone != null">
                 phone = #{phone},
             </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
         </set>
         where id = #{id}
     </update>
+    <delete id="deleteByIds">
+        DELETE FROM user_info WHERE id IN
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="listPage" resultMap="userMap">
+        select
+            id,
+            userid,
+            image,
+            username,
+            name,
+            sex,
+            birthdate,
+            phone,
+            create_time,
+            update_time
+        from user_info
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone like concat('%',#{phone},'%')
+            </if>
+            <if test="begin!= null and end!= null">
+                and create_time between #{begin} and #{end}
+            </if>
+        </where>
+    </select>
+    <!--    property:属性名，column:数据库字段名-->
+    <resultMap id="userMap" type="com.itheima.pojo.User">
+        <id property="id" column="id"/>
+        <result property="userId" column="userid"/>
+        <result property="image" column="image"/>
+        <result property="name" column="name"/>
+        <result property="username" column="username"/>
+        <result property="sex" column="sex"/>
+        <result property="birthDate" column="birthdate"/>
+        <result property="phone" column="phone"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
 </mapper>

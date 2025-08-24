@@ -9,6 +9,7 @@ import {
 } from '@/api/doctor';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import {Delete, EditPen} from "@element-plus/icons-vue";
+import dayjs from "dayjs";
 
 //钩子函数
 onMounted(() => {
@@ -99,13 +100,14 @@ const dialogTitle = ref('')
 //Dialog对话框
 const dialogFormVisible = ref(false);
 const formTitle = ref('');
-const doc = ref({name: '', dept: '',title: '',hospital: '',gender: '',introduce: '',status: '',phone: '',avatar:'',createTime:''});//新增时默认值
+const doc = ref({name: '', dept: '',title: '',hospital: '',gender: '',introduce: '',status: '',phone: '',avatar:'',createTime: ''});//新增时默认值
 
 //新增记录
 const addRecord = () => {
   dialogFormVisible.value = true;
   formTitle.value = '新增医生记录';
-  doc.value = {name: '', dept: '',title: '',hospital: '',gender: '',introduce: '',status: '',phone: '',avatar:'',createTime:''}; //新增时默认值
+  doc.value = {name: '', dept: '',title: '',hospital: '',gender: '',introduce: '',status: '',phone: '',avatar:'',createTime: '' }; //新增时默认值
+  doc.value.createTime = dayjs().format('YYYY-MM-DD HH:mm:ss'); // 自动填充当前时间
 
   //重置表单的校验规则-提示信息
   if (deptFormRef.value){
@@ -120,6 +122,9 @@ const save = async () => {
   if(!deptFormRef.value)   ElMessage.error('表单校验不通过');;
   deptFormRef.value.validate(async (valid) => { //valid 表示是否校验通过: true 通过 / false  不通过
     if(valid){ //通过
+      if (!doc.value.id && !doc.value.createTime) {
+        doc.value.createTime = dayjs().format('yyyy-MM-dd HH:mm:ss'); // 需要安装dayjs：npm i dayjs
+      }
 
       let result;
       console.log(doc.value);
@@ -271,7 +276,7 @@ const deleteByIds = () => {
   <!-- 表格 -->
   <div class="container">
     <el-table :data="docList" border style="width: 100%" @selection-change="handleSelectionChange">
-      <el-table-column type="index" label="序号" width="80" align="center"/>
+      <el-table-column type="selection" width="80" align="center"/>
       <el-table-column prop="name" label="姓名" width="100" align="center"/>
       <el-table-column prop="gender" label="性别" width="80" align="center">
         <template #default="scope">
@@ -333,7 +338,7 @@ const deleteByIds = () => {
         <el-col :span="12">
           <el-form-item label="科室" prop="dept">
             <el-select v-model="doc.dept" placeholder="请选择科室" style="width: 100%;">
-              <el-option v-for="d in depts" :key="dvalue" :label="d.name" :value="d.value"></el-option>
+              <el-option v-for="d in depts" :key="d.value" :label="d.name" :value="d.value"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
@@ -407,11 +412,14 @@ const deleteByIds = () => {
       <!-- 第六行 -->
       <el-row :gutter="20">
         <el-col :span="24">
-          <el-form-item label="发布时间" label-width="100px">
+          <el-form-item label="创建时间" label-width="100px">
             <el-date-picker
                 v-model="doc.createTime"
                 type="datetime"
                 placeholder="选择发布时间"
+                style="width: 100%;"
+                :disabled="!!doc.createTime"
+                value-format="YYYY-MM-DD HH:mm:ss"
                 default-time="12:00:00">
             </el-date-picker>
           </el-form-item>

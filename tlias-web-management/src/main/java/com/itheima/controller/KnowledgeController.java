@@ -2,7 +2,7 @@ package com.itheima.controller;
 
 
 import com.itheima.pojo.Knowledge;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.pojo.dto.KnowledgeQueryParam;
 import com.itheima.service.KnowledgeService;
@@ -24,7 +24,7 @@ public class KnowledgeController {
      */
     @GetMapping
     public Result page(KnowledgeQueryParam knowledgeQueryParam) {
-        log.info("分页模糊查询血压记录page:{},pageSize:{},author:{},text:{},begin:{},end:{}",
+        log.info("分页模糊查询文章记录page:{},pageSize:{},author:{},text:{},begin:{},end:{}",
                 knowledgeQueryParam.getPage(), knowledgeQueryParam.getPageSize(), knowledgeQueryParam.getAuthor(),knowledgeQueryParam.getText(),
                 knowledgeQueryParam.getBegin(), knowledgeQueryParam.getEnd());
         PageResult<Knowledge> knowledge = knowledgeService.page(knowledgeQueryParam);

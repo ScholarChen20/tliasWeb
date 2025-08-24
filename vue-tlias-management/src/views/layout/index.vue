@@ -142,7 +142,7 @@ const logout = () => {
               <el-menu-item index="/inform">
                 <el-icon><LocationInformation /></el-icon>公告通知
               </el-menu-item>
-              <el-menu-item index="/inform">
+              <el-menu-item index="/content">
                 <el-icon><QuestionFilled /></el-icon>意见反馈
               </el-menu-item>
             </el-sub-menu>
@@ -185,6 +185,6 @@ a {
 .aside {
   width: 220px;
   border-right: 1px solid #ccc;
-  height: 730px;
+  height: 800px;
 }
 </style>

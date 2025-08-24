@@ -15,7 +15,8 @@ import DoctorView from '@/views/doctor/index.vue'
 import ReserveView from '@/views/reserve/index.vue'
 import InformView from '@/views/inform/index.vue'
 import KnowledgeView from '@/views/knowledge/index.vue'
-
+import UserView from '@/views/user/index.vue'
+import ContentView from '@/views/content/index.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -36,12 +37,14 @@ const router = createRouter({
       {path: 'doctor', name: 'doctor', component: DoctorView},
       {path: 'reserve', name: 'reserve', component: ReserveView},
       {path: 'knowledge', name: 'knowledge', component: KnowledgeView},
+      {path: 'user', name: 'user', component: UserView},
 
 
       {path: 'empReport', name: 'empReport', component: EmpReportView},
       {path: 'stuReport', name: 'stuReport', component: StuReportView},
 
       {path: 'inform', name: 'inform', component: InformView},
+      {path: 'content', name: 'content', component: ContentView},
      ]
     },
     {path: '/login', name: 'login', component: LoginView}

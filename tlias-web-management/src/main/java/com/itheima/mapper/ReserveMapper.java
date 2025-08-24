@@ -42,6 +42,10 @@ public interface ReserveMapper {
      * @return
      */
     List<Reserve> list();
+
+    /**
+     * id查询预约记录
+     */
     Reserve getById(Integer id);
 
     List<Reserve> listPage(ReserveQueryParam reserveQueryParam);

@@ -21,8 +21,6 @@ public interface UserHbpMapper {
     /**
      * 更新用户健康信息
      */
-    @Update("update user_healthyinfo set sbp = #{sbp}, dbp = #{dbp}, heart = #{heart}, write_time = #{writeTime}, " +
-            "writetype = #{writeType}, situation = #{situation}, update_time = #{updateTime} where id = #{id}")
     void update(UserHbp userHbp);
 
     @Select("select * from user_healthyinfo where id = #{id} order by write_time desc")

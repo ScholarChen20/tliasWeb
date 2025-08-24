@@ -3,7 +3,7 @@ package com.itheima.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.itheima.mapper.ReserveMapper;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Reserve;
 import com.itheima.pojo.dto.ReserveQueryParam;
 import com.itheima.service.ReserveService;
@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -32,6 +33,7 @@ public class ReserveServiceImpl implements ReserveService {
 
     @Override
     public void update(Reserve reserve) {
+        reserve.setUpdateTime(LocalDateTime.now());
         reserveMapper.update(reserve);
     }
 

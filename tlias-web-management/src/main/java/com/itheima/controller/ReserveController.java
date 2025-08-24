@@ -2,6 +2,7 @@ package com.itheima.controller;
 
 
 import com.itheima.pojo.*;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.dto.ReserveQueryParam;
 import com.itheima.service.ReserveService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ public class ReserveController {
     @GetMapping("/{id}")
     public Result getInfo(@PathVariable Integer id){
         Reserve reserve = reserveService.getById(id);
-        log.info("查询用户的预约记录：{}",reserve);
+        log.info("查询的预约记录：{}",reserve);
         return Result.success(reserve);
     }
     /**

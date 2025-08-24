@@ -3,8 +3,7 @@ package com.itheima.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.UserHbpMapper;
-import com.itheima.pojo.Knowledge;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.UserHbp;
 import com.itheima.pojo.dto.RecordQueryParam;
 import com.itheima.service.UserBhpService;
@@ -34,14 +33,13 @@ public class UserBhpServiceImpl implements UserBhpService {
     @Override
     public void insert(UserHbp userHbp) {
         userHbp.setWriteTime(LocalDateTime.now());
-//        userHbp.setUpdateTime(LocalDateTime.now());
+        userHbp.setUpdateTime(LocalDateTime.now());
         userHbpMapper.insert(userHbp);
     }
 
     @Override
     public void update(UserHbp userHbp) {
         userHbp.setUpdateTime(LocalDateTime.now());
-//        userHbp.setWriteTime(LocalDateTime.now());
         userHbpMapper.update(userHbp);
     }
 

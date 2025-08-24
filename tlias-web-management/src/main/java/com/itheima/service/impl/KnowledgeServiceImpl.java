@@ -4,7 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.KnowledgeMapper;
 import com.itheima.pojo.Knowledge;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.dto.KnowledgeQueryParam;
 import com.itheima.service.KnowledgeService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.itheima.service;
 
 import com.itheima.pojo.ClazzCountOption;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Student;
 import java.util.List;
 import java.util.Map;

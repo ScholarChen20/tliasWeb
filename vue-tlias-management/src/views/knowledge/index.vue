@@ -8,6 +8,7 @@ import {
   queryInfoApi,
 } from '@/api/knowledge';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import dayjs from "dayjs";
 
 //钩子函数
 onMounted(() => {
@@ -106,7 +107,7 @@ const addRecord = () => {
   dialogFormVisible.value = true;
   formTitle.value = '新增健康知识记录';
   bp.value = {author: '', title: '',text: '',publishTime: '',image: '',updateTime: ''}; //新增时默认值
-
+  bp.value.publishTime =  dayjs().format('YYYY-MM-DD HH:mm:ss'); // 自动填充当前时间
   //重置表单的校验规则-提示信息
   if (deptFormRef.value){
     deptFormRef.value.resetFields();
@@ -295,11 +296,13 @@ const delById = async (id) => {
             show-word-limit
         />
       </el-form-item>
-      <el-form-item label="发布时间" label-width="100px">
+      <el-form-item label="发布时间" label-width="100px" prop="publishTime">
         <el-date-picker
             v-model="bp.publishTime"
             type="datetime"
             placeholder="选择发布时间"
+            :disabled="!!bp.publishTime"
+            value-format="YYYY-MM-DD HH:mm:ss"
             default-time="12:00:00">
         </el-date-picker>
       </el-form-item>

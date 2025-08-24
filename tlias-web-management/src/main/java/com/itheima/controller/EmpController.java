@@ -2,7 +2,7 @@ package com.itheima.controller;
 
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.dto.EmpQueryParam;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.service.EmpService;
 import lombok.extern.slf4j.Slf4j;

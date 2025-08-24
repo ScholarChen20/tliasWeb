@@ -2,8 +2,12 @@ package com.itheima.controller;
 
 
 import com.itheima.pojo.Clazz;
+import com.itheima.pojo.Knowledge;
 import com.itheima.pojo.Result;
 import com.itheima.pojo.User;
+import com.itheima.pojo.dto.KnowledgeQueryParam;
+import com.itheima.pojo.dto.UserQueryParam;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,19 @@ public class UserController {
 
     @Autowired
     private UserService  userService;
+
+    /**
+     * 条件分页查询列表
+     */
+    @GetMapping
+    public Result page(UserQueryParam userQueryParam) {
+        log.info("分页模糊查询用户记录page:{},pageSize:{},name:{},sex:{},phone:{},begin:{},end:{}",
+                userQueryParam.getPage(), userQueryParam.getPageSize(), userQueryParam.getName(),userQueryParam.getSex(),
+                userQueryParam.getPhone(),userQueryParam.getBegin(), userQueryParam.getEnd());
+        PageResult<User> user = userService.page(userQueryParam);
+        log.info("user: {}", user);
+        return Result.success(user);
+    }
     /**
      * 查询所有用户信息
      */
@@ -56,12 +73,12 @@ public class UserController {
     }
 
     /**
-     * 删除用户信息
+     * 批量删除用户信息
      */
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id){
-        userService.delete(id);
-        log.info("删除用户信息，id：{}",id);
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids){
+        userService.delete(ids);
+        log.info("删除用户信息，id：{}",ids);
         return  Result.success();
     }
 

@@ -1,7 +1,6 @@
 package com.itheima.controller;
 
-import com.itheima.mapper.UserHbpMapper;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.pojo.UserHbp;
 import com.itheima.pojo.dto.RecordQueryParam;

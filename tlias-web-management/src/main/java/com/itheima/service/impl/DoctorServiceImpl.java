@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.DoctorMapper;
 import com.itheima.pojo.Doctor;
 import com.itheima.pojo.dto.DoctorQueryParam;
-import com.itheima.pojo.PageResult;
+import com.itheima.pojo.vo.PageResult;
 import com.itheima.service.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
