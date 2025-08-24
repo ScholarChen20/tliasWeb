@@ -16,8 +16,8 @@ public interface DoctorMapper {
     @Delete("delete from doctor where id=#{id}")
     void delete(Integer id);
 
-    @Insert("insert into doctor(name, gender, dept, title, introduce, status, phone,avatar) " +
-            "values(#{name}, #{gender}, #{dept}, #{title},, #{introduce}, #{status}, #{phone}),#{avatar}")
+    @Insert("insert into doctor(name, gender, dept, title, introduce, hospital, status, phone,avatar,create_time) " +
+            "values(#{name}, #{gender}, #{dept}, #{title}, #{introduce},#{hospital}, #{status}, #{phone},#{avatar},#{createTime})")
     void insert(Doctor doctor);
 
     @Select("select * from doctor where status=1")

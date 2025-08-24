@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +26,7 @@ public class Doctor {
     private Integer status;//0.表示无法预约，1.表示可预约
     private String phone;
     private String avatar;  //头像
+
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 }

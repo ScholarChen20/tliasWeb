@@ -15,6 +15,7 @@
             <if test="status!= null">status = #{status},</if>
             <if test="avatar!= null and avatar!= ''">avatar = #{avatar},</if>
             <if test="introduce!= null and introduce!= ''">introduce = #{introduce},</if>
+            <if test="updateTime!= null">update_time = #{updateTime}</if>
         </set>
         where id = #{id}
     </update>

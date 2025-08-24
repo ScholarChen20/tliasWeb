@@ -99,13 +99,13 @@ const dialogTitle = ref('')
 //Dialog对话框
 const dialogFormVisible = ref(false);
 const formTitle = ref('');
-const doc = ref({name: '', dept: '',title: '',hospital: '',gender: '',introduce: '',status: '',phone: '',avatar:''});//新增时默认值
+const doc = ref({name: '', dept: '',title: '',hospital: '',gender: '',introduce: '',status: '',phone: '',avatar:'',createTime:''});//新增时默认值
 
 //新增记录
 const addRecord = () => {
   dialogFormVisible.value = true;
   formTitle.value = '新增医生记录';
-  doc.value = {name: '', dept: '',title: '',hospital: '',gender: '',introduce: '',status: '',phone: '',avatar:''}; //新增时默认值
+  doc.value = {name: '', dept: '',title: '',hospital: '',gender: '',introduce: '',status: '',phone: '',avatar:'',createTime:''}; //新增时默认值
 
   //重置表单的校验规则-提示信息
   if (deptFormRef.value){
@@ -271,20 +271,30 @@ const deleteByIds = () => {
   <!-- 表格 -->
   <div class="container">
     <el-table :data="docList" border style="width: 100%" @selection-change="handleSelectionChange">
-      <el-table-column type="index" label="序号" width="100" align="center"/>
+      <el-table-column type="index" label="序号" width="80" align="center"/>
       <el-table-column prop="name" label="姓名" width="100" align="center"/>
-      <el-table-column prop="gender" label="性别" width="100" align="center"/>
-      <el-table-column prop="dept" label="科室" width="120" align="center"/>
-      <el-table-column prop="title" label="职称" width="130" align="center"/>
-      <el-table-column prop="hospital" label="所属医院" width="140" align="center"/>
-      <el-table-column prop="introduce" label="简介" width="350" align="center"/>
-      <el-table-column prop="status" label="是否可预约" width="100" align="center"/>
-      <el-table-column prop="phone" label="电话号" width="150" align="center"/>
-      <el-table-column label="头像" width="120"  align="center">
+      <el-table-column prop="gender" label="性别" width="80" align="center">
+        <template #default="scope">
+          {{ scope.row.gender === 1 ? '男' : '女' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="dept" label="科室" width="100" align="center"/>
+      <el-table-column prop="title" label="职称" width="100" align="center"/>
+      <el-table-column prop="hospital" label="所属医院" width="100" align="center"/>
+      <el-table-column prop="introduce" label="简介" width="150" align="center"/>
+      <el-table-column prop="status" label="是否可预约" width="100" align="center">
+        <template #default="scope">
+          {{ scope.row.status === 1 ? '可预约' : '不可预约' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="phone" label="电话号" width="120" align="center"/>
+      <el-table-column label="头像" width="100"  align="center">
         <template #default="scope">
           <img :src="scope.row.avatar" height="50px">
         </template>
       </el-table-column>
+      <el-table-column prop="createTime" label="创建时间" width="200" align="center"/>
+      <el-table-column prop="updateTime" label="更新时间" width="200" align="center"/>
       <el-table-column label="操作" align="center">
         <template #default="scope">
           <el-button type="primary" size="small" @click="edit(scope.row.id)"><el-icon><EditPen /></el-icon> 编辑</el-button>
@@ -368,7 +378,7 @@ const deleteByIds = () => {
       <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="所属医院">
-            <el-select v-model="doc.hospital" placeholder="请选择部门" style="width: 100%;">
+            <el-select v-model="doc.hospital" placeholder="请选择所属医院" style="width: 100%;">
               <el-option v-for="h in hospitals" :key="h.value" :label="h.name" :value="h.value"></el-option>
             </el-select>
           </el-form-item>
@@ -393,7 +403,22 @@ const deleteByIds = () => {
           </el-form-item>
         </el-col>
       </el-row>
+
       <!-- 第六行 -->
+      <el-row :gutter="20">
+        <el-col :span="24">
+          <el-form-item label="发布时间" label-width="100px">
+            <el-date-picker
+                v-model="doc.createTime"
+                type="datetime"
+                placeholder="选择发布时间"
+                default-time="12:00:00">
+            </el-date-picker>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
+      <!-- 第七行 -->
       <el-row :gutter="20">
         <el-col :span="24">
           <el-form-item label="简介">

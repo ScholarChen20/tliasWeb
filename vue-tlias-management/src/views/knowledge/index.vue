@@ -295,7 +295,7 @@ const delById = async (id) => {
             show-word-limit
         />
       </el-form-item>
-      <el-form-item label="发布时间" label-width="100px" prop="publishTime">
+      <el-form-item label="发布时间" label-width="100px">
         <el-date-picker
             v-model="bp.publishTime"
             type="datetime"

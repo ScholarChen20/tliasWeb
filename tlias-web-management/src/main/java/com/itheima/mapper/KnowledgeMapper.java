@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface KnowledgeMapper {
-    @Insert("insert into knowledge(author, title, text, publish_time, image) values(#{author}, #{title}, #{text}, #{publishTime}, {image})")
+    @Insert("insert into knowledge(author, title, text, publish_time, image) values(#{author}, #{title}, #{text}, #{publishTime}, #{image})")
     void insert(Knowledge knowledge);
 
     void update(Knowledge knowledge);
