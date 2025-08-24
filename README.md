@@ -1,6 +1,8 @@
 # tlias智能辅助系统+血压助手小程序
 
-本项目是使用 Spring Boot 框架开发的一套tlias智能辅助系统+血压助手小程序。
+本项目是使用 Spring Boot3 + Vue3 + MySQL + 微信小程序 + ECharts 框架开发的一套高血压助手小程序和智能后台管理系统。
+小程序端主要功能有：
+
 
 ## 技术栈
 
@@ -53,8 +55,8 @@
           bucketName: xxxxx    #bucket名称
           region: xxxxx  #域名
     wx:   #微信配置
-       app-id: xxxxx #微信公众号appid
-       app-secret: xxxxx  #微信公众号appsecret
+       appId: xxxxx #微信公众号appid
+       appSecret: xxxxx  #微信公众号appsecret
     ```
 6. 配置node.js运行前端框架，前端代码为vue-tlias-management文件夹，安装相应的插件配置即可
 7. 配置微信小程序，小程序代码为mp-HBP文件夹，修改yml文件中的appid和secret即可 
@@ -64,11 +66,94 @@
     ```
    
 9. 运行SpringBoot框架和前端界面即可 
-10. 运行界面
-    - 血压助手小程序界面
-![miniapp-hhome.png](tlias-web-management/assert/miniapp-hhome.png)
-    - tlias后台管理系统界面
+10. 血压助手小程序展示
+11. 
+### 小程序登录
+
+![wx_login.png](asserts/wx/wx_login.png)
+
+### 首页
+
+![home.png](asserts/wx/home.png)
+
+### 个人中心
+
+![me.png](asserts/wx/me.png)
+
+### 信息修改
+
+![userInfo.png](asserts/wx/userInfo.png)
+
+### 医生预约
+
+![reserve.png](asserts/wx/reserve.png)
+
+### 预约记录
+
+![reserve_record.png](asserts/wx/reserve_record.png)
+
+### 血压文字显示
+
+![bp_text.png](asserts/wx/bp_text.png)
+
+### 血压记录可视化
+
+![bp_data.png](asserts/wx/bp_data.png)
+
+### 血压记录
+
+![bp_insert.png](asserts/wx/bp_insert.png)
+
+### 科普文章
+
+![knowledge.png](asserts/wx/knowledge.png)
+
+### 医生建议
+
+![advice.png](asserts/wx/advice.png)
+
+
+11. 后台系统展示
+
+### 登录界面
+
+
+
+### 系统首页
 ![system-home.png](tlias-web-management/assert/system-home.png)
+
+### 血压记录管理
+
+![bp.png](asserts/bp.png)
+
+### 预约管理
+
+![reserve.png](asserts/reserve.png)
+
+### 文章管理
+
+![knowledge.png](asserts/knowledge.png)
+
+### 医生管理
+
+![doctor.png](asserts/doctor.png)
+
+### 患者管理
+
+![user.png](asserts/user.png)
+
+### 系统日志
+
+![log.png](asserts/log.png)
+
+### 公告通知
+
+![inform.png](asserts/inform.png)
+
+### 意见反馈
+
+![feedback.png](asserts/feedback.png)
+
 # vue
 
 ## Project setup

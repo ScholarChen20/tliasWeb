@@ -31,7 +31,7 @@ Page({
     });
 
     wx.request({
-      url: 'http://localhost:8080/userHbpInfos/' + userInfo.id,
+      url: 'http://localhost:8080/userHbpInfos/user/' + userInfo.id,
       method: 'GET',
       header: {
         'token': wx.getStorageSync('token')
@@ -39,16 +39,27 @@ Page({
       success: (res) => {
         if (res.data.code === 1) {
           // 处理返回的数据
-          const records = res.data.data.map(item => ({
-            id: item.id,
-            measureTime: this.formatDateTime(item.writeTime),
-            systolic: item.sbp,
-            diastolic: item.dbp,
-            heartRate: item.heart,
-            measureType: item.writeType,
-            arrhythmia: item.situation,
-            bpLevel: this.getBPLevel(item.sbp, item.dbp)
-          }));
+          let records = [];
+          
+          // 检查数据是否为数组
+          if (Array.isArray(res.data.data)) {
+            records = res.data.data.map(item => ({
+              id: item.id,
+              measureTime: this.formatDateTime(item.writeTime),
+              systolic: item.sbp,
+              diastolic: item.dbp,
+              heartRate: item.heart,
+              measureType: item.writeType,
+              arrhythmia: item.situation,
+              bpLevel: this.getBPLevel(item.sbp, item.dbp)
+            }));
+          } else if (res.data.data && typeof res.data.data === 'object') {
+            // 如果是单个对象，转换为数组
+            records = [this.transformRecord(res.data.data)];
+          } else {
+            // 如果数据为空或无效
+            console.warn('获取到的记录数据格式异常:', res.data.data);
+          }
 
           this.setData({
             records: records
@@ -75,6 +86,20 @@ Page({
         wx.hideLoading();
       }
     });
+  },
+
+  // 转换单个记录
+  transformRecord(item) {
+    return {
+      id: item.id,
+      measureTime: this.formatDateTime(item.writeTime),
+      systolic: item.sbp,
+      diastolic: item.dbp,
+      heartRate: item.heart,
+      measureType: item.writeType,
+      arrhythmia: item.situation,
+      bpLevel: this.getBPLevel(item.sbp, item.dbp)
+    };
   },
 
   // 格式化日期时间

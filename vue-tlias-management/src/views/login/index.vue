@@ -1,104 +1,395 @@
+<!-- index.vue -->
 <script setup>
 import { ref } from 'vue'
-import { loginApi} from '@/api/login'
-import { ElMessage } from 'element-plus'
+import { loginApi } from '@/api/login'
+import { ElMessage, ElLoading } from 'element-plus'
 import { useRouter } from 'vue-router'
 
-const loginForm = ref({username:'', password:''})
-const router = useRouter();
+// 表单数据
+const loginForm = ref({
+  username: '',
+  password: ''
+})
 
-// 登录
+// 表单验证规则
+const rules = {
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+  ],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, max: 20, message: '长度在 6 到 20 个字符', trigger: 'blur' }
+  ]
+}
+
+// 表单引用
+const formRef = ref()
+
+// 路由器
+const router = useRouter()
+
+// 登录方法
 const login = async () => {
-  const result = await loginApi(loginForm.value);
-  if(result.code){ //成功
-    //1. 提示信息
-    ElMessage.success('登录成功');
-    //2. 存储当前登录员工信息
-    localStorage.setItem('loginUser',JSON.stringify(result.data));
-    //3. 跳转页面 - 首页
-    router.push('/index');
-  }else { //失败
-    ElMessage.error(result.msg);
+  // 显示加载状态
+  const loading = ElLoading.service({
+    lock: true,
+    text: '正在登录...',
+    background: 'rgba(0, 0, 0, 0.5)'
+  })
+
+  try {
+    await formRef.value.validate() // 验证表单
+
+    const result = await loginApi(loginForm.value)
+
+    if (result.code === 1) {
+      // 登录成功
+      ElMessage.success('登录成功')
+
+      // 存储用户信息
+      localStorage.setItem('loginUser', JSON.stringify(result.data))
+
+      // 跳转到首页
+      router.push('/index')
+    } else {
+      ElMessage.error(result.msg || '登录失败')
+    }
+  } catch (error) {
+    ElMessage.error('登录失败，请检查输入信息')
+  } finally {
+    // 关闭加载状态
+    loading.close()
   }
 }
 
-// 重置
+// 重置表单
 const clear = () => {
-  loginForm.value = {username:'', password:''};
+  formRef.value.resetFields()
 }
 </script>
 
 <template>
   <div id="container">
-    <div class="login-form">
-      <el-form label-width="80px">
-        <p class="title">智能后台管理系统</p>
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="loginForm.username" placeholder="请输入用户名"></el-input>
-        </el-form-item>
+    <!-- 背景图 -->
+    <div class="background">
+      <img src="@/assets/bg1.jpg" alt="背景图" class="bg-image" />
+    </div>
 
-        <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="loginForm.password" placeholder="请输入密码"></el-input>
-        </el-form-item>
+    <!-- 登录表单 -->
+    <div class="login-container">
+      <el-card
+        class="login-form"
+        shadow="hover"
+        :style="{
+          'backdrop-filter': 'blur(16px)',
+          'border-radius': '20px',
+          'box-shadow': '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1)',
+          'transition': 'all 0.3s ease'
+        }"
+      >
+        <template #header>
+          <div class="card-header">
+            <span class="title">智能后台管理系统</span>
+          </div>
+        </template>
 
-        <el-form-item>
-          <el-button class="button" type="primary" @click="login">登 录</el-button>
-          <el-button class="button" type="info" @click="clear">重 置</el-button>
-        </el-form-item>
-      </el-form>
+        <el-form
+          ref="formRef"
+          :model="loginForm"
+          :rules="rules"
+          label-width="80px"
+          label-position="right"
+          size="large"
+          :style="{ 'padding': '30px' }"
+        >
+          <el-form-item label="用户名" prop="username">
+            <el-input
+              v-model="loginForm.username"
+              placeholder="请输入用户名"
+              prefix-icon="el-icon-user"
+              clearable
+              @keyup.enter="login"
+              :style="{
+                'border-radius': '12px',
+                'border': '1px solid rgba(255, 255, 255, 0.3)',
+                'background-color': 'rgba(255, 255, 255, 0.2)',
+                'color': '#fff',
+                'transition': 'all 0.3s ease'
+              }"
+            />
+          </el-form-item>
+
+          <el-form-item label="密码" prop="password">
+            <el-input
+              v-model="loginForm.password"
+              type="password"
+              placeholder="请输入密码"
+              prefix-icon="el-icon-lock"
+              show-password
+              @keyup.enter="login"
+              :style="{
+                'border-radius': '12px',
+                'border': '1px solid rgba(255, 255, 255, 0.3)',
+                'background-color': 'rgba(255, 255, 255, 0.2)',
+                'color': '#fff',
+                'transition': 'all 0.3s ease'
+              }"
+            />
+          </el-form-item>
+
+          <!-- 按钮居中显示 -->
+          <el-form-item class="el-form-item__content" style="margin-left: 0">
+            <div class="button-group">
+              <el-button
+                class="login-button"
+                type="primary"
+                @click="login"
+                :loading="loading"
+                :style="{
+                  'width': '120px',
+                  'margin-right': '10px',
+                  'padding': '12px 24px',
+                  'font-size': '16px',
+                  'border-radius': '12px',
+                  'background-color': '#409eff',
+                  'border-color': '#409eff',
+                  'color': 'white',
+                  'cursor': 'pointer',
+                  'transition': 'all 0.3s ease'
+                }"
+              >
+                登 录
+              </el-button>
+              <el-button
+                class="reset-button"
+                type="info"
+                @click="clear"
+                :style="{
+                  'width': '120px',
+                  'padding': '12px 24px',
+                  'font-size': '16px',
+                  'border-radius': '12px',
+                  'background-color': 'rgba(255, 255, 255, 0.2)',
+                  'border-color': 'rgba(255, 255, 255, 0.3)',
+                  'color': '#fff',
+                  'cursor': 'pointer',
+                  'transition': 'all 0.3s ease'
+                }"
+              >
+                重 置
+              </el-button>
+            </div>
+          </el-form-item>
+        </el-form>
+
+        <!-- 底部信息 -->
+        <div class="footer">
+          <p class="copyright">© 2025 智能后台管理系统</p>
+          <p class="version">v1.0.0</p>
+        </div>
+      </el-card>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* 让背景填充整个页面 */
+/* 容器样式 */
 #container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../../assets/bg1.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0; /* 移除原来的padding */
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
+/* 背景图 */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: brightness(1.1);
+}
+
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+/* 登录容器 */
+.login-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* 登录表单卡片 */
 .login-form {
-  max-width: 400px;
-  padding: 30px;
-  margin: 0 auto;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  /* 设置半透明背景 */
-  background-color: rgba(255, 255, 255, 0.8); /* 0.8是透明度，可调整 */
-  backdrop-filter: blur(5px); /* 添加毛玻璃效果，可选 */
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
 }
 
-.title {
-  font-size: 30px;
-  font-family: '楷体';
-  text-align: center;
-  margin-bottom: 30px;
+.login-form:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 卡片头部 */
+.card-header {
+  font-size: 24px;
   font-weight: bold;
-  color: #333; /* 确保文字在透明背景下可见 */
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0;
+  background: linear-gradient(135deg, #409eff, #66b1ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.button {
-  margin-top: 30px;
-  width: 120px;
+/* 标题 */
+.title {
+  font-size: 24px;
+  font-family: 'Microsoft YaHei', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* 调整表单元素的透明度 */
-.el-form-item__label {
-  color: #333 !important; /* 确保标签文字可见 */
-}
+/* 输入框样式 */
 .el-input__inner {
-  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.el-input__inner:focus {
+  border-color: #409eff;
+  box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 前缀图标 */
+.el-input__prefix {
+  color: #909399;
+}
+
+.el-form-item__content{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  min-width: 0;
+}
+
+/* 按钮组样式 */
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  padding: 0 0;
+}
+
+/* 按钮样式 */
+.login-button {
+  width: 120px;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 12px;
+  background-color: #409eff;
+  border-color: #409eff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #66b1ff;
+  border-color: #66b1ff;
+  transform: translateY(-1px);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+.reset-button {
+  width: 120px;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+/* 底部信息 */
+.footer {
+  margin-top: 30px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+}
+
+.copyright {
+  margin-bottom: 5px;
+}
+
+.version {
+  font-size: 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 500px) {
+  .login-form {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .login-button,
+  .reset-button {
+    width: 100px;
+    padding: 0 100px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>

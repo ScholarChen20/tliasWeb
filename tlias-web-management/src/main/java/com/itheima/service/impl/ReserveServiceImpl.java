@@ -2,6 +2,7 @@ package com.itheima.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.itheima.common.ReserveStatusCommon;
 import com.itheima.mapper.ReserveMapper;
 import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Reserve;
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static com.itheima.common.ReserveStatusCommon.ATTENDANCE;
+import static com.itheima.common.ReserveStatusCommon.NO_ATTENDANCE;
 
 
 @Slf4j
@@ -53,7 +57,7 @@ public class ReserveServiceImpl implements ReserveService {
 
     @Override
     public List<Reserve> getAdvice(Integer id) {
-        return reserveMapper.adviceListById(id);
+        return reserveMapper.adviceListById(id, ATTENDANCE);
     }
 
     @Override

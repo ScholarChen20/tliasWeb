@@ -48,9 +48,9 @@ const handleCurrentChange = (val) => {
       <el-table-column type="index" label="ID" width="100" align="center"/>
       <el-table-column prop="operateEmpName" label="操作人姓名" width="130" align="center"/>
       <el-table-column prop="className" label="操作类名" width="160" align="center"/>
-      <el-table-column prop="methodName" label="操作方法名" width="120" align="center"/>
-      <el-table-column prop="methodParams" label="操作方法参数" width="290" align="center"/>
-      <el-table-column prop="returnValue" label="操作方法返回值" width="160" align="center"/>
+      <el-table-column prop="methodName" label="操作方法名" width="180" align="center"/>
+      <el-table-column prop="methodParams" label="操作方法参数" width="400" align="center"/>
+      <el-table-column prop="returnValue" label="操作方法返回值" width="250" align="center"/>
       <el-table-column prop="costTime" label="操作耗时" width="90" align="center"/>
       <el-table-column prop="operateTime" label="操作时间" width="200" align="center"/>
 <!--      <el-table-column label="操作" align="center">-->

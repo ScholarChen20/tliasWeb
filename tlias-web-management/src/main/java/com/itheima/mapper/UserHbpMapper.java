@@ -27,9 +27,14 @@ public interface UserHbpMapper {
     UserHbp  getInfo(Integer id);
 
     /**
+     * 根据用户id查询所有记录（小程序使用）
+     */
+    @Select("select id, userid, sbp, dbp,heart,write_time,situation,writeType from user_healthyinfo where userid = #{userid} order by write_time desc")
+    List<UserHbp> getInfoByUserId(Integer userId);
+    /**
      * 返回最近一条记录
      */
-    @Select("select id, userid, sbp, dbp,heart,write_time from user_healthyinfo where userid = #{userid} order by id desc limit 1")
+    @Select("select id, userid, sbp, dbp,heart,situation,write_time,writeType from user_healthyinfo where userid = #{userid} order by id desc limit 1")
     UserHbp getInfoById(@Param("userid") Integer id);
 
     /**
