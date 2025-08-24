@@ -25,4 +25,6 @@ public interface ReserveService {
     PageResult<Reserve> page(ReserveQueryParam reserveQueryParam);
 
     Reserve getById(Integer id);
+
+    void deleteByIds(List<Integer> ids);
 }

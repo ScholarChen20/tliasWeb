@@ -56,6 +56,16 @@ public class DoctorController {
     }
 
     /**
+     * 批量删除医生信息
+     */
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids){
+        doctorService.deleteByIds(ids);
+        log.info("批量删除医生信息，id：{}",ids);
+        return  Result.success();
+    }
+
+    /**
      * 删除医生信息
      */
     @DeleteMapping("/{id}")

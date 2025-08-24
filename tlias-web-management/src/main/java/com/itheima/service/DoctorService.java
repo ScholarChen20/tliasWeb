@@ -17,6 +17,8 @@ public interface DoctorService {
 
     void delete(Integer id);
 
+    void deleteByIds(List<Integer> ids);
+
     List<Doctor> list();
 
     PageResult<Doctor> page(DoctorQueryParam doctorQueryParam);

@@ -68,9 +68,15 @@ public class UserHbpInfoController {
         return Result.success();
     }
 
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids){
+        log.info("删除用户信息:{}",ids);
+        userHbpService.deleteByIds(ids);
+        return Result.success();
+    }
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id){
-        log.info("删除用户信息:{}",id);
+        log.info("批量删除用户信息:{}",id);
         userHbpService.delete(id);
         return Result.success();
     }

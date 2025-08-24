@@ -16,7 +16,7 @@ public interface UserService {
 
     void save(User user);
 
-    void delete(List<Integer> id);
+    void delete(Integer id);
 
     UserLoginInfo login(User user);
 
@@ -25,4 +25,6 @@ public interface UserService {
     List<User> list();
 
     PageResult<User> page(UserQueryParam userQueryParam);
+
+    void deleteByIds(List<Integer> ids);
 }

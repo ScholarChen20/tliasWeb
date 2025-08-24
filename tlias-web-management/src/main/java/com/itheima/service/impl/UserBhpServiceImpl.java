@@ -49,6 +49,11 @@ public class UserBhpServiceImpl implements UserBhpService {
     }
 
     @Override
+    public void deleteByIds(List<Integer> ids) {
+        userHbpMapper.deleteByIds(ids);
+    }
+
+    @Override
     public UserHbp getInfoById(Integer id) {
         return userHbpMapper.getInfoById(id);
     }

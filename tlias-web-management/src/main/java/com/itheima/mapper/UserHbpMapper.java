@@ -39,9 +39,11 @@ public interface UserHbpMapper {
 
     /**
      * 分页条件查询所有记录
-     * @param recordQueryParam
-     * @return
      */
     List<UserHbp> listPage(RecordQueryParam recordQueryParam);
 
+    /**
+     * 批量删除
+     */
+    void deleteByIds(List<Integer> ids);
 }

@@ -49,4 +49,6 @@ public interface ReserveMapper {
     Reserve getById(Integer id);
 
     List<Reserve> listPage(ReserveQueryParam reserveQueryParam);
+
+    void deleteByIds(List<Integer> ids);
 }

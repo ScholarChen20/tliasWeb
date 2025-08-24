@@ -43,6 +43,11 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public void deleteByIds(List<Integer> ids) {
+        doctorMapper.deleteByIds(ids);
+    }
+
+    @Override
     public List<Doctor> list() {
         return doctorMapper.listAll();
     }

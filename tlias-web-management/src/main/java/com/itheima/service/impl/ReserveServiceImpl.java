@@ -46,6 +46,10 @@ public class ReserveServiceImpl implements ReserveService {
     public void delete(Integer id) {
         reserveMapper.delete(id);
     }
+    @Override
+    public void deleteByIds(List<Integer> ids) {
+        reserveMapper.deleteByIds(ids);
+    }
 
     @Override
     public List<Reserve> getAdvice(Integer id) {

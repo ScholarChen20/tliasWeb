@@ -46,8 +46,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(List<Integer> ids) {
-        userMapper.deleteByIds(ids);
+    public void delete(Integer id) {
+        userMapper.delete(id);
     }
 
     @Override
@@ -98,6 +98,11 @@ public class UserServiceImpl implements UserService {
         List<User> list = userMapper.listPage(userQueryParam);
         Page<User> page = (Page<User>)  list;
         return new PageResult<>(page.getTotal(), page.getResult());
+    }
+
+    @Override
+    public void deleteByIds(List<Integer> ids) {
+        userMapper.deleteByIds(ids);
     }
 
 }

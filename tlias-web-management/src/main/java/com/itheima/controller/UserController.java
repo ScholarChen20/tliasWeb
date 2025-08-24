@@ -77,8 +77,18 @@ public class UserController {
      */
     @DeleteMapping
     public Result delete(@RequestParam List<Integer> ids){
-        userService.delete(ids);
-        log.info("删除用户信息，id：{}",ids);
+        userService.deleteByIds(ids);
+        log.info("批量删除用户信息，id：{}",ids);
+        return  Result.success();
+    }
+
+    /**
+     * 删除用户信息
+     */
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Integer id){
+        userService.delete(id);
+        log.info("删除用户信息，id：{}",id);
         return  Result.success();
     }
 

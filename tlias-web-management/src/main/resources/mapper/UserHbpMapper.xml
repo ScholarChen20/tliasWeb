@@ -27,6 +27,12 @@
         </set>
         where id = #{id}
     </update>
+    <delete id="deleteByIds">
+        delete from user_healthyinfo where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
     <!--    根据id查询用户预约信息，使用resultMap进行结果集的封装 -->
     <select id="list" resultMap="userHbpMap">
         SELECT

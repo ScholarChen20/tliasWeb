@@ -46,5 +46,9 @@ public interface UserMapper {
      */
     List<User> listPage(UserQueryParam userQueryParam);
 
+    /**
+     * 批量删除
+     * @param ids
+     */
     void deleteByIds(List<Integer> ids);
 }

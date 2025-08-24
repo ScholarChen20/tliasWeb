@@ -19,6 +19,13 @@
         </set>
         where id = #{id}
     </update>
+    <delete id="deleteByIds">
+        delete from doctor
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 
     <select id="listPages" resultType="com.itheima.pojo.Doctor">

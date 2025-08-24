@@ -91,6 +91,16 @@ public class ReserveController {
         return  Result.success();
     }
     /**
+     * 删除用户信息
+     */
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids){
+        reserveService.deleteByIds(ids);
+        log.info("批量删除预约信息，id：{}",ids);
+        return  Result.success();
+    }
+
+    /**
      * 根据用户id查询医生建议信息
      */
     @GetMapping("/advice/{id}")

@@ -17,6 +17,8 @@ public interface UserBhpService {
 
     void delete(Integer id);
 
+    void deleteByIds(List<Integer> ids);
+
     UserHbp getInfoById(Integer id);
 
     PageResult<UserHbp> page(RecordQueryParam recordQueryParam);
