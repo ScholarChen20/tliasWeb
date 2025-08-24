@@ -139,43 +139,43 @@ const clear = () => {
           </el-form-item>
 
           <!-- 按钮居中显示 -->
+          <!-- 按钮组（修改后） -->
           <el-form-item class="el-form-item__content" style="margin-left: 0">
             <div class="button-group">
               <el-button
-                class="login-button"
-                type="primary"
-                @click="login"
-                :loading="loading"
-                :style="{
-                  'width': '120px',
-                  'margin-right': '10px',
-                  'padding': '12px 24px',
-                  'font-size': '16px',
-                  'border-radius': '12px',
-                  'background-color': '#409eff',
-                  'border-color': '#409eff',
-                  'color': 'white',
-                  'cursor': 'pointer',
-                  'transition': 'all 0.3s ease'
-                }"
+                  class="login-button"
+                  type="primary"
+                  @click="login"
+                  :loading="loading"
+                  :style="{
+        'width': '120px',
+        'padding': '12px 24px',
+        'font-size': '16px',
+        'border-radius': '12px',
+        'background-color': '#409eff',
+        'border-color': '#409eff',
+        'color': 'white',
+        'cursor': 'pointer',
+        'transition': 'all 0.3s ease'
+      }"
               >
                 登 录
               </el-button>
               <el-button
-                class="reset-button"
-                type="info"
-                @click="clear"
-                :style="{
-                  'width': '120px',
-                  'padding': '12px 24px',
-                  'font-size': '16px',
-                  'border-radius': '12px',
-                  'background-color': 'rgba(255, 255, 255, 0.2)',
-                  'border-color': 'rgba(255, 255, 255, 0.3)',
-                  'color': '#fff',
-                  'cursor': 'pointer',
-                  'transition': 'all 0.3s ease'
-                }"
+                  class="reset-button"
+                  type="info"
+                  @click="clear"
+                  :style="{
+        'width': '120px',
+        'padding': '12px 24px',
+        'font-size': '16px',
+        'border-radius': '12px',
+        'background-color': 'rgba(255, 255, 255, 0.2)',
+        'border-color': 'rgba(255, 255, 255, 0.3)',
+        'color': '#fff',
+        'cursor': 'pointer',
+        'transition': 'all 0.3s ease'
+      }"
               >
                 重 置
               </el-button>
@@ -298,26 +298,17 @@ const clear = () => {
   color: #909399;
 }
 
-.el-form-item__content{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  flex: 1;
-  position: relative;
-  min-width: 0;
-}
-
-/* 按钮组样式 */
+/* 按钮组样式（修改后） */
 .button-group {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* 左对齐，登录按钮靠左 */
   align-items: center;
-  gap: 20px;
+  gap: 20px; /* 按钮间的固定间隙 */
   margin-top: 30px;
-  padding: 0 0;
+  padding: 0;
 }
 
-/* 按钮样式 */
+/* 登录按钮样式（修改后，无margin-right） */
 .login-button {
   width: 120px;
   padding: 12px 24px;
@@ -330,16 +321,7 @@ const clear = () => {
   transition: all 0.3s ease;
 }
 
-.login-button:hover {
-  background-color: #66b1ff;
-  border-color: #66b1ff;
-  transform: translateY(-1px);
-}
-
-.login-button:active {
-  transform: translateY(0);
-}
-
+/* 重置按钮样式（保持不变） */
 .reset-button {
   width: 120px;
   padding: 12px 24px;
@@ -375,7 +357,7 @@ const clear = () => {
 }
 
 /* 响应式设计 */
-@media (max-width: 500px) {
+@media (max-width: 450px) {
   .login-form {
     width: 90%;
     padding: 20px;
@@ -384,7 +366,7 @@ const clear = () => {
   .login-button,
   .reset-button {
     width: 100px;
-    padding: 0 100px;
+    padding: 10px 20px;
   }
 
   .button-group {
