@@ -327,32 +327,9 @@ const loadChart = async (userId) => {
           fontWeight: 'bold'
         }
       },
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow'
-        },
-        formatter: function (params) {
-          console.log('tooltip triggered:', params);
-          const date = params[0].axisValue;
-          let html = `<div style="font-size: 12px; line-height: 1.4; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">`;
-          html += `<strong>${date}</strong><br/>`;
-
-          params.forEach(item => {
-            const color = item.color;
-            const name = item.seriesName;
-            const value = item.value;
-
-            // 添加小圆点图标和对齐
-            html += `<span style="color: ${color}; margin-right: 4px;">●</span>`;
-            html += `<span style="display: inline-block; width: 100px;">${name}</span>`;
-            html += `<strong style="float: right;">${value}</strong><br/>`;
-          });
-
-          html += '</div>';
-          return html;
-        }
-      },
+          tooltip: {
+            trigger: 'axis',
+          },
       legend: {
         data: ['收缩压', '舒张压', '心率'],
         top: '10%',
@@ -414,7 +391,7 @@ const loadChart = async (userId) => {
           type: 'line',
           data: dbp,
           smooth: true,
-          lineStyle: { color: '#87ceeb' },
+          lineStyle: { color: '#0badef' },
           symbol: 'circle',
           symbolSize: 6
         },
@@ -423,7 +400,7 @@ const loadChart = async (userId) => {
           type: 'line',
           data: heart,
           smooth: true,
-          lineStyle: { color: '#9acd32' },
+          lineStyle: { color: '#619003' },
           symbol: 'circle',
           symbolSize: 6
         }
