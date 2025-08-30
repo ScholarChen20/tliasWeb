@@ -29,7 +29,7 @@
 1. 安装 Java JDK 17 并配置环境变量
 2. 安装 MySQL8.0、Redis 数据库并创建相应数据库
 
-   - 创建 MySQL 数据库与表: 运行 [mysql.sql](./assert/tlias.sql)
+   - 创建 MySQL 数据库与表: 运行 [mysql.sql](tlias.sql)
 
 3. 安装 Maven 构建工具
 4. 克隆项目到本地 `git clone https://github.com/ScholarChen20/tliasWeb.git `

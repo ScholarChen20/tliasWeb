@@ -1,196 +1,6 @@
-<script setup>
-import { ref, onMounted,watch } from 'vue';
-import {
-  queryPageApi,
-  addApi,
-  updateApi,
-  deleteApi,
-  queryAllUserApi,
-  queryInfoApi,
-} from '@/api/bp-record';
-import { ElMessage, ElMessageBox } from 'element-plus';
-import {SuccessFilled} from "@element-plus/icons-vue";
-import dayjs from "dayjs";
-
-//钩子函数
-onMounted(() => {
-  search();
-  queryAllUsers();
-
-})
-
-//查询
-const bpList = ref([])
-
-
-// //获取token
-// const getToken = () => {
-//   const loginUser = JSON.parse(localStorage.getItem('loginUser'));
-//   if(loginUser && loginUser.token){
-//     token.value = loginUser.token;
-//   }
-// }
-
-const wType = ref([{ name: '家庭血压', value: "家庭血压" },{ name: '诊室血压', value: "诊室血压" }])
-//性别列表数据
-const situation = ref([{ name: '正常', value: "正常" }, {  name: '异常', value: "异常" }])
-//用户列表数据
-const users = ref([])
-
-const queryAllUsers = async () => {
-  const result = await queryAllUserApi();
-  if(result.code){
-    users.value = result.data;
-  }
-}
-
-
-//搜索表单对象
-const searchEmp = ref({userId: '', date: [], begin: '', end: ''})
-
-watch(() => searchEmp.value.date, (newVal, oldVal) => {
-  if(newVal.length === 2) {
-    searchEmp.value.begin = newVal[0];
-    searchEmp.value.end = newVal[1];
-  }else {
-    searchEmp.value.begin = '';
-    searchEmp.value.end = '';
-  }
-})
-
-
-const search = async () => {
-  const result = await queryPageApi(searchEmp.value.userId,
-      searchEmp.value.begin, searchEmp.value.end, currentPage.value, pageSize.value);
-  // console.log(result);
-  if(result.code){
-    bpList.value = result.data.rows;
-    total.value = result.data.total;
-  }
-}
-
-//清空
-const clear = () => {
-  searchEmp.value = {userId: '', date: [], begin: '', end: ''};
-  search();
-}
-//分页
-const currentPage = ref(1); //页码
-const pageSize = ref(10); //每页展示记录数
-const background = ref(true); //背景色
-const total = ref(0); //总记录数
-
-//每页展示记录数变化
-const handleSizeChange = (val) => {
-  search();
-}
-//页码变化时触发
-const handleCurrentChange = (val) => {
-  search();
-}
-
-//Dialog对话框
-const dialogFormVisible = ref(false);
-const formTitle = ref('');
-const bp = ref({name: '', userid: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',writeTime: ''});//新增时默认值
-
-//新增记录
-const addRecord = () => {
-  dialogFormVisible.value = true;
-  formTitle.value = '新增血压记录';
-  bp.value = {name: '', userid: '',sbp: '',dbp: '',heart: '',writeType: '',situation: '',writeTime: ''}; //新增时默认值
-  bp.value.writeTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
-  //重置表单的校验规则-提示信息
-  if (deptFormRef.value){
-    deptFormRef.value.resetFields();
-  }
-
-}
-
-//保存部门
-const save = async () => {
-  //表单校验
-  if(!deptFormRef.value) return;
-  deptFormRef.value.validate(async (valid) => { //valid 表示是否校验通过: true 通过 / false  不通过
-    if(valid){ //通过
-
-      let result ;
-      if(bp.value.id){ //修改
-        result = await updateApi(bp.value);
-      }else{ //新增
-        result = await addApi(bp.value);
-      }
-
-      if(result.code){ //成功
-        //提示信息
-        ElMessage.success('操作成功');
-        //关闭对话框
-        dialogFormVisible.value = false;
-        //查询
-        search();
-      }else{ //失败
-        ElMessage.error(result.msg);
-      }
-    }else { //不通过
-      ElMessage.error('表单校验不通过');
-    }
-  })
-}
-
-
-//表单校验
-const rules = ref({
-  sbp: [
-    { required: true, message: '收缩压为90mmHg-139mmHg', trigger: 'blur' },
-  ],
-  dbp: [
-    { required: true, message: '舒张压为60mmHg-89mmHg', trigger: 'blur' },
-  ],
-  heart: [
-    { required: true, message: '  60～100次/分', trigger: 'blur' },
-  ]
-
-})
-const deptFormRef = ref();
-
-//编辑
-const edit = async (id) => {
-  formTitle.value = '修改记录';
-  //重置表单的校验规则-提示信息
-  if (deptFormRef.value){
-    deptFormRef.value.resetFields();
-  }
-
-  const result = await queryInfoApi(id);
-  if(result.code){
-    dialogFormVisible.value = true;
-    bp.value = result.data;
-    bp.value.userid = result.data.userid
-    console.log(result.data.userid);
-  }
-}
-
-//删除
-const delById = async (id) => {
-  //弹出确认框
-  ElMessageBox.confirm('您确认删除该血压记录吗?','提示',
-      { confirmButtonText: '确认',cancelButtonText: '取消',type: 'warning'}
-  ).then(async () => { //确认
-    const result = await deleteApi(id);
-    if(result.code){
-      ElMessage.success('删除成功');
-      search();
-    }else{
-      ElMessage.error(result.msg);
-    }
-  }).catch(() => { //取消
-    ElMessage.info('您已取消删除');
-  })
-}
-</script>
-
 <template>
   <h1>血压记录管理</h1>
+
   <!-- 搜索栏 -->
   <div class="container">
     <el-form :inline="true" :model="searchEmp" class="demo-form-inline">
@@ -217,6 +27,7 @@ const delById = async (id) => {
       </el-form-item>
     </el-form>
   </div>
+
   <div class="container">
     <el-button type="primary" @click="addRecord"> + 新增血压记录</el-button>
   </div>
@@ -224,7 +35,7 @@ const delById = async (id) => {
   <!-- 表格 -->
   <div class="container">
     <el-table :data="bpList" border style="width: 100%">
-      <el-table-column type="index" label="序号" width="100" align="center"/>
+      <el-table-column type="index" label="序号" width="80" align="center"/>
       <el-table-column prop="userName" label="用户" width="120" align="center"/>
       <el-table-column prop="sbp" label="收缩压" width="120" align="center"/>
       <el-table-column prop="dbp" label="舒张压" width="120" align="center"/>
@@ -235,7 +46,7 @@ const delById = async (id) => {
       <el-table-column prop="updateTime" label="最后操作时间" width="230" align="center"/>
       <el-table-column label="操作" align="center">
         <template #default="scope">
-          <el-button type="success" size="small" @click="showRecord(scope.row.id)"><el-icon><success-filled /></el-icon> 可视化显示</el-button>
+          <el-button type="success" size="small" @click="showRecord(scope.row.userid)"><el-icon><SuccessFilled /></el-icon> 可视化显示</el-button>
           <el-button type="primary" size="small" @click="edit(scope.row.id)"><el-icon><EditPen /></el-icon> 编辑</el-button>
           <el-button type="danger" size="small" @click="delById(scope.row.id)"><el-icon><Delete /></el-icon> 删除</el-button>
         </template>
@@ -257,6 +68,17 @@ const delById = async (id) => {
     />
   </div>
 
+  <!-- 可视化图表 Dialog -->
+  <el-dialog
+      v-model="chartVisible"
+      title=""
+      width="800px"
+      height="600px"
+      :before-close="handleClose"
+  >
+    <div ref="chartRef" style="width: 100%; height: 450px; margin-top: 20px;"></div>
+  </el-dialog>
+
   <!-- Dialog对话框 -->
   <el-dialog v-model="dialogFormVisible" :title="formTitle" width="500">
     <el-form :model="bp" :rules="rules" ref="deptFormRef">
@@ -275,16 +97,16 @@ const delById = async (id) => {
         <el-input v-model="bp.heart" />
       </el-form-item>
       <el-form-item label="测量方式" label-width="80px">
-        <el-select v-model="bp.writeType" placeholder="请选择用户" style="width: 100%;">
+        <el-select v-model="bp.writeType" placeholder="请选择" style="width: 100%;">
           <el-option v-for="w in wType" :key="w.value" :label="w.name" :value="w.value"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="房颤" label-width="80px">
-        <el-select v-model="bp.situation" placeholder="请选择用户" style="width: 100%;">
+        <el-select v-model="bp.situation" placeholder="请选择" style="width: 100%;">
           <el-option v-for="s in situation" :key="s.value" :label="s.name" :value="s.value"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="记录时间" label-width="80px" prop="updateTime">
+      <el-form-item label="记录时间" label-width="80px" prop="writeTime">
         <el-date-picker
             v-model="bp.writeTime"
             type="datetime"
@@ -295,8 +117,6 @@ const delById = async (id) => {
             default-time="12:00:00">
         </el-date-picker>
       </el-form-item>
-
-
     </el-form>
     <template #footer>
       <div class="dialog-footer">
@@ -305,11 +125,328 @@ const delById = async (id) => {
       </div>
     </template>
   </el-dialog>
-
 </template>
+
+<script setup>
+import { ref, onMounted, watch } from 'vue';
+import {
+  queryPageApi,
+  addApi,
+  updateApi,
+  deleteApi,
+  queryAllUserApi,
+  queryInfoApi,
+  queryWeeklyApi
+} from '@/api/bp-record';
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { SuccessFilled, EditPen, Delete } from '@element-plus/icons-vue';
+import dayjs from 'dayjs';
+import * as echarts from 'echarts';
+
+// 钩子函数
+onMounted(() => {
+  search();
+  queryAllUsers();
+});
+
+// 查询列表
+const bpList = ref([]);
+const currentPage = ref(1);
+const pageSize = ref(10);
+const background = ref(true);
+const total = ref(0);
+
+// 搜索表单
+const searchEmp = ref({ userId: '', date: [], begin: '', end: '' });
+
+watch(() => searchEmp.value.date, (newVal) => {
+  if (newVal.length === 2) {
+    searchEmp.value.begin = newVal[0];
+    searchEmp.value.end = newVal[1];
+  } else {
+    searchEmp.value.begin = '';
+    searchEmp.value.end = '';
+  }
+});
+
+const search = async () => {
+  const result = await queryPageApi(
+    searchEmp.value.userId,
+    searchEmp.value.begin,
+    searchEmp.value.end,
+    currentPage.value,
+    pageSize.value
+  );
+  if (result.code) {
+    bpList.value = result.data.rows;
+    total.value = result.data.total;
+  }
+};
+
+const clear = () => {
+  searchEmp.value = { userId: '', date: [], begin: '', end: '' };
+  search();
+};
+
+// 分页事件
+const handleSizeChange = (val) => {
+  pageSize.value = val;
+  search();
+};
+const handleCurrentChange = (val) => {
+  currentPage.value = val;
+  search();
+};
+
+// 用户列表
+const users = ref([]);
+const queryAllUsers = async () => {
+  const result = await queryAllUserApi();
+  if (result.code) {
+    users.value = result.data;
+  }
+};
+
+// 对话框相关
+const dialogFormVisible = ref(false);
+const formTitle = ref('');
+const bp = ref({
+  name: '',
+  userid: '',
+  sbp: '',
+  dbp: '',
+  heart: '',
+  writeType: '',
+  situation: '',
+  writeTime: ''
+});
+const deptFormRef = ref(null);
+
+const addRecord = () => {
+  dialogFormVisible.value = true;
+  formTitle.value = '新增血压记录';
+  bp.value = {
+    name: '',
+    userid: '',
+    sbp: '',
+    dbp: '',
+    heart: '',
+    writeType: '',
+    situation: '',
+    writeTime: dayjs().format('YYYY-MM-DD HH:mm:ss')
+  };
+  if (deptFormRef.value) {
+    deptFormRef.value.resetFields();
+  }
+};
+
+const save = async () => {
+  if (!deptFormRef.value) return;
+  await deptFormRef.value.validate(async (valid) => {
+    if (valid) {
+      let result;
+      if (bp.value.id) {
+        result = await updateApi(bp.value);
+      } else {
+        result = await addApi(bp.value);
+      }
+      if (result.code) {
+        ElMessage.success('操作成功');
+        dialogFormVisible.value = false;
+        search();
+      } else {
+        ElMessage.error(result.msg);
+      }
+    } else {
+      ElMessage.error('表单校验不通过');
+    }
+  });
+};
+
+const edit = async (id) => {
+  formTitle.value = '修改记录';
+  if (deptFormRef.value) {
+    deptFormRef.value.resetFields();
+  }
+  const result = await queryInfoApi(id);
+  if (result.code) {
+    dialogFormVisible.value = true;
+    bp.value = result.data;
+    bp.value.userid = result.data.userid;
+  }
+};
+
+const delById = async (id) => {
+  ElMessageBox.confirm('您确认删除该血压记录吗?', '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    const result = await deleteApi(id);
+    if (result.code) {
+      ElMessage.success('删除成功');
+      search();
+    } else {
+      ElMessage.error(result.msg);
+    }
+  }).catch(() => {
+    ElMessage.info('您已取消删除');
+  });
+};
+
+// ==================== 可视化图表部分 ====================
+
+const chartVisible = ref(false);
+const chartRef = ref(null);
+const chartInstance = ref(null);
+
+// 显示图表
+const showRecord = async (userId) => {
+  chartVisible.value = true;
+  await loadChart(userId);
+};
+
+// 加载图表数据
+const loadChart = async (userId) => {
+  const result = await queryWeeklyApi(userId);
+  if (result.code && result.data) {
+    const data = result.data;
+    const dates = data.dates;
+    const sbp = data.sbp;
+    const dbp = data.dbp;
+    const heart = data.heart;
+
+    // 初始化图表
+    chartInstance.value = echarts.init(chartRef.value);
+        chartInstance.value.setOption({
+      title: {
+        text: '最近一周血压趋势',
+        left: 'center',
+        textStyle: {
+          fontSize: 16,
+          fontWeight: 'bold'
+        }
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: function (params) {
+          console.log('tooltip triggered:', params);
+          const date = params[0].axisValue;
+          let html = `<div style="font-size: 12px; line-height: 1.4; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">`;
+          html += `<strong>${date}</strong><br/>`;
+
+          params.forEach(item => {
+            const color = item.color;
+            const name = item.seriesName;
+            const value = item.value;
+
+            // 添加小圆点图标和对齐
+            html += `<span style="color: ${color}; margin-right: 4px;">●</span>`;
+            html += `<span style="display: inline-block; width: 100px;">${name}</span>`;
+            html += `<strong style="float: right;">${value}</strong><br/>`;
+          });
+
+          html += '</div>';
+          return html;
+        }
+      },
+      legend: {
+        data: ['收缩压', '舒张压', '心率'],
+        top: '10%',
+        left: 'center',
+        textStyle: {
+          fontSize: 12
+        },
+        itemWidth: 12,
+        itemHeight: 8
+      },
+      grid: {
+        left: '10%',
+        right: '10%',
+        top: '25%',  // 因为图例在上，所以 grid 的 top 要留出空间
+        bottom: '20%'
+      },
+      xAxis: {
+        type: 'category',
+        data: dates,
+        axisLabel: {
+          rotate: 45,
+          formatter: function(value) {
+            return value.split(' ')[0];
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#999'
+          }
+        }
+      },
+      yAxis: {
+        type: 'value',
+        name: '数值',
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: '#eee'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#999'
+          }
+        }
+      },
+      series: [
+        {
+          name: '收缩压',
+          type: 'line',
+          data: sbp,
+          smooth: true,
+          lineStyle: { color: '#ff7f50' },
+          symbol: 'circle', // 可选：设置数据点形状
+          symbolSize: 6     // 可选：设置数据点大小
+        },
+        {
+          name: '舒张压',
+          type: 'line',
+          data: dbp,
+          smooth: true,
+          lineStyle: { color: '#87ceeb' },
+          symbol: 'circle',
+          symbolSize: 6
+        },
+        {
+          name: '心率',
+          type: 'line',
+          data: heart,
+          smooth: true,
+          lineStyle: { color: '#9acd32' },
+          symbol: 'circle',
+          symbolSize: 6
+        }
+      ]
+    })
+  }
+};
+
+// 关闭图表时销毁实例
+const handleClose = () => {
+  if (chartInstance.value) {
+    chartInstance.value.dispose();
+    chartInstance.value = null;
+  }
+  chartVisible.value = false;
+};
+</script>
 
 <style scoped>
 .container {
-  margin: 15px 0px;
+  margin: 15px 0;
+}
+.dialog-footer {
+  text-align: right;
 }
 </style>

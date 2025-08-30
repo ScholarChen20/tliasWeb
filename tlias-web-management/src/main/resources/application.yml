@@ -35,5 +35,5 @@ aliyun:   #阿里云配置,用于文件上传
     region: cn-beijing
 
 wx:   #微信配置
-  app-id: wxf2f3ec1435991131  #微信公众号appid
-  app-secret: 80cc45346775bb1286bd3b5fa620d81c  #微信公众号appsecret
+  appId: wxf2f3ec1435991131  #微信公众号appid
+  appSecret: 80cc45346775bb1286bd3b5fa620d81c  #微信公众号appsecret

@@ -140,7 +140,7 @@ const clear = () => {
 
           <!-- 按钮居中显示 -->
           <!-- 按钮组（修改后） -->
-          <el-form-item class="el-form-item__content" style="margin-left: 0">
+          <el-form-item class="el-form-item_content" style="margin-left: 0">
             <div class="button-group">
               <el-button
                   class="login-button"
@@ -148,7 +148,7 @@ const clear = () => {
                   @click="login"
                   :loading="loading"
                   :style="{
-        'width': '120px',
+        'width': '140px',
         'padding': '12px 24px',
         'font-size': '16px',
         'border-radius': '12px',
@@ -166,7 +166,7 @@ const clear = () => {
                   type="info"
                   @click="clear"
                   :style="{
-        'width': '120px',
+        'width': '140px',
         'padding': '12px 24px',
         'font-size': '16px',
         'border-radius': '12px',
@@ -240,7 +240,7 @@ const clear = () => {
 
 /* 登录表单卡片 */
 .login-form {
-  width: 400px;
+  width: 500px;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.1);

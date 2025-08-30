@@ -24,4 +24,6 @@ public interface UserBhpService {
     List<UserHbp> getInfoByUserId(Integer id);
 
     PageResult<UserHbp> page(RecordQueryParam recordQueryParam);
+
+    List<UserHbp> getWeeklyInfoById(Integer id);
 }
