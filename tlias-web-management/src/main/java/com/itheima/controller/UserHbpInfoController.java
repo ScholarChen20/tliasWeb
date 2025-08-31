@@ -1,5 +1,6 @@
 package com.itheima.controller;
 
+import com.itheima.pojo.dto.ChartDataDTO;
 import com.itheima.pojo.vo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.pojo.UserHbp;
@@ -9,7 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Slf4j
 @RequestMapping("/userHbpInfos")
@@ -40,6 +42,31 @@ public class UserHbpInfoController {
         return Result.success(userHbp);
     }
 
+    @GetMapping("/weekly/{id}")
+    public Result getWeeklyInfo(@PathVariable Integer id){
+        log.info("查询用户周血压信息：{}",id);
+        List<UserHbp> records = userHbpService.getWeeklyInfoById(id);
+        // 转换为ECharts所需的数据格式
+//        Map<String, ArrayList<String>> chartData = new HashMap<>();
+//        chartData.put("dates", new ArrayList<>()); // x轴：日期
+//        chartData.put("sbp", new ArrayList<>());   // 收缩压
+//        chartData.put("dbp", new ArrayList<>());   // 舒张压
+//        chartData.put("heart", new ArrayList<>()); // 心率
+
+        List<String> dates = new ArrayList<>();
+        List<Double> sbp = new ArrayList<>();
+        List<Double> dbp = new ArrayList<>();
+        List<Double> heart = new ArrayList<>();
+        for (UserHbp record : records) {
+            String date = record.getWriteTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dates.add(date);
+            sbp.add(Double.valueOf(record.getSbp()));
+            dbp.add(Double.valueOf(record.getDbp()));
+            heart.add(Double.valueOf(record.getHeart()));
+        }
+
+        return Result.success(new ChartDataDTO(dates, sbp, dbp, heart));
+    }
     /**
      * 查询某用户的血压记录
      */

@@ -56,6 +56,25 @@
         </where>
         order by u.update_time desc
     </select>
+    <select id="getWeeklyInfoById" resultType="com.itheima.pojo.UserHbp">
+        WITH ranked_data AS (
+        SELECT
+        *,
+        ROW_NUMBER() OVER (PARTITION BY DATE(write_time) ORDER BY write_time DESC) AS rn
+        FROM user_healthyinfo
+        WHERE userid = #{userId}
+         AND write_time between #{startTime} and #{endTime}
+        )
+        SELECT
+        userid,
+        write_time,
+        sbp,
+        dbp,
+        heart
+        FROM ranked_data
+        WHERE rn = 1
+        ORDER BY write_time
+    </select>
     <!--    property:属性名，column:数据库字段名-->
     <resultMap id="userHbpMap" type="com.itheima.pojo.UserHbp">
         <id property="id" column="id"/>

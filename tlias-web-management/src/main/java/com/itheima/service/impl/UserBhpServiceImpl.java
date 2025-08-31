@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -72,6 +74,18 @@ public class UserBhpServiceImpl implements UserBhpService {
         return new PageResult<>(p.getTotal(), p.getResult()); // 返回分页结果
     }
 
+    @Override
+    public List<UserHbp> getWeeklyInfoById(Integer id) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime sevenDaysAgo = now.minusDays(7);
+
+        //调整为yyyy-MM-dd hh:mm:ss格式
+        sevenDaysAgo = sevenDaysAgo.withHour(0).withMinute(0).withSecond(0);
+        now = now.withHour(23).withMinute(59).withSecond(59);
+        Integer userId = userHbpMapper.getUseridById(id);
+        log.info("userId: {},saveDyasAgo:{},now: {}", userId, sevenDaysAgo, now);
+        return userHbpMapper.getWeeklyInfoById(userId, sevenDaysAgo, now);
+    }
 
 
 }

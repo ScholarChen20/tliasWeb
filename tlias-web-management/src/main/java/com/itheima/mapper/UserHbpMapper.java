@@ -4,6 +4,8 @@ import com.itheima.pojo.UserHbp;
 import com.itheima.pojo.dto.RecordQueryParam;
 import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Mapper
@@ -51,4 +53,9 @@ public interface UserHbpMapper {
      * 批量删除
      */
     void deleteByIds(List<Integer> ids);
+
+    @Select("select userid from user_healthyinfo where id = #{id}")
+    Integer getUseridById(Integer id);
+
+    List<UserHbp> getWeeklyInfoById(Integer userId, LocalDateTime startTime, LocalDateTime endTime);
 }

@@ -14,3 +14,5 @@ export const updateApi = (usrBhp) => request.put('/userHbpInfos', usrBhp);
 export const deleteApi = (id) => request.delete(`/userHbpInfos/id=${id}`);
 
 export const queryAllUserApi = () =>  request.get('/users/list');
+
+export const queryWeeklyApi = (id) => request.get(`/userHbpInfos/weekly/${id}`);

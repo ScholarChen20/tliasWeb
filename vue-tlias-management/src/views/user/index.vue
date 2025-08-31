@@ -258,7 +258,7 @@ const deleteByIds = () => {
 </script>
 
 <template>
-  <h1>员工管理</h1>
+  <h1>用户管理</h1>
 
   <!-- 搜索栏 -->
   <div class="container">
