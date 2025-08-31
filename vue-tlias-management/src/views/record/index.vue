@@ -318,7 +318,7 @@ const loadChart = async (userId) => {
 
     // 初始化图表
     chartInstance.value = echarts.init(chartRef.value);
-        chartInstance.value.setOption({
+    chartInstance.value.setOption({
       title: {
         text: '最近一周血压趋势',
         left: 'center',
@@ -327,9 +327,39 @@ const loadChart = async (userId) => {
           fontWeight: 'bold'
         }
       },
-          tooltip: {
-            trigger: 'axis',
-          },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'line' // 确保是按轴线显示
+        },
+        formatter: function (params) {
+          if (!params || params.length === 0) return '';
+
+          // 获取日期
+          const date = params[0].axisValue;
+
+          let html = `<div style="font-size: 12px; line-height: 1.4; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">`;
+          html += `<strong>${date}</strong><br/>`;  // 显示日期
+
+          // 循环所有参数，获取每个系列的数据（即收缩压、舒张压、心率）
+          params.forEach(item => {
+            const color = item.color; // 获取系列颜色
+            const name = item.seriesName; // 获取系列名称
+            const value = item.value; // 获取值
+
+            if (value == null) return;  // 如果没有值则跳过
+
+            // 按照样式显示每个系列的值
+            html += `<span style="color: ${color}; margin-right: 4px;">●</span>`;
+            html += `<span style="display: inline-block; width: 100px;">${name}</span>`;
+            html += `<strong style="float: right;">${value}</strong><br/>`;  // 显示数值
+          });
+
+          html += '</div>';
+          return html;
+        }
+      },
+
       legend: {
         data: ['收缩压', '舒张压', '心率'],
         top: '10%',
@@ -348,11 +378,11 @@ const loadChart = async (userId) => {
       },
       xAxis: {
         type: 'category',
-        data: dates,
+        data: dates, // 直接使用日期数组
         axisLabel: {
           rotate: 45,
           formatter: function(value) {
-            return value.split(' ')[0];
+            return value.split(' ')[0]; // 确保日期格式正确
           }
         },
         axisLine: {
@@ -363,7 +393,7 @@ const loadChart = async (userId) => {
       },
       yAxis: {
         type: 'value',
-        name: '数值',
+        name: '',
         splitLine: {
           show: true,
           lineStyle: {
@@ -383,8 +413,9 @@ const loadChart = async (userId) => {
           data: sbp,
           smooth: true,
           lineStyle: { color: '#ff7f50' },
-          symbol: 'circle', // 可选：设置数据点形状
-          symbolSize: 6     // 可选：设置数据点大小
+          stack: 'Total',
+          symbol: 'circle', // 数据点形状
+          symbolSize: 6     // 数据点大小
         },
         {
           name: '舒张压',
@@ -392,6 +423,7 @@ const loadChart = async (userId) => {
           data: dbp,
           smooth: true,
           lineStyle: { color: '#0badef' },
+          stack: 'Total',
           symbol: 'circle',
           symbolSize: 6
         },
@@ -401,6 +433,7 @@ const loadChart = async (userId) => {
           data: heart,
           smooth: true,
           lineStyle: { color: '#619003' },
+          stack: 'Total',
           symbol: 'circle',
           symbolSize: 6
         }

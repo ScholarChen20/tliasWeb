@@ -126,6 +126,8 @@
 
 ![bp.png](asserts/bp.png)
 
+![record_visualize.png](asserts/record_visualize.png)
+
 ### 预约管理
 
 ![reserve.png](asserts/reserve.png)
